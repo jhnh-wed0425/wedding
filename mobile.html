@@ -68,6 +68,43 @@ img{
   letter-spacing:3px;
   transition: opacity 1s ease;
 }
+/* 모달 */
+.modal{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.5);
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+
+.modal-content{
+  width:85%;
+  max-width:420px;
+  background:#fff;
+  padding:40px 25px;
+  border-radius:18px;
+  position:relative;
+  animation:fadeUp 0.3s ease;
+}
+
+.modal-close{
+  position:absolute;
+  right:18px;
+  top:15px;
+  cursor:pointer;
+  font-size:18px;
+  color:#999;
+}
+
+@keyframes fadeUp{
+  from{ transform:translateY(20px); opacity:0; }
+  to{ transform:translateY(0); opacity:1; }
+}
 
 /* 🔥 가로 타이머 카드 */
 .timer-wrap{
@@ -197,6 +234,10 @@ img{
 </head>
 
 <body>
+  
+<div class="loading" id="loading">
+  WEDDING INVITATION
+</div>
 
 <audio id="bgm" autoplay loop>
   <source src="모청bgm.mp3" type="audio/mpeg">
@@ -218,11 +259,13 @@ img{
     따뜻한 마음으로 축복해 주세요.
   </p>
   <div class="divider"></div>
+</section>
+
 
 <!-- 3 대표사진2 -->
 <section>
   <img src="대표사진2.jpg">
-</section>
+
 
   <p style="color:#777; font-size:13px;">
     류완영 · 노복란 의 장남 정현<br>
@@ -353,6 +396,40 @@ img{
 
   </div>
 </section>
+<!-- 8 참석 여부 -->
+<section>
+  <h2>RSVP</h2>
+
+  <p style="font-size:14px; line-height:1.9; color:#555;">
+    특별한 날 축하하는 마음으로<br>
+    참석해 주시는 모든 분들을<br>
+    한 분 한 분 마음을 담아 귀하게 모실 수 있도록,<br>
+    하단의 버튼을 클릭하여<br>
+    참석 여부 전달을 꼭 부탁드립니다.
+  </p>
+
+  <button class="button" onclick="openRSVP()">전달하기</button>
+</section>
+<!-- 9 화환 안내 -->
+<section>
+  <h2>화환 안내</h2>
+
+  <p style="font-size:14px; line-height:1.9; color:#555;">
+    함께해 주시는 마음만으로도 충분히 감사드립니다.<br>
+    정히 화환을 보내주시려는 경우<br>
+    꽃으로 된 화환은 예식장 내부 규정으로 인해 불가하오니<br>
+    쌀화환만 가능한 점 너그러이 양해 부탁드립니다.
+  </p>
+</section>
+  
+<!-- 10 대표사진3 -->
+<section>
+  <img src="대표사진3.jpg">
+
+  <button class="button" onclick="copyLink()">
+    링크 복사하기
+  </button>
+</section>
 
 <script>
 function copyText(text){
@@ -419,7 +496,39 @@ window.onload = function(){
     }, 1000);
   }, 3000); // ★ 3초 대기
 }
+<!-- RSVP 팝업 -->
+<div class="modal" id="rsvpModal">
+  <div class="modal-content">
+    <div class="modal-close" onclick="closeRSVP()">✕</div>
 
+    <h3 style="margin-top:10px;">참석 여부 전달</h3>
+
+    <p style="font-size:13px; margin-top:15px; color:#666;">
+      아래 번호로 참석 여부를 전달해 주세요.
+    </p>
+
+    <div style="margin-top:25px;">
+      <div style="margin-bottom:10px;">
+        신랑 010-0000-0000
+      </div>
+      <div>
+        신부 010-0000-0000
+      </div>
+    </div>
+  </div>
+</div>
+
+function openRSVP(){
+  document.getElementById("rsvpModal").style.display = "flex";
+}
+
+function closeRSVP(){
+  document.getElementById("rsvpModal").style.display = "none";
+}
+function copyLink(){
+  navigator.clipboard.writeText(window.location.href);
+  alert("홈페이지 주소가 복사되었습니다.");
+}
 
 </script>
 
