@@ -101,11 +101,6 @@ img{
   color:#999;
 }
 
-@keyframes fadeUp{
-  from{ transform:translateY(20px); opacity:0; }
-  to{ transform:translateY(0); opacity:1; }
-}
-
 /* 🔥 가로 타이머 카드 */
 .timer-wrap{
   display:flex;
@@ -421,6 +416,7 @@ img{
     쌀화환만 가능한 점 너그러이 양해 부탁드립니다.
   </p>
 </section>
+  
 <!-- RSVP 팝업 -->
 <div class="modal" id="rsvpModal">
   <div class="modal-content">
@@ -453,6 +449,8 @@ img{
 </section>
 
 <script>
+
+  
 function copyText(text){
   navigator.clipboard.writeText(text);
   alert("복사되었습니다");
@@ -509,14 +507,17 @@ function copyAccount(event, number){
   alert("계좌번호가 복사되었습니다.");
 }
   
-window.onload = function(){
+document.addEventListener("DOMContentLoaded", function(){
   setTimeout(function(){
-    document.getElementById("loading").style.opacity = "0";
-    setTimeout(function(){
-      document.getElementById("loading").style.display = "none";
-    }, 1000);
-  }, 3000); // ★ 3초 대기
-};
+    const loading = document.getElementById("loading");
+    if(loading){
+      loading.style.opacity = "0";
+      setTimeout(function(){
+        loading.style.display = "none";
+      }, 1000);
+    }
+  }, 3000);//3초대기
+});
 
 function openRSVP(){
   document.getElementById("rsvpModal").style.display = "flex";
