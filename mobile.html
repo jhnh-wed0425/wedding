@@ -55,6 +55,19 @@ img{
   background:#dcdcdc;
   margin:50px auto;
 }
+.loading {
+  position: fixed;
+  width:100%;
+  height:100%;
+  background:#ffffff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  font-family:'Nanum Myeongjo', serif;
+  letter-spacing:3px;
+  transition: opacity 1s ease;
+}
 
 /* 🔥 가로 타이머 카드 */
 .timer-wrap{
@@ -396,6 +409,15 @@ function copyAccount(event, number){
   event.stopPropagation();
   navigator.clipboard.writeText(number);
   alert("계좌번호가 복사되었습니다.");
+}
+  
+window.onload = function(){
+  setTimeout(function(){
+    document.getElementById("loading").style.opacity = "0";
+    setTimeout(function(){
+      document.getElementById("loading").style.display = "none";
+    }, 1000);
+  }, 3000); // ★ 3초 대기
 }
 
 
