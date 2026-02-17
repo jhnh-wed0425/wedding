@@ -178,20 +178,93 @@ img{
 <!-- 6 오시는 길 -->
 <section>
   <h2>LOCATION</h2>
-  <p style="font-size:14px;">
-    충북 청주시 흥덕구 남석로 579<br>
-    아모르아트컨벤션 3층 아트홀
+
+  <p style="font-size:14px; margin-bottom:20px;">
+    아모르아트컨벤션 3층 아트홀<br>
+    충북 청주시 흥덕구 남석로 579
   </p>
-  <div class="button" onclick="openMap()">네이버 지도 보기</div>
+
+  <!-- 네이버 지도 미리보기 -->
+  <div style="max-width:480px; margin:0 auto; border-radius:16px; overflow:hidden; box-shadow:0 12px 30px rgba(0,0,0,0.08);">
+    <iframe 
+      src="https://naver.me/x3iFFSDF"
+      width="100%" 
+      height="300" 
+      style="border:0;"
+      loading="lazy">
+    </iframe>
+  </div>
+
+  <!-- 지도 앱 버튼 -->
+  <div style="display:flex; gap:12px; justify-content:center; margin-top:22px; flex-wrap:wrap;">
+
+    <!-- 티맵 -->
+    <a href="tmap://route?goalname=아모르아트컨벤션&goalx=127.4287&goaly=36.6266"
+       style="flex:1; min-width:100px; padding:15px 0; border:1px solid #e5e5e5; border-radius:14px; font-size:13px; text-decoration:none; color:#333;">
+       티맵
+    </a>
+
+    <!-- 카카오내비 -->
+    <a href="kakaonavi://navigate?name=아모르아트컨벤션&x=127.4287&y=36.6266"
+       style="flex:1; min-width:100px; padding:15px 0; border:1px solid #e5e5e5; border-radius:14px; font-size:13px; text-decoration:none; color:#333;">
+       카카오내비
+    </a>
+
+    <!-- 네이버지도 -->
+    <a href="https://naver.me/x3iFFSDF"
+       style="flex:1; min-width:100px; padding:15px 0; border:1px solid #e5e5e5; border-radius:14px; font-size:13px; text-decoration:none; color:#333;">
+       네이버지도
+    </a>
+
+  </div>
 </section>
 
-<!-- 7 계좌 -->
+<!-- 7 마음 전하는 곳 -->
 <section>
   <h2>ACCOUNT</h2>
-  <div class="account-box">
-    신부 이나현<br>
-    기업은행 000000000000
-    <div class="button" onclick="copyText('000000000000')">계좌번호 복사</div>
+
+  <div style="max-width:480px; margin:0 auto; font-size:14px; color:#666; line-height:1.8;">
+    <p style="margin-bottom:25px;">
+      <strong style="color:#333;">마음 전하는 곳</strong><br><br>
+      직접 발걸음 해주시지 못하는 분들을 위해<br>
+      부득이하게 계좌번호를 기재하게 되었습니다.<br>
+      넓은 마음으로 양해 부탁드립니다.
+    </p>
+
+    <!-- 신랑측 -->
+    <div class="account-toggle" onclick="toggleAccount('groom')">
+      신랑 측 계좌번호 <span id="arrow-groom">▲</span>
+    </div>
+
+    <div id="groom" class="account-content">
+      <div class="account-item">
+        신랑 류정현 기업은행 000-0000-0000-00
+        <button onclick="copyAccount(event,'00000000000000')">복사하기</button>
+      </div>
+
+      <div class="account-item">
+        신랑 혼주 000 기업은행 000-0000-0000-00
+        <button onclick="copyAccount(event,'00000000000000')">복사하기</button>
+      </div>
+    </div>
+
+    <!-- 신부측 -->
+    <div class="account-toggle" onclick="toggleAccount('bride')">
+      신부 측 계좌번호 <span id="arrow-bride">▲</span>
+    </div>
+
+    <div id="bride" class="account-content">
+      <div class="account-item">
+        신부 이나현 기업은행 000-0000-0000-00
+        <button onclick="copyAccount(event,'00000000000000')">복사하기</button>
+      </div>
+
+      <div class="account-item">
+        신부 혼주 000 기업은행 000-0000-0000-00
+        <button onclick="copyAccount(event,'00000000000000')">복사하기</button>
+      </div>
+    </div>
+
   </div>
 </section>
 
