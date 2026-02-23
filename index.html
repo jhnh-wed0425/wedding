@@ -32,8 +32,7 @@
 
       --base-font: 16px;
       --font-scale: 1; /* 글자 크게 토글용 */
-      --gallery-fit: contain; /* contain(안 잘림) / cover(프레임 꽉) */
-    }
+          }
 
     *{ box-sizing:border-box; }
     html{ scroll-behavior:smooth; }
@@ -399,7 +398,7 @@
     .photo-frame img{
       width:100%;
       height:100%;
-      object-fit: var(--gallery-fit); /* ✅ contain 기본(안 잘림), cover로 바꿀 수도 */
+      object-fit: contain;/* ✅ 무조건 안 잘림 */
       user-select:none;
       -webkit-user-drag:none;
       pointer-events:none;
@@ -461,6 +460,18 @@
       .gal-arrow.left{ left:-18px; }
       .gal-arrow.right{ right:-18px; }
     }
+
+    /* ✅ 전체 글자 1.5배 토글 */
+body.big-font{
+  zoom: 1.5;
+}
+
+    #musicBtn{
+  width:44px;
+  justify-content:center;
+  padding:9px 0;
+}
+
   </style>
 </head>
 
@@ -683,7 +694,14 @@
         setTimeout(() => el.style.display = "none", 1000);
       }, 1500);
     });
-
+// ✅ 안전장치: 어떤 이유로든 4초 지나면 로딩 강제 종료
+setTimeout(() => {
+  const el = document.getElementById("loading");
+  if(el){
+    el.style.opacity = "0";
+    setTimeout(() => el.style.display = "none", 500);
+  }
+}, 4000);
     // 지도
     function openMap(){ window.open("https://naver.me/x3iFFSDF"); }
 
@@ -721,16 +739,6 @@
         arrow.textContent = "▼";
       }
     }
-/* ✅ 전체 글자 1.5배 토글 */
-body.big-font{
-  zoom: 1.5;
-}
-
-    #musicBtn{
-  width:44px;
-  justify-content:center;
-  padding:9px 0;
-}
     // 복사
     function copyAccount(e, number){
       e.stopPropagation();
@@ -798,8 +806,9 @@ body.big-font{
 
     // ✅ 상단 컨트롤: 음악 / 글자 크게 / 사진 fit 토글
     const bgm = document.getElementById("bgm");
-const musicBtn = document.getElementById("musicBtn");
-const playDot = document.getElementById("playDot");
+    const musicBtn = document.getElementById("musicBtn");
+    const playDot = document.getElementById("playDot");
+    const fontBtn = document.getElementById("fontBtn");
 
 function syncMusicUI(){
   const muted = bgm.muted || bgm.volume === 0;
@@ -846,14 +855,6 @@ fontBtn.addEventListener("click", () => {
 
 // 초기 텍스트 세팅
 syncFontUI();
-    
-    // 갤러리 사진 fit 토글 (contain <-> cover)
-    let coverFit = false;
-    fitBtn.addEventListener("click", () => {
-      coverFit = !coverFit;
-      document.documentElement.style.setProperty("--gallery-fit", coverFit ? "cover" : "contain");
-      fitBtn.textContent = coverFit ? "사진 안잘림" : "사진 꽉";
-    });
-  </script>
+      </script>
 </body>
 </html>
