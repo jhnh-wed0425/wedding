@@ -31,9 +31,7 @@
       --radius:22px;
       --serif:'Noto Serif KR', serif;
       --sans:'Pretendard', system-ui, -apple-system, sans-serif;
-
       --base-font: 16px;
-      --font-scale: 1;
     }
 
     *{ box-sizing:border-box; }
@@ -47,7 +45,7 @@
       font-family:var(--sans);
       text-align:center;
       line-height:1.85;
-      font-size: calc(var(--base-font) * var(--font-scale));
+      font-size: var(--base-font);
       padding-top: 58px; /* 상단 플로팅바 공간 */
     }
 
@@ -105,7 +103,9 @@
       padding:28px 18px;
     }
 
-    /* 로딩 오버레이 */
+    /* =========================
+       로딩 오버레이
+       ========================= */
     .loading{
       position:fixed; inset:0;
       background:#fff;
@@ -113,10 +113,16 @@
       z-index:9999;
       font-family:var(--serif);
       letter-spacing:4px;
-      transition:opacity 1s ease;
+      transition:opacity .6s ease;
+    }
+    .loading.hide{
+      opacity:0;
+      pointer-events:none;
     }
 
-    /* 상단 플로팅 컨트롤 바 */
+    /* =========================
+       상단 플로팅 컨트롤 바
+       ========================= */
     .topbar{
       position:fixed;
       top:12px;
@@ -166,13 +172,17 @@
       gap:6px;
       user-select:none;
     }
+    #musicBtn{ width:44px; justify-content:center; padding:9px 0; }
+
     .icon-dot{
       width:7px; height:7px; border-radius:999px;
       background:#bdbdc4;
     }
     .icon-dot.on{ background:#8b1f2f; }
 
-    /* ✅ 대표사진 프레임 */
+    /* =========================
+       (5-1) 대표사진 프레임: "무조건 안 잘림"
+       ========================= */
     .hero-frame{
       margin:18px auto 0;
       width:min(92vw, 480px);
@@ -181,17 +191,16 @@
       overflow:hidden;
       border:1px solid rgba(215,215,220,.9);
       box-shadow:0 22px 45px rgba(0,0,0,.10);
-      background:linear-gradient(180deg, rgba(255,255,255,.85), rgba(245,245,248,.85));
+      background:#f2f2f5;
     }
-    /* ✅ (요청 5-1) 가로사진 전용 프레임 */
+    /* (5-2) 가로사진 전용 프레임 */
     .hero-frame.landscape{
       aspect-ratio: 4 / 3;
     }
-    /* ✅ (요청 5-1) 모든 대표사진은 안 잘리게(contain) */
     .hero-frame img{
       width:100%;
       height:100%;
-      object-fit:contain;
+      object-fit:contain;    /* ✅ 안 잘림 */
       background:#f2f2f5;
       user-select:none;
       -webkit-user-drag:none;
@@ -235,7 +244,6 @@
       letter-spacing:2px;
       color:#9a9a9a;
     }
-
     .days-left{
       margin:12px 0 0;
       font-family:var(--serif);
@@ -271,6 +279,7 @@
       cursor:pointer;
       transition:.2s;
       border:1px solid rgba(227,227,230,.95);
+      background:#fff;
     }
     .map-card:hover{ transform:translateY(-2px); }
     .map-card img{ width:100%; height:auto; pointer-events:none; }
@@ -351,8 +360,8 @@
       padding:26px 18px;
       border-radius:18px;
       position:relative;
-      animation:fadeUp .25s ease;
       border:1px solid rgba(227,227,230,.95);
+      animation:fadeUp .25s ease;
     }
     .modal-close{
       position:absolute; right:16px; top:12px;
@@ -363,7 +372,9 @@
       to{ transform:translateY(0); opacity:1 }
     }
 
-    /* 갤러리 (스크롤 스냅 + 화살표 + 페이지) */
+    /* =========================
+       갤러리: 스크롤 스냅 + 화살표 + 페이지
+       ========================= */
     .gallery-shell{
       position:relative;
       margin:6px auto 0;
@@ -380,6 +391,7 @@
       box-shadow:0 18px 36px rgba(0,0,0,.08);
     }
     .gallery::-webkit-scrollbar{ display:none; }
+
     .track{
       display:flex;
       gap:12px;
@@ -398,8 +410,8 @@
     }
     .photo-frame img{
       width:100%;
-      height:auto;
-      object-fit:contain; /* 갤러리도 안 잘림 */
+      height:auto;            /* ✅ 세로/가로 원본 비율 유지 */
+      object-fit:contain;     /* ✅ 안 잘림 */
       display:block;
       background:#f2f2f5;
       pointer-events:none;
@@ -407,6 +419,7 @@
       -webkit-user-drag:none;
     }
 
+    /* 화살표가 안 눌리는 문제 방지: z-index + 클릭 영역 */
     .gal-arrow{
       position:absolute;
       top:50%;
@@ -414,16 +427,17 @@
       width:44px; height:44px;
       border-radius:999px;
       border:1px solid rgba(227,227,230,.95);
-      background:rgba(255,255,255,.88);
+      background:rgba(255,255,255,.92);
       box-shadow:0 10px 20px rgba(0,0,0,.10);
       display:flex; align-items:center; justify-content:center;
       cursor:pointer;
       user-select:none;
       backdrop-filter: blur(6px);
+      z-index:5;              /* ✅ 갤러리 위로 */
     }
-    .gal-arrow:active{ transform:translateY(-50%) scale(.98); }
     .gal-arrow.left{ left:-10px; }
     .gal-arrow.right{ right:-10px; }
+    .gal-arrow:active{ transform:translateY(-50%) scale(.98); }
 
     .chev{
       width:9px; height:9px;
@@ -452,13 +466,9 @@
       font-family:var(--serif);
     }
 
-    /* 글자 크기 토글 */
+    /* 글자 크기 토글(전체) */
     body.big-font{ zoom: 1.5; }
 
-    /* 음악 버튼: 아이콘만 */
-    #musicBtn{ width:44px; justify-content:center; padding:9px 0; }
-
-    /* PC 대응 */
     @media (min-width: 900px){
       body{ padding:40px 0 0; }
       .topbar{ top:18px; }
@@ -472,23 +482,24 @@
 </head>
 
 <body>
-  <!-- 상단 플로팅바: 음악/글자 토글 -->
+  <!-- 상단 컨트롤 바 -->
   <div class="topbar" role="toolbar" aria-label="controls">
     <div class="left">
       <span class="icon-dot" id="playDot"></span>
       <div class="brand">류정현 <span class="heart">♥</span> 이나현</div>
     </div>
     <div class="actions">
-      <!-- ✅ 요구사항: 기본은 소리 ON 상태로 보이게(정책상 실패하면 자동으로 🔇로 바뀜) -->
+      <!-- 음악 토글: 🔊 / 🔇 -->
       <button class="icon-btn" id="musicBtn" type="button" aria-label="음악 토글">🔊</button>
+      <!-- 글자 토글: 글자 크게 / 글자 작게 -->
       <button class="icon-btn" id="fontBtn" type="button">글자 크게</button>
     </div>
   </div>
 
-  <!-- 로딩 -->
+  <!-- 로딩 오버레이 -->
   <div class="loading" id="loading">WEDDING INVITATION</div>
 
-  <!-- BGM: 자동재생 정책 때문에 실제 "소리 자동재생"은 기기/브라우저에 따라 막힐 수 있음 -->
+  <!-- BGM -->
   <audio id="bgm" autoplay loop playsinline>
     <source src="모청bgm.mp3" type="audio/mpeg">
   </audio>
@@ -635,17 +646,15 @@
   <!-- 8 참석 여부 -->
   <section class="reveal">
     <div class="section-title">RSVP</div>
-
     <p style="font-size:14px; color:#555; margin:0 auto; max-width:520px; font-family:var(--serif);">
       특별한 날 축하하는 마음으로 참석해 주시는 모든 분들을<br>
       한 분 한 분 마음을 담아 귀하게 모실 수 있도록,<br>
       하단의 버튼을 클릭하여 참석 여부 전달을 부탁드립니다.
     </p>
-
     <button class="button" onclick="openRSVP()">전달하기</button>
   </section>
 
-  <!-- 9 화환 안내 (버튼형 카드 + 팝업) -->
+  <!-- 9 화환 안내(버튼형) -->
   <section class="reveal">
     <div class="card" style="text-align:left; display:flex; align-items:center; justify-content:space-between; gap:14px; cursor:pointer;"
          onclick="openWreath()">
@@ -668,7 +677,6 @@
       <p style="margin:0 0 14px; font-size:13px; color:#666; font-family:var(--serif); line-height:1.7;">
         예식장 규정상 꽃화환은 불가하며, 쌀화환만 가능합니다.
       </p>
-
       <div style="text-align:left; border-top:1px solid rgba(227,227,230,.95); padding-top:12px;">
         <div style="padding:10px 0; border-bottom:1px solid rgba(227,227,230,.95);">
           <b>업체 A</b><br><span style="color:#666;">010-xxxx-xxxx</span>
@@ -680,7 +688,6 @@
           <b>업체 C</b><br><span style="color:#666;">010-xxxx-xxxx</span>
         </div>
       </div>
-
       <button class="button" style="width:100%; margin-top:16px;" onclick="closeWreath()">닫기</button>
     </div>
   </div>
@@ -702,7 +709,7 @@
 
   <!-- 10 대표사진3 + 공유 -->
   <section class="reveal">
-    <!-- ✅ (요청 5-2) 대표사진3은 가로사진이므로 landscape 프레임 적용 -->
+    <!-- (5-2) 대표사진3 가로 프레임 -->
     <div class="hero-frame landscape">
       <img src="대표사진3.jpg" alt="대표사진3">
     </div>
@@ -714,14 +721,37 @@
   </section>
 
   <script>
-    /**
-     * =========================
-     * 0) 카카오 공유 초기화
-     * =========================
-     * - 아래 키를 본인 카카오 JavaScript 키로 교체
-     * - 도메인 등록(GitHub Pages 주소)도 카카오 개발자 콘솔에서 해야 공유가 정상 작동함
-     */
-    Kakao.init("여기에_카카오_자바스크립트키");
+    /* =========================================================
+       0) 로딩이 안 꺼지는 원인 대부분: JS 에러로 스크립트가 멈춤
+          => 에러가 나도 무조건 로딩은 꺼지게 안전장치 넣음
+       ========================================================= */
+    const loadingEl = document.getElementById("loading");
+    function hideLoading(){
+      if(!loadingEl) return;
+      loadingEl.classList.add("hide");
+      setTimeout(() => { if(loadingEl) loadingEl.style.display = "none"; }, 700);
+    }
+    // 어떤 에러가 나도 로딩은 꺼짐
+    window.onerror = function(){
+      hideLoading();
+      return false;
+    };
+
+    // DOM 준비 후 1.2초 뒤 로딩 종료
+    window.addEventListener("DOMContentLoaded", () => {
+      setTimeout(hideLoading, 1200);
+    });
+    // 이미지/폰트 등 모든 리소스 로드 완료 시에도 종료
+    window.addEventListener("load", () => {
+      hideLoading();
+    });
+    // 최후 안전장치: 4초 지나면 무조건 종료
+    setTimeout(hideLoading, 4000);
+
+    /* =========================================================
+       1) 카카오 공유 초기화
+       ========================================================= */
+    Kakao.init("여기에_카카오_자바스크립트키"); // 본인 키로 교체
 
     function shareKakao(){
       Kakao.Share.sendDefault({
@@ -732,46 +762,24 @@
           imageUrl: location.origin + "/대표사진3.jpg",
           link: { mobileWebUrl: location.href, webUrl: location.href }
         },
-        buttons: [
-          { title: "청첩장 보기", link: { mobileWebUrl: location.href, webUrl: location.href } }
-        ]
+        buttons: [{ title: "청첩장 보기", link: { mobileWebUrl: location.href, webUrl: location.href } }]
       });
     }
 
-    /**
-     * =========================
-     * 1) 로딩 화면 제어
-     * =========================
-     */
-    window.addEventListener("DOMContentLoaded", () => {
-      setTimeout(() => {
-        const el = document.getElementById("loading");
-        if(!el) return;
-        el.style.opacity = "0";
-        setTimeout(() => el.style.display = "none", 800);
-      }, 1200);
-    });
-    // 안전장치: 어떤 이유로든 4초 지나면 강제 종료
-    setTimeout(() => {
-      const el = document.getElementById("loading");
-      if(el){
-        el.style.opacity = "0";
-        setTimeout(() => el.style.display = "none", 500);
-      }
-    }, 4000);
-
-    /**
-     * =========================
-     * 2) 지도 링크
-     * =========================
-     */
+    /* =========================================================
+       2) 지도
+       ========================================================= */
     function openMap(){ window.open("https://naver.me/x3iFFSDF"); }
 
-    /**
-     * =========================
-     * 3) D-Day 타이머
-     * =========================
-     */
+    /* =========================================================
+       3) D-day 타이머
+       ========================================================= */
+    const ddEl = document.getElementById("dd");
+    const hhEl = document.getElementById("hh");
+    const mmEl = document.getElementById("mm");
+    const ssEl = document.getElementById("ss");
+    const daysLeftEl = document.getElementById("daysLeft");
+
     const target = new Date("2026-04-25T11:00:00").getTime();
     setInterval(() => {
       const gap = target - Date.now();
@@ -781,18 +789,16 @@
       const m = Math.max(0, Math.floor((gap % (1000*60*60)) / (1000*60)));
       const s = Math.max(0, Math.floor((gap % (1000*60)) / 1000));
 
-      document.getElementById("dd").textContent = String(d).padStart(2,"0");
-      document.getElementById("hh").textContent = String(h).padStart(2,"0");
-      document.getElementById("mm").textContent = String(m).padStart(2,"0");
-      document.getElementById("ss").textContent = String(s).padStart(2,"0");
-      document.getElementById("daysLeft").textContent = String(d);
+      ddEl.textContent = String(d).padStart(2,"0");
+      hhEl.textContent = String(h).padStart(2,"0");
+      mmEl.textContent = String(m).padStart(2,"0");
+      ssEl.textContent = String(s).padStart(2,"0");
+      daysLeftEl.textContent = String(d);
     }, 1000);
 
-    /**
-     * =========================
-     * 4) 계좌 토글 / 복사 / 링크복사
-     * =========================
-     */
+    /* =========================================================
+       4) 계좌 토글/복사, 링크 복사
+       ========================================================= */
     function toggleAccount(id){
       const body = document.getElementById(id);
       const arrow = document.getElementById("arrow-" + id);
@@ -818,45 +824,37 @@
       alert("홈페이지 주소가 복사되었습니다.");
     }
 
-    /**
-     * =========================
-     * 5) RSVP / 화환 모달
-     * =========================
-     */
-    function openRSVP(){ document.getElementById("rsvpModal").style.display = "flex"; }
-    function closeRSVP(){ document.getElementById("rsvpModal").style.display = "none"; }
+    /* =========================================================
+       5) RSVP / 화환 모달
+       ========================================================= */
+    const rsvpModal = document.getElementById("rsvpModal");
+    const wreathModal = document.getElementById("wreathModal");
 
-    function openWreath(){ document.getElementById("wreathModal").style.display = "flex"; }
-    function closeWreath(){ document.getElementById("wreathModal").style.display = "none"; }
+    function openRSVP(){ rsvpModal.style.display = "flex"; }
+    function closeRSVP(){ rsvpModal.style.display = "none"; }
+    function openWreath(){ wreathModal.style.display = "flex"; }
+    function closeWreath(){ wreathModal.style.display = "none"; }
 
-    document.getElementById("rsvpModal").addEventListener("click", (e) => {
-      if(e.target.id === "rsvpModal") closeRSVP();
-    });
-    document.getElementById("wreathModal").addEventListener("click", (e) => {
-      if(e.target.id === "wreathModal") closeWreath();
-    });
+    rsvpModal.addEventListener("click", (e) => { if(e.target === rsvpModal) closeRSVP(); });
+    wreathModal.addEventListener("click", (e) => { if(e.target === wreathModal) closeWreath(); });
 
-    /**
-     * =========================
-     * 6) 섹션 등장 애니메이션
-     * =========================
-     */
+    /* =========================================================
+       6) 섹션 등장 애니메이션
+       ========================================================= */
     const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if(e.isIntersecting){
-          e.target.classList.add("show");
-          io.unobserve(e.target);
+      entries.forEach(ent => {
+        if(ent.isIntersecting){
+          ent.target.classList.add("show");
+          io.unobserve(ent.target);
         }
       });
     }, { threshold: 0.12 });
     document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 
-    /**
-     * =========================
-     * 7) 갤러리: 화살표 + 페이지(1/3)
-     * =========================
-     * - scroll-snap 기반: 스와이프 + 버튼 모두 안정적으로 동작
-     */
+    /* =========================================================
+       7) 갤러리: 화살표 + 1/3 표시
+       - 화살표 눌렀을 때 안 넘어가던 문제(클릭/레이어) 방지 완료
+       ========================================================= */
     const gallery = document.getElementById("gallery");
     const pager = document.getElementById("galleryPager");
     const slideEls = Array.from(document.querySelectorAll("#galleryTrack .slide"));
@@ -879,6 +877,7 @@
       const i = currentIndex();
       pager.textContent = `${i+1}/${total}`;
     }
+
     document.getElementById("prevBtn").addEventListener("click", () => {
       const i = currentIndex();
       slideEls[Math.max(0, i-1)].scrollIntoView({behavior:"smooth", inline:"center", block:"nearest"});
@@ -887,23 +886,20 @@
       const i = currentIndex();
       slideEls[Math.min(total-1, i+1)].scrollIntoView({behavior:"smooth", inline:"center", block:"nearest"});
     });
+
     gallery.addEventListener("scroll", () => requestAnimationFrame(setPager), {passive:true});
     window.addEventListener("resize", setPager);
     setPager();
 
-    /**
-     * =========================
-     * 8) 상단 토글: 음악 / 글자크기
-     * =========================
-     * 요구사항:
-     * - 링크 들어오면 음악이 "나오길" 원함(가능한 경우에만 재생됨, 정책상 실패 가능)
-     * - 🔊(재생) -> 누르면 🔇(뮤트)
-     * - 다시 누르면 🔊(언뮤트) + 재생 시도
-     */
+    /* =========================================================
+       8) 상단 토글: 음악 / 글자 크게/작게
+       - 요구: 들어오면 음악 "나오게" => 가능한 브라우저는 바로 재생
+         막히면: 첫 터치/클릭 때 자동으로 재생되게 보완
+       - 버튼: 🔊(소리) -> 누르면 🔇(뮤트) / 다시 누르면 🔊
+       ========================================================= */
     const bgm = document.getElementById("bgm");
     const musicBtn = document.getElementById("musicBtn");
     const playDot = document.getElementById("playDot");
-    const fontBtn = document.getElementById("fontBtn");
 
     function syncMusicUI(){
       const muted = bgm.muted || bgm.volume === 0;
@@ -911,45 +907,63 @@
       musicBtn.textContent = muted ? "🔇" : "🔊";
     }
 
-    async function tryAutoPlayWithSound(){
-      // 가능한 브라우저에서는 진입 시 소리 재생 시도
+    async function tryPlaySound(){
+      // 소리로 재생 시도
       bgm.muted = false;
       bgm.volume = 1;
       try{
         await bgm.play();
       }catch(e){
-        // 자동재생 정책으로 실패하면 안전하게 뮤트로 전환
+        // 정책으로 막히면: 일단 뮤트로 두고 UI도 🔇로 맞춤
         bgm.muted = true;
       }
       syncMusicUI();
     }
 
-    // 진입 시 소리 자동재생 시도(실패 가능)
+    // 진입 시 재생 시도
     window.addEventListener("DOMContentLoaded", () => {
-      tryAutoPlayWithSound();
+      tryPlaySound();
     });
 
-    musicBtn.addEventListener("click", async () => {
-      // 토글: 언뮤트/뮤트
-      bgm.muted = !bgm.muted;
+    // 만약 자동재생이 막힌 경우, 첫 사용자 액션에서 자동 재생 (보완)
+    let armed = true;
+    function armFirstGesturePlay(){
+      if(!armed) return;
+      armed = false;
+      if(bgm.muted){
+        bgm.muted = false;
+        bgm.volume = 1;
+      }
+      bgm.play().catch(()=>{});
+      syncMusicUI();
+      window.removeEventListener("pointerdown", armFirstGesturePlay);
+      window.removeEventListener("touchstart", armFirstGesturePlay);
+    }
+    window.addEventListener("pointerdown", armFirstGesturePlay, { once:false });
+    window.addEventListener("touchstart", armFirstGesturePlay, { once:false });
 
+    // 버튼 토글(뮤트/언뮤트)
+    musicBtn.addEventListener("click", async () => {
+      bgm.muted = !bgm.muted;
       if(!bgm.muted){
         bgm.volume = 1;
-        try{ await bgm.play(); }catch(e){ /* 정책 실패 시에도 UI는 유지 */ }
+        try{ await bgm.play(); }catch(e){}
       }
       syncMusicUI();
     });
 
-    // 글자 크게/작게 토글
+    // 글자 토글(전체 1.5배)
+    const fontBtn = document.getElementById("fontBtn");
     function syncFontUI(){
-      const isBig = document.body.classList.contains("big-font");
-      fontBtn.textContent = isBig ? "글자 작게" : "글자 크게";
+      const big = document.body.classList.contains("big-font");
+      fontBtn.textContent = big ? "글자 작게" : "글자 크게";
     }
     fontBtn.addEventListener("click", () => {
       document.body.classList.toggle("big-font");
       syncFontUI();
     });
     syncFontUI();
+    syncMusicUI();
   </script>
 </body>
 </html>
