@@ -472,9 +472,8 @@
       <div class="brand">류정현 <span class="heart">♥</span> 이나현</div>
     </div>
     <div class="actions">
-      <button class="icon-btn" id="musicBtn" type="button">음악</button>
+      <button class="icon-btn" id="musicBtn" type="button">🔇</button>
       <button class="icon-btn" id="fontBtn" type="button">글자 크게</button>
-      <button class="icon-btn" id="fitBtn" type="button">사진 꽉</button>
     </div>
   </div>
 
@@ -722,7 +721,16 @@
         arrow.textContent = "▼";
       }
     }
+/* ✅ 전체 글자 1.5배 토글 */
+body.big-font{
+  zoom: 1.5;
+}
 
+    #musicBtn{
+  width:44px;
+  justify-content:center;
+  padding:9px 0;
+}
     // 복사
     function copyAccount(e, number){
       e.stopPropagation();
@@ -790,44 +798,55 @@
 
     // ✅ 상단 컨트롤: 음악 / 글자 크게 / 사진 fit 토글
     const bgm = document.getElementById("bgm");
-    const musicBtn = document.getElementById("musicBtn");
-    const fontBtn = document.getElementById("fontBtn");
-    const fitBtn = document.getElementById("fitBtn");
-    const playDot = document.getElementById("playDot");
+const musicBtn = document.getElementById("musicBtn");
+const playDot = document.getElementById("playDot");
 
-    // 모바일 자동재생 보완: 첫 클릭에 재생 시도
-    document.addEventListener("click", () => {
-      if(bgm && bgm.paused){
-        bgm.play().catch(()=>{});
-      }
-    }, { once:false });
+function syncMusicUI(){
+  const muted = bgm.muted || bgm.volume === 0;
+  playDot.classList.toggle("on", !muted);
+  musicBtn.textContent = muted ? "🔇" : "🔊";
+  musicBtn.setAttribute("aria-label", muted ? "음악 켜기" : "음악 끄기");
+}
 
-    function setPlayUI(isPlaying){
-      playDot.classList.toggle("on", isPlaying);
-      musicBtn.textContent = isPlaying ? "음악 끄기" : "음악 켜기";
-    }
+// ✅ 모바일에서 최초 재생은 사용자 제스처 필요
+async function ensurePlayOnce(){
+  try{
+    // 음원 로드/재생 시도
+    await bgm.play();
+  }catch(e){
+    // 카카오/브라우저 정책상 막히는 경우가 있음(그럼 사용자 클릭 후 다시 누르면 됨)
+  }
+}
 
-    // 초기 상태(autoplay가 막힐 수 있으니)
-    setTimeout(() => setPlayUI(bgm && !bgm.paused), 300);
+musicBtn.addEventListener("click", async () => {
+  // 일단 재생을 한번 시도 (막혀도 괜찮음)
+  await ensurePlayOnce();
 
-    musicBtn.addEventListener("click", () => {
-      if(!bgm) return;
-      if(bgm.paused){
-        bgm.play().then(()=>setPlayUI(true)).catch(()=>{ alert("휴대폰에서는 화면을 한번 터치한 뒤 재생될 수 있어요."); });
-      }else{
-        bgm.pause();
-        setPlayUI(false);
-      }
-    });
+  // ✅ 윈도우 스피커처럼 "뮤트 토글"
+  bgm.muted = !bgm.muted;
 
+  // muted 풀었는데도 소리가 0일 수 있으니 보정
+  if(!bgm.muted && bgm.volume === 0) bgm.volume = 1;
+
+  syncMusicUI();
+});
+
+// 초기 UI
+syncMusicUI();
     // 글자 크게 토글
-    let bigFont = false;
-    fontBtn.addEventListener("click", () => {
-      bigFont = !bigFont;
-      document.documentElement.style.setProperty("--font-scale", bigFont ? "1.12" : "1");
-      fontBtn.textContent = bigFont ? "글자 원래" : "글자 크게";
-    });
+function syncFontUI(){
+  const isBig = document.body.classList.contains("big-font");
+  fontBtn.textContent = isBig ? "글자 작게" : "글자 크게";
+}
 
+fontBtn.addEventListener("click", () => {
+  document.body.classList.toggle("big-font");
+  syncFontUI();
+});
+
+// 초기 텍스트 세팅
+syncFontUI();
+    
     // 갤러리 사진 fit 토글 (contain <-> cover)
     let coverFit = false;
     fitBtn.addEventListener("click", () => {
