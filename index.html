@@ -540,10 +540,10 @@ body{
       충북 청주시 흥덕구 남석로 579
     </p>
 
-    <div class="map-card" onclick="openMap()">
-      <img src="https://ssl.pstatic.net/static/maps/mantle/1x/img_map_static.png" alt="지도">
-    </div>
-
+    <a class="map-card" href="https://naver.me/x3iFFSDF" target="_blank" rel="noopener">
+  <img src="https://ssl.pstatic.net/static/maps/mantle/1x/img_map_static.png" alt="지도">
+</a>
+    
     <div class="nav-btns">
       <a href="https://tmap.life/dadbe9d5">티맵</a>
       <a href="kakaonavi://navigate?name=아모르아트컨벤션">카카오내비</a>
@@ -645,8 +645,8 @@ body{
     </div>
 
     <div style="max-width:520px; margin:14px auto 0; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-      <button class="button" style="margin-top:0; flex:1; min-width:160px;" onclick="copyLink()">청첩장 주소 복사하기</button>
-      <button class="button" style="margin-top:0; flex:1; min-width:160px;" onclick="shareKakao()">카카오톡으로 공유하기</button>
+      <button class="button" style="margin-top:0; flex:1; min-width:160px;" onclick="copyLink()">청첩장 주소<br>복사하기</button>
+      <button class="button" style="margin-top:0; flex:1; min-width:160px;" onclick="shareKakao()">카카오톡으로<br>공유하기</button>
     </div>
   </section>
 
@@ -671,7 +671,7 @@ body{
        1) 카카오 공유
        ========================================================= */
     if (window.Kakao && !Kakao.isInitialized()) {
-      Kakao.init("fcc3a1be2558f7a368d372db08814fd2");
+      Kakao.init("91eed7186338a8599546bf372fc45f56");
     }
     function shareKakao(){
       if(!window.Kakao){
@@ -856,6 +856,7 @@ body{
     });
 
     syncMusicUI();
-  </script>
-</body>
+         </script>
+     </main>
+  </body>
 </html>
