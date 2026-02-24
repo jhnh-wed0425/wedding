@@ -45,7 +45,27 @@
       line-height:1.85;
       font-size: var(--base-font);
     }
+/* ✅ PC에서 양옆 흰색 */
+body{
+  margin:0;
+  background:#fff;   /* 화면 전체는 흰색 */
+  color:var(--text);
+  font-family:var(--sans);
+  text-align:center;
+  line-height:1.85;
+  font-size: var(--base-font);
+}
 
+/* ✅ 가운데 ‘모바일 화면’ */
+.page{
+  max-width:560px;          /* 모바일 카드 폭 */
+  margin:0 auto;
+  min-height:100vh;
+  background:
+    radial-gradient(1200px 600px at 50% -120px, rgba(200,200,205,.35), transparent 55%),
+    linear-gradient(180deg, #fbfbfc 0%, var(--bg) 55%, #f3f3f5 100%);
+}
+    
     section{
       padding:54px 18px;
       max-width:560px;
@@ -408,38 +428,6 @@
    ========================= */
 
 /* 사진을 감싸는 모든 프레임/카드 컨테이너를 투명 + 무테로 */
-.hero-frame,
-.gallery,
-.gallery-shell,
-.photo-frame,
-.map-card{
-  border: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  background: transparent !important;
-  overflow: visible !important;
-}
-
-/* 고정 비율(프레임 느낌)의 원인 제거 */
-.hero-frame,
-.photo-frame{
-  aspect-ratio: auto !important;
-  width: min(92vw, 480px);
-}
-
-/* 모든 img는 "이미지 자체 크기"로만 */
-.hero-frame img,
-.photo-frame img,
-.map-card img,
-img{
-  display:block;
-  width:100%;
-  height:auto !important;
-  object-fit: contain !important;
-  background: transparent !important;
-  border-radius: 0 !important;
-  box-shadow:none !important;
-}
     
   </style>
 </head>
@@ -457,6 +445,7 @@ img{
     <source src="모청bgm.mp3" type="audio/mpeg">
   </audio>
 
+   <main class="page">
   <!-- 1 메인 -->
   <section class="reveal">
     <div class="section-title">WEDDING INVITATION</div>
