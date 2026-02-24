@@ -175,7 +175,7 @@
     #musicBtn{ width:44px; justify-content:center; padding:9px 0; }
 
     .icon-dot{
-      display: none; 
+      display: none!important;
 }
     .icon-dot.on{ background:#8b1f2f; }
 
@@ -720,33 +720,28 @@
   </section>
 
   <script>
-    /* =========================================================
-       0) 로딩이 안 꺼지는 원인 대부분: JS 에러로 스크립트가 멈춤
-          => 에러가 나도 무조건 로딩은 꺼지게 안전장치 넣음
-       ========================================================= */
-    const loadingEl = document.getElementById("loading");
-    function hideLoading(){
-      if(!loadingEl) return;
-      loadingEl.classList.add("hide");
-      setTimeout(() => { if(loadingEl) loadingEl.style.display = "none"; }, 700);
-    }
-    // 어떤 에러가 나도 로딩은 꺼짐
-    window.onerror = function(){
-      hideLoading();
-      return false;
-    };
+/* =========================================================
+   0) 로딩 화면 제어: 무조건 3초 동안 보여주기
+   ========================================================= */
+const loadingEl = document.getElementById("loading");
 
-    // DOM 준비 후 1.2초 뒤 로딩 종료
-    window.addEventListener("DOMContentLoaded", () => {
-      setTimeout(hideLoading, 1200);
-    });
-    // 이미지/폰트 등 모든 리소스 로드 완료 시에도 종료
-    window.addEventListener("load", () => {
-      hideLoading();
-    });
-    // 최후 안전장치: 4초 지나면 무조건 종료
-    setTimeout(hideLoading, 4000);
+function hideLoading() {
+  if (!loadingEl) return;
+  loadingEl.classList.add("hide");
+  // 페이드아웃 애니메이션 시간(0.7초) 뒤에 아예 제거
+  setTimeout(() => { 
+    if (loadingEl) loadingEl.style.display = "none"; 
+  }, 700);
+}
 
+// 페이지가 열리고 나서 '3초(3000ms)' 뒤에 로딩 화면을 끕니다.
+window.addEventListener("load", () => {
+  setTimeout(hideLoading, 3000); 
+});
+
+// 만약 이미지가 너무 늦게 떠도 5초 뒤에는 무조건 꺼지게 안전장치
+setTimeout(hideLoading, 5000);
+    
     /* =========================================================
        1) 카카오 공유 초기화
        ========================================================= */
