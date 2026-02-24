@@ -175,9 +175,8 @@
     #musicBtn{ width:44px; justify-content:center; padding:9px 0; }
 
     .icon-dot{
-      width:7px; height:7px; border-radius:999px;
-      background:#bdbdc4;
-    }
+      display: none; 
+}
     .icon-dot.on{ background:#8b1f2f; }
 
     /* =========================
@@ -897,61 +896,34 @@
          막히면: 첫 터치/클릭 때 자동으로 재생되게 보완
        - 버튼: 🔊(소리) -> 누르면 🔇(뮤트) / 다시 누르면 🔊
        ========================================================= */
-    const bgm = document.getElementById("bgm");
-    const musicBtn = document.getElementById("musicBtn");
-    const playDot = document.getElementById("playDot");
+/* 8) 상단 토글: 음악 / 글자 크게/작게 */
+const bgm = document.getElementById("bgm");
+const musicBtn = document.getElementById("musicBtn");
 
-    function syncMusicUI(){
-      const muted = bgm.muted || bgm.volume === 0;
-      playDot.classList.toggle("on", !muted);
-      musicBtn.textContent = muted ? "🔇" : "🔊";
+// 음악 상태에 따라 버튼 아이콘 바꾸기 함수
+function syncMusicUI() {
+  musicBtn.textContent = bgm.paused ? "🔇" : "🔊";
+}
+
+// [핵심] 화면 어디든 누르면 노래가 시작되게 함
+document.addEventListener('click', function() {
+    if (bgm.paused) {
+        bgm.play().then(() => {
+            syncMusicUI();
+        }).catch(e => console.log("재생 실패:", e));
     }
+}, { once: true }); // 'once: true'는 딱 처음 한 번만 실행한다는 뜻!
 
-    async function tryPlaySound(){
-      // 소리로 재생 시도
-      bgm.muted = false;
-      bgm.volume = 1;
-      try{
-        await bgm.play();
-      }catch(e){
-        // 정책으로 막히면: 일단 뮤트로 두고 UI도 🔇로 맞춤
-        bgm.muted = true;
-      }
-      syncMusicUI();
-    }
-
-    // 진입 시 재생 시도
-    window.addEventListener("DOMContentLoaded", () => {
-      tryPlaySound();
-    });
-
-    // 만약 자동재생이 막힌 경우, 첫 사용자 액션에서 자동 재생 (보완)
-    let armed = true;
-    function armFirstGesturePlay(){
-      if(!armed) return;
-      armed = false;
-      if(bgm.muted){
-        bgm.muted = false;
-        bgm.volume = 1;
-      }
-      bgm.play().catch(()=>{});
-      syncMusicUI();
-      window.removeEventListener("pointerdown", armFirstGesturePlay);
-      window.removeEventListener("touchstart", armFirstGesturePlay);
-    }
-    window.addEventListener("pointerdown", armFirstGesturePlay, { once:false });
-    window.addEventListener("touchstart", armFirstGesturePlay, { once:false });
-
-    // 버튼 토글(뮤트/언뮤트)
-    musicBtn.addEventListener("click", async () => {
-      bgm.muted = !bgm.muted;
-      if(!bgm.muted){
-        bgm.volume = 1;
-        try{ await bgm.play(); }catch(e){}
-      }
-      syncMusicUI();
-    });
-
+// 상단바 🔊 버튼 눌렀을 때 끄고 켜기
+musicBtn.addEventListener("click", (e) => {
+  e.stopPropagation(); // 화면 클릭 이벤트랑 겹치지 않게 방지
+  if (bgm.paused) {
+    bgm.play();
+  } else {
+    bgm.pause();
+  }
+  syncMusicUI();
+});
     // 글자 토글(전체 1.5배)
     const fontBtn = document.getElementById("fontBtn");
     function syncFontUI(){
