@@ -136,27 +136,25 @@
     .loading.hide{ opacity:0; pointer-events:none; }
 
     /* 대표사진 프레임 */
-    .hero-frame{
-      margin:18px auto 0;
-      width:min(92vw, 480px);
-      aspect-ratio: 4 / 5;
-      border-radius:26px;
-      overflow:hidden;
-      border:1px solid rgba(215,215,220,.9);
-      box-shadow:0 22px 45px rgba(0,0,0,.10);
-      background:#f2f2f5;
-    }
-    .hero-frame.landscape{ aspect-ratio: 4 / 3; }
-    .hero-frame img{
-      width:100%;
-      height:100%;
-      object-fit:contain;
-      background:#f2f2f5;
-      user-select:none;
-      -webkit-user-drag:none;
-      pointer-events:none;
-    }
+ .hero-frame{
+  margin:18px auto 0;
+  width:min(92vw, 480px);
+  aspect-ratio: 4 / 5;
+  border-radius:0;   /* 둥근모서리 제거 */
+  overflow:visible;  /* 잘림/프레임 느낌 제거 */
+  border:0;          /* 테두리 제거 */
+  box-shadow:none;   /* 그림자 제거 */
+  background:transparent; /* 배경 제거 */
+}
+.hero-frame.landscape{ aspect-ratio: 4 / 3; }
 
+.hero-frame img{
+  width:100%;
+  height:auto;       /* 프레임에 맞추지 말고 사진 자체로 */
+  object-fit:contain;
+  background:transparent;
+}
+    
     /* 섹션 애니메이션: JS가 켜졌을 때만 숨김 */
     .reveal{ opacity:1; transform:none; }
     html.js .reveal{ opacity:0; transform:translateY(14px); transition: opacity .9s ease, transform .9s ease; }
@@ -312,44 +310,42 @@
       margin:6px auto 0;
       width:min(92vw, 480px);
     }
-    .gallery{
-      overflow-x:auto;
-      overflow-y:hidden;
-      scroll-snap-type:x mandatory;
-      scroll-snap-stop: always;
-      -webkit-overflow-scrolling:touch;
-      border-radius:22px;
-      border:1px solid rgba(227,227,230,.95);
-      background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(245,245,248,.92));
-      box-shadow:0 18px 36px rgba(0,0,0,.08);
-    }
+  .gallery{
+  overflow-x:auto;
+  overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  scroll-snap-stop: always;
+  -webkit-overflow-scrolling:touch;
+
+  border:0;            /* 테두리 제거 */
+  border-radius:0;     /* 둥근모서리 제거 */
+  background:transparent; /* 배경 제거 */
+  box-shadow:none;     /* 그림자 제거 */
+}
+    
     .gallery::-webkit-scrollbar{ display:none; }
     .track{ display:flex; gap:0; padding:0; }
     .slide{ flex:0 0 100%; scroll-snap-align:start; padding:0; }
 
-    .photo-frame{
-      width:100%;
-      aspect-ratio: 4 / 5;
-      border-radius:18px;
-      overflow:hidden;
-      background:#f2f2f5;
-      border:1px solid rgba(227,227,230,.7);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .photo-frame img{
-      width:100%;
-      height:100%;
-      object-fit:contain;
-      object-position:center;
-      background:#f2f2f5;
-      display:block;
-      pointer-events:none;
-      user-select:none;
-      -webkit-user-drag:none;
-    }
+.photo-frame{
+  width:100%;
+  aspect-ratio: 4 / 5;
 
+  border-radius:0;     /* 둥근모서리 제거 */
+  overflow:visible;    /* 프레임 느낌 제거 */
+  background:transparent; /* 배경 제거 */
+  border:0;            /* 테두리 제거 */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.photo-frame img{
+  width:100%;
+  height:auto;         /* 사진만 */
+  object-fit:contain;
+  background:transparent;
+}
     /* 화살표(필요한 CSS가 빠져있던 부분을 다시 넣음) */
     .gal-arrow{
       position:absolute;
