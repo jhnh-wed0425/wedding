@@ -7,7 +7,7 @@
 
   <!-- Kakao Share SDK (카카오 공유용) -->
   <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"></script>
-  
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,32 +31,7 @@
       --sans:'Pretendard', system-ui, -apple-system, sans-serif;
       --base-font: 16px;
     }
-/* 오른쪽 상단 플로팅 음악 토글만 */
-.floating-music{
-  position: fixed;
-  top: 12px;
-  right: 12px;
-  z-index: 9999;
-}
 
-.floating-music button{
-  width: 44px;
-  height: 44px;
-  border-radius: 999px;
-  border: 1px solid rgba(227,227,230,.95);
-  background: rgba(255,255,255,.85);
-  box-shadow: 0 10px 20px rgba(0,0,0,.10);
-  backdrop-filter: blur(10px);
-  cursor: pointer;
-  font-size: 18px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.floating-music button:active{
-  transform: scale(.98);
-}
-    
     *{ box-sizing:border-box; }
     html{ scroll-behavior:smooth; }
     body{
@@ -69,7 +44,6 @@
       text-align:center;
       line-height:1.85;
       font-size: var(--base-font);
-      padding-top: 0; /* 상단 플로팅바 공간 */
     }
 
     section{
@@ -80,6 +54,30 @@
 
     a{ color:inherit; text-decoration:none; }
     img{ display:block; margin:0 auto; }
+
+    /* 오른쪽 상단 플로팅 음악 토글만 */
+    .floating-music{
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      z-index: 9999;
+    }
+    .floating-music button{
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(227,227,230,.95);
+      background: rgba(255,255,255,.85);
+      box-shadow: 0 10px 20px rgba(0,0,0,.10);
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+      font-size: 18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      user-select:none;
+    }
+    .floating-music button:active{ transform: scale(.98); }
 
     /* 공통 섹션 타이틀 */
     .section-title{
@@ -101,7 +99,6 @@
       margin:10px 0 10px;
     }
     .heart{ color:#8b1f2f; }
-
     .hero-sub{
       font-family:var(--serif);
       color:#7a7a7a;
@@ -126,9 +123,7 @@
       padding:28px 18px;
     }
 
-    /* =========================
-       로딩 오버레이
-       ========================= */
+    /* 로딩 오버레이 */
     .loading{
       position:fixed; inset:0;
       background:#fff;
@@ -138,15 +133,9 @@
       letter-spacing:4px;
       transition:opacity .6s ease;
     }
-    .loading.hide{
-      opacity:0;
-      pointer-events:none;
-    }
+    .loading.hide{ opacity:0; pointer-events:none; }
 
-   
-    /* =========================
-       (5-1) 대표사진 프레임: "무조건 안 잘림"
-       ========================= */
+    /* 대표사진 프레임 */
     .hero-frame{
       margin:18px auto 0;
       width:min(92vw, 480px);
@@ -157,30 +146,21 @@
       box-shadow:0 22px 45px rgba(0,0,0,.10);
       background:#f2f2f5;
     }
-    /* (5-2) 가로사진 전용 프레임 */
-    .hero-frame.landscape{
-      aspect-ratio: 4 / 3;
-    }
+    .hero-frame.landscape{ aspect-ratio: 4 / 3; }
     .hero-frame img{
       width:100%;
       height:100%;
-      object-fit:contain;    /* ✅ 안 잘림 */
+      object-fit:contain;
       background:#f2f2f5;
       user-select:none;
       -webkit-user-drag:none;
       pointer-events:none;
     }
 
-    /* 섹션 등장 애니메이션 */
-    .reveal{
-      opacity:0;
-      transform:translateY(14px);
-      transition: opacity .9s ease, transform .9s ease;
-    }
-    .reveal.show{
-      opacity:1;
-      transform:translateY(0);
-    }
+    /* 섹션 애니메이션: JS가 켜졌을 때만 숨김 */
+    .reveal{ opacity:1; transform:none; }
+    html.js .reveal{ opacity:0; transform:translateY(14px); transition: opacity .9s ease, transform .9s ease; }
+    html.js .reveal.show{ opacity:1; transform:translateY(0); }
 
     /* 타이머 */
     .timer-wrap{
@@ -197,17 +177,8 @@
       border-radius:16px;
       background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(245,245,248,.92));
     }
-    .num{
-      font-size:26px;
-      font-weight:300;
-      letter-spacing:1px;
-    }
-    .label{
-      margin-top:6px;
-      font-size:10px;
-      letter-spacing:2px;
-      color:#9a9a9a;
-    }
+    .num{ font-size:26px; font-weight:300; letter-spacing:1px; }
+    .label{ margin-top:6px; font-size:10px; letter-spacing:2px; color:#9a9a9a; }
     .days-left{
       margin:12px 0 0;
       font-family:var(--serif);
@@ -215,10 +186,7 @@
       font-size:14px;
       letter-spacing:.6px;
     }
-    .days-left b{
-      font-weight:500;
-      color:#3a3a3a;
-    }
+    .days-left b{ font-weight:500; color:#3a3a3a; }
 
     .button{
       display:inline-block;
@@ -309,7 +277,7 @@
       cursor:pointer;
     }
 
-    /* 모달 공통 */
+    /* RSVP 모달 */
     .modal{
       display:none;
       position:fixed; inset:0;
@@ -337,7 +305,7 @@
     }
 
     /* =========================
-       갤러리: 스크롤 스냅 + 화살표 + 페이지
+       GALLERY (Instagram feed style)
        ========================= */
     .gallery-shell{
       position:relative;
@@ -348,6 +316,7 @@
       overflow-x:auto;
       overflow-y:hidden;
       scroll-snap-type:x mandatory;
+      scroll-snap-stop: always;
       -webkit-overflow-scrolling:touch;
       border-radius:22px;
       border:1px solid rgba(227,227,230,.95);
@@ -355,35 +324,33 @@
       box-shadow:0 18px 36px rgba(0,0,0,.08);
     }
     .gallery::-webkit-scrollbar{ display:none; }
+    .track{ display:flex; gap:0; padding:0; }
+    .slide{ flex:0 0 100%; scroll-snap-align:start; padding:0; }
 
-    .track{
-      display:flex;
-      gap:12px;
-      padding:12px;
-    }
-    .slide{
-      flex:0 0 88%;
-      scroll-snap-align:center;
-      padding:0;
-    }
     .photo-frame{
+      width:100%;
+      aspect-ratio: 4 / 5;
       border-radius:18px;
       overflow:hidden;
       background:#f2f2f5;
       border:1px solid rgba(227,227,230,.7);
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
     .photo-frame img{
       width:100%;
-      height:auto;            /* ✅ 세로/가로 원본 비율 유지 */
-      object-fit:contain;     /* ✅ 안 잘림 */
-      display:block;
+      height:100%;
+      object-fit:contain;
+      object-position:center;
       background:#f2f2f5;
+      display:block;
       pointer-events:none;
       user-select:none;
       -webkit-user-drag:none;
     }
 
-    /* 화살표가 안 눌리는 문제 방지: z-index + 클릭 영역 */
+    /* 화살표(필요한 CSS가 빠져있던 부분을 다시 넣음) */
     .gal-arrow{
       position:absolute;
       top:50%;
@@ -397,10 +364,10 @@
       cursor:pointer;
       user-select:none;
       backdrop-filter: blur(6px);
-      z-index:5;              /* ✅ 갤러리 위로 */
+      z-index:5;
     }
-    .gal-arrow.left{ left:-10px; }
-    .gal-arrow.right{ right:-10px; }
+    .gal-arrow.left{ left:10px; }   /* ✅ 카드 안쪽 */
+    .gal-arrow.right{ right:10px; } /* ✅ 카드 안쪽 */
     .gal-arrow:active{ transform:translateY(-50%) scale(.98); }
 
     .chev{
@@ -430,45 +397,22 @@
       font-family:var(--serif);
     }
 
-    /* 글자 크기 토글(전체) */
-    body.big-font{ zoom: 1.5; }
-
     @media (min-width: 900px){
-      body{ padding:40px 0 0; }
-      .topbar{ top:18px; }
       section{ padding:70px 20px; }
       .hero-frame{ width:480px; }
       .gallery-shell{ width:480px; }
-      .gal-arrow.left{ left:-18px; }
-      .gal-arrow.right{ right:-18px; }
     }
   </style>
 </head>
 
 <body>
   <div class="floating-music">
-  <button id="musicBtn" type="button" aria-label="음악 토글">🔊</button>
-</div>
-  
+    <button id="musicBtn" type="button" aria-label="음악 토글">🔊</button>
+  </div>
+
   <!-- 로딩 오버레이 -->
   <div class="loading" id="loading">WEDDING INVITATION</div>
-<script>
-  (function(){
-    const loadingEl = document.getElementById("loading");
-    function forceHide(){
-      if(!loadingEl) return;
-      loadingEl.classList.add("hide");
-      setTimeout(()=>{ loadingEl.style.display="none"; }, 700);
-    }
-    // DOM만 준비돼도 타이머 시작 (load 대기 X)
-    setTimeout(forceHide, 3000);
-    // 어떤 에러가 나도 5초 뒤엔 무조건 끔
-    setTimeout(forceHide, 5000);
-    // JS 에러가 발생해도 화면은 살려두기
-    window.addEventListener("error", forceHide, { once:true });
-  })();
-</script>
-  
+
   <!-- BGM -->
   <audio id="bgm" autoplay loop playsinline>
     <source src="모청bgm.mp3" type="audio/mpeg">
@@ -624,44 +568,6 @@
     <button class="button" onclick="openRSVP()">전달하기</button>
   </section>
 
-  <!-- 9 화환 안내(버튼형) -->
-  <section class="reveal">
-    <div class="card" style="text-align:left; display:flex; align-items:center; justify-content:space-between; gap:14px; cursor:pointer;"
-         onclick="openWreath()">
-      <div>
-        <div style="font-family:var(--serif); font-size:16px; color:#222;">함께해 주시는 마음만으로도 충분히 감사드립니다</div>
-        <div style="margin-top:4px; color:#777; font-size:13px; line-height:1.6;">
-          화환을 보내주시는 경우, 예식장 규정으로 꽃화환은 불가하며<br>
-          쌀화환만 가능한 점 너그러이 양해 부탁드립니다.
-        </div>
-      </div>
-      <div style="font-size:26px;">💐</div>
-    </div>
-  </section>
-
-  <!-- 쌀화환 업체 모달 -->
-  <div class="modal" id="wreathModal" role="dialog" aria-modal="true">
-    <div class="modal-content">
-      <div class="modal-close" onclick="closeWreath()">✕</div>
-      <h3 style="margin:0 0 10px; font-family:var(--serif); font-weight:500;">쌀화환 업체 안내</h3>
-      <p style="margin:0 0 14px; font-size:13px; color:#666; font-family:var(--serif); line-height:1.7;">
-        예식장 규정상 꽃화환은 불가하며, 쌀화환만 가능합니다.
-      </p>
-      <div style="text-align:left; border-top:1px solid rgba(227,227,230,.95); padding-top:12px;">
-        <div style="padding:10px 0; border-bottom:1px solid rgba(227,227,230,.95);">
-          <b>업체 A</b><br><span style="color:#666;">010-xxxx-xxxx</span>
-        </div>
-        <div style="padding:10px 0; border-bottom:1px solid rgba(227,227,230,.95);">
-          <b>업체 B</b><br><span style="color:#666;">010-xxxx-xxxx</span>
-        </div>
-        <div style="padding:10px 0;">
-          <b>업체 C</b><br><span style="color:#666;">010-xxxx-xxxx</span>
-        </div>
-      </div>
-      <button class="button" style="width:100%; margin-top:16px;" onclick="closeWreath()">닫기</button>
-    </div>
-  </div>
-
   <!-- RSVP 모달 -->
   <div class="modal" id="rsvpModal" role="dialog" aria-modal="true">
     <div class="modal-content">
@@ -677,9 +583,21 @@
     </div>
   </div>
 
+  <!-- 9 화환 안내 (모달 삭제, 카드 안에 글귀만) -->
+  <section class="reveal">
+    <div class="card" style="text-align:left;">
+      <div style="font-family:var(--serif); font-size:16px; color:#222;">
+        함께해 주시는 마음만으로도 충분히 감사드립니다
+      </div>
+      <div style="margin-top:8px; color:#777; font-size:13px; line-height:1.7;">
+        화환을 보내주시는 경우, 예식장 규정으로 꽃화환은 불가하며<br>
+        쌀화환만 가능한 점 너그러이 양해 부탁드립니다.
+      </div>
+    </div>
+  </section>
+
   <!-- 10 대표사진3 + 공유 -->
   <section class="reveal">
-    <!-- (5-2) 대표사진3 가로 프레임 -->
     <div class="hero-frame landscape">
       <img src="대표사진3.jpg" alt="대표사진3">
     </div>
@@ -691,52 +609,45 @@
   </section>
 
   <script>
-/* =========================================================
-   0) 로딩 화면 제어: 무조건 3초 동안 보여주기
-   ========================================================= */
-const loadingEl = document.getElementById("loading");
+    // JS가 정상 실행될 때만 reveal 숨김 적용
+    document.documentElement.classList.add("js");
 
-function hideLoading() {
-  if (!loadingEl) return;
-  loadingEl.classList.add("hide");
-  // 페이드아웃 애니메이션 시간(0.7초) 뒤에 아예 제거
-  setTimeout(() => { 
-    if (loadingEl) loadingEl.style.display = "none"; 
-  }, 700);
-}
-
-// 페이지가 열리고 나서 '3초(3000ms)' 뒤에 로딩 화면을 끕니다.
-window.addEventListener("load", () => {
-  setTimeout(hideLoading, 3000); 
-});
-
-// 만약 이미지가 너무 늦게 떠도 5초 뒤에는 무조건 꺼지게 안전장치
-setTimeout(hideLoading, 5000);
-    
     /* =========================================================
-       1) 카카오 공유 초기화
+       0) 로딩 화면: 3초 후 숨김 (최대 5초 안전장치)
+       ========================================================= */
+    const loadingEl = document.getElementById("loading");
+    function hideLoading(){
+      if(!loadingEl) return;
+      loadingEl.classList.add("hide");
+      setTimeout(()=>{ loadingEl.style.display="none"; }, 700);
+    }
+    setTimeout(hideLoading, 3000);
+    setTimeout(hideLoading, 5000);
+    window.addEventListener("error", hideLoading, { once:true });
+
+    /* =========================================================
+       1) 카카오 공유
        ========================================================= */
     if (window.Kakao && !Kakao.isInitialized()) {
-  Kakao.init("fcc3a1be2558f7a368d372db08814fd2");
-}
+      Kakao.init("fcc3a1be2558f7a368d372db08814fd2");
+    }
+    function shareKakao(){
+      if(!window.Kakao){
+        alert("카카오 공유 기능을 불러오지 못했습니다. (네트워크/차단 확인)");
+        return;
+      }
+      Kakao.Share.sendDefault({
+        objectType: "feed",
+        content: {
+          title: "류정현 ♥ 이나현 결혼식에 초대합니다",
+          description: "2026년 04월 25일 토요일 오전 11시",
+          imageUrl: location.origin + "/대표사진3.jpg",
+          link: { mobileWebUrl: location.href, webUrl: location.href }
+        },
+        buttons: [{ title: "청첩장 보기", link: { mobileWebUrl: location.href, webUrl: location.href } }]
+      });
+    }
 
-function shareKakao(){
-  if(!window.Kakao){
-    alert("카카오 공유 기능을 불러오지 못했습니다. (네트워크/차단 확인)");
-    return;
-  }
-  Kakao.Share.sendDefault({
-    objectType: "feed",
-    content: {
-      title: "류정현 ♥ 이나현 결혼식에 초대합니다",
-      description: "2026년 04월 25일 토요일 오전 11시",
-      imageUrl: location.origin + "/대표사진3.jpg",
-      link: { mobileWebUrl: location.href, webUrl: location.href }
-    },
-    buttons: [{ title: "청첩장 보기", link: { mobileWebUrl: location.href, webUrl: location.href } }]
-  });
-}
-    
     /* =========================================================
        2) 지도
        ========================================================= */
@@ -754,7 +665,6 @@ function shareKakao(){
     const target = new Date("2026-04-25T11:00:00").getTime();
     setInterval(() => {
       const gap = target - Date.now();
-
       const d = Math.max(0, Math.floor(gap / (1000*60*60*24)));
       const h = Math.max(0, Math.floor((gap % (1000*60*60*24)) / (1000*60*60)));
       const m = Math.max(0, Math.floor((gap % (1000*60*60)) / (1000*60)));
@@ -796,18 +706,12 @@ function shareKakao(){
     }
 
     /* =========================================================
-       5) RSVP / 화환 모달
+       5) RSVP 모달
        ========================================================= */
     const rsvpModal = document.getElementById("rsvpModal");
-    const wreathModal = document.getElementById("wreathModal");
-
     function openRSVP(){ rsvpModal.style.display = "flex"; }
     function closeRSVP(){ rsvpModal.style.display = "none"; }
-    function openWreath(){ wreathModal.style.display = "flex"; }
-    function closeWreath(){ wreathModal.style.display = "none"; }
-
     rsvpModal.addEventListener("click", (e) => { if(e.target === rsvpModal) closeRSVP(); });
-    wreathModal.addEventListener("click", (e) => { if(e.target === wreathModal) closeWreath(); });
 
     /* =========================================================
        6) 섹션 등장 애니메이션
@@ -823,75 +727,93 @@ function shareKakao(){
     document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 
     /* =========================================================
-       7) 갤러리: 화살표 + 1/3 표시
-       - 화살표 눌렀을 때 안 넘어가던 문제(클릭/레이어) 방지 완료
+       7) 갤러리: 한 장씩 딱 넘김 + pager
        ========================================================= */
-    const gallery = document.getElementById("gallery");
-    const pager = document.getElementById("galleryPager");
-    const slideEls = Array.from(document.querySelectorAll("#galleryTrack .slide"));
-    const total = slideEls.length;
+    const galleryEl = document.getElementById("gallery");
+    const pagerEl = document.getElementById("galleryPager");
+    const slides = Array.from(document.querySelectorAll("#galleryTrack .slide"));
+    const total = slides.length;
 
-    function currentIndex(){
-      const g = gallery.getBoundingClientRect();
-      const center = g.left + g.width/2;
-      let best = 0, bestDist = Infinity;
-
-      slideEls.forEach((s, i) => {
-        const r = s.getBoundingClientRect();
-        const c = r.left + r.width/2;
-        const d = Math.abs(c - center);
-        if(d < bestDist){ bestDist = d; best = i; }
-      });
-      return best;
+    function getIndex(){
+      const w = galleryEl.clientWidth || 1;
+      const i = Math.round(galleryEl.scrollLeft / w);
+      return Math.max(0, Math.min(total - 1, i));
     }
-    function setPager(){
-      const i = currentIndex();
-      pager.textContent = `${i+1}/${total}`;
+    function goTo(i){
+      const w = galleryEl.clientWidth || 1;
+      const next = Math.max(0, Math.min(total - 1, i));
+      galleryEl.scrollTo({ left: next * w, behavior: "smooth" });
+      pagerEl.textContent = `${next+1}/${total}`;
     }
 
-    document.getElementById("prevBtn").addEventListener("click", () => {
-      const i = currentIndex();
-      slideEls[Math.max(0, i-1)].scrollIntoView({behavior:"smooth", inline:"center", block:"nearest"});
+    document.getElementById("prevBtn").addEventListener("click", (e) => {
+      e.stopPropagation();
+      goTo(getIndex() - 1);
     });
-    document.getElementById("nextBtn").addEventListener("click", () => {
-      const i = currentIndex();
-      slideEls[Math.min(total-1, i+1)].scrollIntoView({behavior:"smooth", inline:"center", block:"nearest"});
+    document.getElementById("nextBtn").addEventListener("click", (e) => {
+      e.stopPropagation();
+      goTo(getIndex() + 1);
     });
 
-    gallery.addEventListener("scroll", () => requestAnimationFrame(setPager), {passive:true});
-    window.addEventListener("resize", setPager);
-    setPager();
+    galleryEl.addEventListener("scroll", () => {
+      const i = getIndex();
+      pagerEl.textContent = `${i+1}/${total}`;
+    }, { passive:true });
+
+    window.addEventListener("resize", () => goTo(getIndex()));
+    goTo(0);
 
     /* =========================================================
-       8) 상단 토글: 음악 / 글자 크게/작게
-       - 요구: 들어오면 음악 "나오게" => 가능한 브라우저는 바로 재생
-         막히면: 첫 터치/클릭 때 자동으로 재생되게 보완
-       - 버튼: 🔊(소리) -> 누르면 🔇(뮤트) / 다시 누르면 🔊
+       8) 음악 자동재생/토글 (안정 버전)
        ========================================================= */
-/* 8) 상단 토글: 음악 */
-const bgm = document.getElementById("bgm");
-const musicBtn = document.getElementById("musicBtn");
+    const bgmEl = document.getElementById("bgm");
+    const musicBtnEl = document.getElementById("musicBtn");
 
-function syncMusicUI() {
-  musicBtn.textContent = bgm.paused ? "🔇" : "🔊";
-}
+    // 자동재생 성공률↑ (특히 iOS/인앱): 처음엔 무음으로 시작
+    bgmEl.muted = true;
 
-// 첫 사용자 클릭/터치 때 재생 시도 (자동재생 막힘 대비)
-document.addEventListener("click", function () {
-  if (bgm.paused) {
-    bgm.play().then(syncMusicUI).catch(() => {});
-  }
-}, { once: true });
+    function syncMusicUI(){
+      musicBtnEl.textContent = bgmEl.paused ? "🔇" : "🔊";
+    }
 
-// 버튼으로 토글
-musicBtn.addEventListener("click", (e) => {
-  e.stopPropagation();
-  if (bgm.paused) bgm.play();
-  else bgm.pause();
-  syncMusicUI();
-});
+    async function tryAutoPlay(){
+      try{
+        await bgmEl.play();
+        bgmEl.muted = false; // 재생 성공 후 소리 켜기 시도
+      }catch(e){}
+      syncMusicUI();
+    }
 
-syncMusicUI();
+    // 가능한 빨리 + load 후 재시도
+    tryAutoPlay();
+    window.addEventListener("load", tryAutoPlay);
+
+    // 첫 사용자 제스처에서 unlock
+    function unlock(){
+      tryAutoPlay();
+      document.removeEventListener("touchstart", unlock);
+      document.removeEventListener("click", unlock);
+      document.removeEventListener("scroll", unlock);
+    }
+    document.addEventListener("touchstart", unlock, { passive:true });
+    document.addEventListener("click", unlock, { passive:true });
+    document.addEventListener("scroll", unlock, { passive:true });
+
+    // 버튼 토글
+    musicBtnEl.addEventListener("click", async (e) => {
+      e.stopPropagation();
+      try{
+        if(bgmEl.paused){
+          bgmEl.muted = false;
+          await bgmEl.play();
+        }else{
+          bgmEl.pause();
+        }
+      }catch(e2){}
+      syncMusicUI();
+    });
+
+    syncMusicUI();
   </script>
 </body>
-</html> 
+</html>
