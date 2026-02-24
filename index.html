@@ -4,6 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
   <meta name="format-detection" content="telephone=no" />
+  <meta property="og:site_name" content="류정현 & 이나현 청첩장" />
+  <meta property="og:image" content="https://jhnh-wed0425.github.io/대표사진3.jpg" />
+  <meta property="og:url" content="https://jhnh-wed0425.github.io/" />
+  
   <title>류정현 ♥ 이나현</title>
 
   <!-- Kakao Share SDK (카카오 공유용) -->
@@ -546,7 +550,7 @@ body{
     
     <div class="nav-btns">
       <a href="https://tmap.life/dadbe9d5">티맵</a>
-      <a href="kakaonavi://navigate?name=아모르아트컨벤션">카카오내비</a>
+      <a href="#" onclick="openKakaoNavi(event)">카카오내비</a>
       <a href="https://naver.me/x3iFFSDF">네이버지도</a>
     </div>
   </section>
@@ -683,7 +687,7 @@ body{
         content: {
           title: "류정현 ♥ 이나현 결혼식에 초대합니다",
           description: "2026년 04월 25일 토요일 오전 11시",
-          imageUrl: location.origin + "/대표사진3.jpg",
+          imageUrl: "https://jhnh-wed0425.github.io/대표사진3.jpg",
           link: { mobileWebUrl: location.href, webUrl: location.href }
         },
         buttons: [{ title: "청첩장 보기", link: { mobileWebUrl: location.href, webUrl: location.href } }]
@@ -856,6 +860,29 @@ body{
     });
 
     syncMusicUI();
+
+    function openKakaoNavi(e){
+  e.preventDefault();
+
+  const lat = 36.642846;     // 위도
+  const lon = 127.404761;    // 경도
+  const name = "아모르아트컨벤션";
+
+  const deepLink =
+    `kakaonavi://navigate?name=${encodeURIComponent(name)}&x=${lon}&y=${lat}`;
+
+  const webFallback =
+    `https://map.kakao.com/link/to/${encodeURIComponent(name)},${lat},${lon}`;
+
+  // 딥링크 시도
+  location.href = deepLink;
+
+  // 앱이 없으면 웹 fallback
+  setTimeout(() => {
+    window.open(webFallback, "_blank", "noopener");
+  }, 700);
+}
+    
          </script>
      </main>
   </body>
