@@ -6,10 +6,8 @@
   <title>류정현 ♥ 이나현</title>
 
   <!-- Kakao Share SDK (카카오 공유용) -->
-  <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
-    integrity="sha384-0y0s7Y3XQnFQqgP2f8Z7o6nQn7cVtVw9y2y6QnqgQ8Jr6yqzZfXkXrYh7wXnX9m0"
-    crossorigin="anonymous"></script>
-
+  <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"></script>
+  
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,7 +31,32 @@
       --sans:'Pretendard', system-ui, -apple-system, sans-serif;
       --base-font: 16px;
     }
+/* 오른쪽 상단 플로팅 음악 토글만 */
+.floating-music{
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 9999;
+}
 
+.floating-music button{
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(227,227,230,.95);
+  background: rgba(255,255,255,.85);
+  box-shadow: 0 10px 20px rgba(0,0,0,.10);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  font-size: 18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.floating-music button:active{
+  transform: scale(.98);
+}
+    
     *{ box-sizing:border-box; }
     html{ scroll-behavior:smooth; }
     body{
@@ -46,7 +69,7 @@
       text-align:center;
       line-height:1.85;
       font-size: var(--base-font);
-      padding-top: 58px; /* 상단 플로팅바 공간 */
+      padding-top: 0; /* 상단 플로팅바 공간 */
     }
 
     section{
@@ -120,51 +143,7 @@
       pointer-events:none;
     }
 
-    /* =========================
-       상단 플로팅 컨트롤 바
-       ========================= */
-    .topbar{
-      position:fixed;
-      top:12px;
-      left:50%;
-      transform:translateX(-50%);
-      width:min(560px, calc(100vw - 24px));
-      z-index:9998;
-      border-radius:999px;
-      padding:10px 10px;
-      background:rgba(255,255,255,.78);
-      border:1px solid rgba(227,227,230,.92);
-      box-shadow:0 14px 30px rgba(0,0,0,.08);
-      backdrop-filter: blur(10px);
-      display:flex;
-      gap:8px;
-      align-items:center;
-      justify-content:space-between;
-    }
-       .topbar .actions{
-      display:flex; gap:8px; align-items:center;
-    }
-    .icon-btn{
-      border:1px solid rgba(227,227,230,.95);
-      background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(245,245,248,.92));
-      border-radius:999px;
-      padding:9px 12px;
-      font-size:12px;
-      letter-spacing:1px;
-      cursor:pointer;
-      color:#444;
-      display:flex;
-      align-items:center;
-      gap:6px;
-      user-select:none;
-    }
-    #musicBtn{ width:44px; justify-content:center; padding:9px 0; }
-
-    .icon-dot{
-      display: none!important;
-}
-    .icon-dot.on{ background:#8b1f2f; }
-
+   
     /* =========================
        (5-1) 대표사진 프레임: "무조건 안 잘림"
        ========================= */
@@ -467,16 +446,29 @@
 </head>
 
 <body>
-  <!-- 상단 컨트롤 바 -->
-<div class="topbar" role="toolbar" aria-label="controls">
-  <div style="width:100%; display:flex; justify-content:flex-end;">
-    <button class="icon-btn" id="musicBtn" type="button" aria-label="음악 토글">🔊</button>
-  </div>
+  <div class="floating-music">
+  <button id="musicBtn" type="button" aria-label="음악 토글">🔊</button>
 </div>
-
+  
   <!-- 로딩 오버레이 -->
   <div class="loading" id="loading">WEDDING INVITATION</div>
-
+<script>
+  (function(){
+    const loadingEl = document.getElementById("loading");
+    function forceHide(){
+      if(!loadingEl) return;
+      loadingEl.classList.add("hide");
+      setTimeout(()=>{ loadingEl.style.display="none"; }, 700);
+    }
+    // DOM만 준비돼도 타이머 시작 (load 대기 X)
+    setTimeout(forceHide, 3000);
+    // 어떤 에러가 나도 5초 뒤엔 무조건 끔
+    setTimeout(forceHide, 5000);
+    // JS 에러가 발생해도 화면은 살려두기
+    window.addEventListener("error", forceHide, { once:true });
+  })();
+</script>
+  
   <!-- BGM -->
   <audio id="bgm" autoplay loop playsinline>
     <source src="모청bgm.mp3" type="audio/mpeg">
@@ -724,21 +716,27 @@ setTimeout(hideLoading, 5000);
     /* =========================================================
        1) 카카오 공유 초기화
        ========================================================= */
-    Kakao.init("fcc3a1be2558f7a368d372db08814fd2"); // 카카오 플랫폼 키
+    if (window.Kakao && !Kakao.isInitialized()) {
+  Kakao.init("fcc3a1be2558f7a368d372db08814fd2");
+}
 
-    function shareKakao(){
-      Kakao.Share.sendDefault({
-        objectType: "feed",
-        content: {
-          title: "류정현 ♥ 이나현 결혼식에 초대합니다",
-          description: "2026년 04월 25일 토요일 오전 11시",
-          imageUrl: location.origin + "/대표사진3.jpg",
-          link: { mobileWebUrl: location.href, webUrl: location.href }
-        },
-        buttons: [{ title: "청첩장 보기", link: { mobileWebUrl: location.href, webUrl: location.href } }]
-      });
-    }
-
+function shareKakao(){
+  if(!window.Kakao){
+    alert("카카오 공유 기능을 불러오지 못했습니다. (네트워크/차단 확인)");
+    return;
+  }
+  Kakao.Share.sendDefault({
+    objectType: "feed",
+    content: {
+      title: "류정현 ♥ 이나현 결혼식에 초대합니다",
+      description: "2026년 04월 25일 토요일 오전 11시",
+      imageUrl: location.origin + "/대표사진3.jpg",
+      link: { mobileWebUrl: location.href, webUrl: location.href }
+    },
+    buttons: [{ title: "청첩장 보기", link: { mobileWebUrl: location.href, webUrl: location.href } }]
+  });
+}
+    
     /* =========================================================
        2) 지도
        ========================================================= */
@@ -870,34 +868,30 @@ setTimeout(hideLoading, 5000);
          막히면: 첫 터치/클릭 때 자동으로 재생되게 보완
        - 버튼: 🔊(소리) -> 누르면 🔇(뮤트) / 다시 누르면 🔊
        ========================================================= */
-/* 8) 상단 토글: 음악 / 글자 크게/작게 */
+/* 8) 상단 토글: 음악 */
 const bgm = document.getElementById("bgm");
 const musicBtn = document.getElementById("musicBtn");
 
-// 음악 상태에 따라 버튼 아이콘 바꾸기 함수
 function syncMusicUI() {
   musicBtn.textContent = bgm.paused ? "🔇" : "🔊";
 }
 
-// [핵심] 화면 어디든 누르면 노래가 시작되게 함
-document.addEventListener('click', function() {
-    if (bgm.paused) {
-        bgm.play().then(() => {
-            syncMusicUI();
-        }).catch(e => console.log("재생 실패:", e));
-    }
-}, { once: true }); // 'once: true'는 딱 처음 한 번만 실행한다는 뜻!
-
-// 상단바 🔊 버튼 눌렀을 때 끄고 켜기
-musicBtn.addEventListener("click", (e) => {
-  e.stopPropagation(); // 화면 클릭 이벤트랑 겹치지 않게 방지
+// 첫 사용자 클릭/터치 때 재생 시도 (자동재생 막힘 대비)
+document.addEventListener("click", function () {
   if (bgm.paused) {
-    bgm.play();
-  } else {
-    bgm.pause();
+    bgm.play().then(syncMusicUI).catch(() => {});
   }
+}, { once: true });
+
+// 버튼으로 토글
+musicBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  if (bgm.paused) bgm.play();
+  else bgm.pause();
   syncMusicUI();
 });
+
+syncMusicUI();
   </script>
 </body>
 </html> 
