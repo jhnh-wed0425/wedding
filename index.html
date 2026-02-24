@@ -141,21 +141,7 @@
       align-items:center;
       justify-content:space-between;
     }
-    .topbar .left{
-      display:flex; align-items:center; gap:8px;
-      min-width:0;
-    }
-    .topbar .brand{
-      font-family:var(--serif);
-      font-size:12px;
-      letter-spacing:1px;
-      color:#666;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      max-width: 180px;
-    }
-    .topbar .actions{
+       .topbar .actions{
       display:flex; gap:8px; align-items:center;
     }
     .icon-btn{
@@ -482,18 +468,11 @@
 
 <body>
   <!-- 상단 컨트롤 바 -->
-  <div class="topbar" role="toolbar" aria-label="controls">
-    <div class="left">
-      <span class="icon-dot" id="playDot"></span>
-      <div class="brand">류정현 <span class="heart">♥</span> 이나현</div>
-    </div>
-    <div class="actions">
-      <!-- 음악 토글: 🔊 / 🔇 -->
-      <button class="icon-btn" id="musicBtn" type="button" aria-label="음악 토글">🔊</button>
-      <!-- 글자 토글: 글자 크게 / 글자 작게 -->
-      <button class="icon-btn" id="fontBtn" type="button">글자 크게</button>
-    </div>
+<div class="topbar" role="toolbar" aria-label="controls">
+  <div style="width:100%; display:flex; justify-content:flex-end;">
+    <button class="icon-btn" id="musicBtn" type="button" aria-label="음악 토글">🔊</button>
   </div>
+</div>
 
   <!-- 로딩 오버레이 -->
   <div class="loading" id="loading">WEDDING INVITATION</div>
@@ -919,18 +898,6 @@ musicBtn.addEventListener("click", (e) => {
   }
   syncMusicUI();
 });
-    // 글자 토글(전체 1.5배)
-    const fontBtn = document.getElementById("fontBtn");
-    function syncFontUI(){
-      const big = document.body.classList.contains("big-font");
-      fontBtn.textContent = big ? "글자 작게" : "글자 크게";
-    }
-    fontBtn.addEventListener("click", () => {
-      document.body.classList.toggle("big-font");
-      syncFontUI();
-    });
-    syncFontUI();
-    syncMusicUI();
   </script>
 </body>
 </html> 
