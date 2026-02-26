@@ -452,7 +452,41 @@ body{
 .section-tight .divider{
   margin: 18px auto; /* divider 간격도 같이 줄임 */
 }
-  
+/* PC에서만 보여줄 중앙 안내 토스트 */
+.pc-toast{
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+
+  background: rgba(0,0,0,.72);
+  color: #fff;
+  padding: 14px 18px;
+  border-radius: 14px;
+  font-size: 14px;
+  letter-spacing: .2px;
+  line-height: 1.4;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease;
+}
+.pc-toast.show{ opacity: 1; }
+
+/* 모바일에서는 토스트 숨김(원하면 이 줄 빼도 됨) */
+@media (hover:none) and (pointer:coarse){
+  .pc-toast{ display:none; }
+}
+    /* 사진 저장/드래그 방지(가능한 범위) */
+img{
+  -webkit-user-drag: none;
+  user-drag: none;
+  -webkit-touch-callout: none; /* iOS 롱탭 메뉴 */
+  -webkit-user-select: none;
+  user-select: none;
+}
+    
   </style>
 </head>
 
@@ -559,11 +593,15 @@ body{
   <img src="https://ssl.pstatic.net/static/maps/mantle/1x/img_map_static.png" alt="지도">
 </a>
     
-    <div class="nav-btns">
-      <a href="https://tmap.life/dadbe9d5">티맵</a>
-      <a href="#" onclick="openKakaoNavi(event)">카카오내비</a>
-      <a href="https://naver.me/x3iFFSDF">네이버지도</a>
-    </div>
+  <div class="nav-btns">
+  <a href="https://tmap.life/dadbe9d5" onclick="return pcGuard(event)">티맵</a>
+  <a href="#" onclick="return pcGuard(event, openKakaoNavi)">카카오내비</a>
+  <a href="https://naver.me/x3iFFSDF" onclick="return pcGuard(event)">네이버지도</a>
+</div>
+    <!-- PC 안내 토스트 -->
+<div id="pcOnlyToast" class="pc-toast" aria-live="polite">
+  모바일에서만 확인이 가능합니다.
+</div>
   </section>
 <div class="section-sep"></div>
      
@@ -893,6 +931,72 @@ body{
     window.open(webFallback, "_blank", "noopener");
   }, 700);
 }
+
+    /* =========================================================
+   PC에서 내비/지도 버튼 클릭 시: 중앙 안내 + 이동 막기
+   ========================================================= */
+const pcToast = document.getElementById("pcOnlyToast");
+
+// PC 판별(마우스/트랙패드 환경)
+function isDesktop(){
+  return window.matchMedia && window.matchMedia("(hover:hover) and (pointer:fine)").matches;
+}
+
+function showPcToast(msg){
+  if(!pcToast) return;
+  pcToast.textContent = msg || "모바일에서만 확인이 가능합니다.";
+  pcToast.classList.add("show");
+  clearTimeout(showPcToast._t);
+  showPcToast._t = setTimeout(()=> pcToast.classList.remove("show"), 1400);
+}
+
+// a태그 클릭 가드
+function pcGuard(e, mobileFn){
+  if(isDesktop()){
+    e.preventDefault();
+    showPcToast("모바일에서만 확인이 가능합니다.");
+    return false;
+  }
+  // 모바일이면 (선택) mobileFn 실행
+  if(typeof mobileFn === "function"){
+    mobileFn(e);
+    return false;
+  }
+  return true;
+}
+
+    /* =========================================================
+   사진 저장/확대 방지(가능한 범위)
+   ========================================================= */
+
+// 이미지 우클릭 메뉴 차단
+document.addEventListener("contextmenu", (e) => {
+  if(e.target && e.target.closest && e.target.closest("img")) e.preventDefault();
+});
+
+// 이미지 드래그 저장 차단
+document.addEventListener("dragstart", (e) => {
+  if(e.target && e.target.tagName === "IMG") e.preventDefault();
+});
+
+// iOS 사파리 핀치줌 관련 제스처 차단(가능한 범위)
+document.addEventListener("gesturestart", (e) => e.preventDefault(), { passive:false });
+document.addEventListener("gesturechange", (e) => e.preventDefault(), { passive:false });
+document.addEventListener("gestureend", (e) => e.preventDefault(), { passive:false });
+
+// PC/모바일 브라우저: Ctrl/Command + 휠 확대 차단
+document.addEventListener("wheel", (e) => {
+  if(e.ctrlKey || e.metaKey) e.preventDefault();
+}, { passive:false });
+
+// Ctrl/Command + (+/-/0) 확대 차단
+document.addEventListener("keydown", (e) => {
+  const key = e.key.toLowerCase();
+  const zoomKeys = ["+", "=", "-", "_", "0"];
+  if((e.ctrlKey || e.metaKey) && zoomKeys.includes(key)){
+    e.preventDefault();
+  }
+});
     
          </script>
      </main>
