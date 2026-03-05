@@ -148,7 +148,7 @@ body{
       z-index:9999;
       font-family:var(--serif);
       letter-spacing:4px;
-      transition:opacity .6s ease;
+      transition:opacity 1.2s ease;
     }
     .loading.hide{ opacity:0; pointer-events:none; }
 
@@ -499,7 +499,14 @@ img{
   </div>
 
   <!-- 로딩 오버레이 -->
-  <div class="loading" id="loading">WEDDING INVITATION</div>
+  <div class="loading" id="loading">
+  <div>
+    WEDDING INVITATION
+    <div style="font-size:12px; letter-spacing:2px; margin-top:12px; color:#999;">
+      2026.04.25
+    </div>
+  </div>
+</div>
 
   <!-- BGM -->
   <audio id="bgm" autoplay loop playsinline>
