@@ -499,9 +499,7 @@ img{
     
        
   </style>
-<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=91eed7186338a8599546bf372fc45f56&autoload=false">
-  
-</script>
+<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=91eed7186338a8599546bf372fc45f56&autoload=false"></script>
   
 </head>
 
@@ -561,20 +559,20 @@ img{
   <div class="divider"></div>
 </section>
 
-  <!-- 3 혼주 -->
-  <section class="reveal">
-    <div class="hero-frame">
-      <img src="대표사진2.jpg" alt="대표사진2">
-    </div>
+<!-- 3 혼주 -->
+<section class="reveal parents-section">
+  <div class="hero-frame">
+    <img src="대표사진2.jpg" alt="대표사진2">
+  </div>
 
-  <section class="reveal parents-section">
-
-    <p style="color:#777; font-size:13px; margin-top:1px; font-family:var(--serif);">
-      류완영 · 노복란 의 장남 정현<br>
-      이정복 · 신복순 의 장녀 나현
-    </p>
-  </section>
+  <p style="color:#777; font-size:13px; margin-top:1px; font-family:var(--serif);">
+    류완영 · 노복란 의 장남 정현<br>
+    이정복 · 신복순 의 장녀 나현
+  </p>
+</section>
+     
 <div class="section-sep"></div>
+     
   <!-- 4 타이머 -->
   <section class="reveal">
     <div class="section-title">OUR WEDDING DAY</div>
@@ -1008,48 +1006,59 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-(function initKakaoMap(){
-  // ✅ SDK 자체가 없으면 여기서 끝 (이 경우는 네트워크/차단/도메인 이슈)
-  if(!window.kakao || !kakao.maps){
-    console.log("kakao maps sdk not ready", window.kakao);
-    return;
-  }
+  (function initKakaoMap(){
+    function boot(){
+      // 지도 SDK 로드 확인 (지도는 'kakao' 소문자)
+      if(!window.kakao || !kakao.maps || !kakao.maps.load){
+        console.log("Kakao Maps SDK not ready:", window.kakao);
+        return;
+      }
 
-  // ✅ autoload=false를 썼으니 load 콜백 안에서 지도 생성
-  kakao.maps.load(function(){
-    const lat = 36.642846;
-    const lon = 127.404761;
+      kakao.maps.load(function(){
+        const lat = 36.642846;
+        const lon = 127.404761;
 
-    const container = document.getElementById("kakaoMap");
-    if(!container){
-      console.log("#kakaoMap not found");
-      return;
-    }
-
-    const map = new kakao.maps.Map(container, {
-      center: new kakao.maps.LatLng(lat, lon),
-      level: 3
-    });
-
-    const marker = new kakao.maps.Marker({
-      position: new kakao.maps.LatLng(lat, lon)
-    });
-    marker.setMap(map);
-
-    // 클릭 시 이동(PC 토스트 유지)
-    const card = document.getElementById("kakaoMapCard");
-    if(card){
-      card.addEventListener("click", (e) => {
-        if(typeof pcGuard === "function"){
-          if(!pcGuard(e)) return;
+        const container = document.getElementById("kakaoMap");
+        if(!container){
+          console.log("#kakaoMap not found");
+          return;
         }
-        window.open(
-          `https://map.kakao.com/link/to/${encodeURIComponent("아모르아트컨벤션")},${lat},${lon}`,
-          "_blank",
-          "noopener"
-        );
+
+        const map = new kakao.maps.Map(container, {
+          center: new kakao.maps.LatLng(lat, lon),
+          level: 3
+        });
+
+        const marker = new kakao.maps.Marker({
+          position: new kakao.maps.LatLng(lat, lon)
+        });
+        marker.setMap(map);
+
+        // 클릭 시 이동 (PC 토스트 유지)
+        const card = document.getElementById("kakaoMapCard");
+        if(card){
+          card.addEventListener("click", (e) => {
+            if(typeof pcGuard === "function" && !pcGuard(e)) return; // PC면 토스트
+            window.open(
+              `https://map.kakao.com/link/to/${encodeURIComponent("아모르아트컨벤션")},${lat},${lon}`,
+              "_blank",
+              "noopener"
+            );
+          });
+        }
+
+        console.log("kakao map loaded ✅");
       });
     }
+
+    // DOM 완성 후 실행(가장 안전)
+    if(document.readyState === "loading"){
+      document.addEventListener("DOMContentLoaded", boot);
+    }else{
+      boot();
+    }
+  })();
+</script>
 
     console.log("kakao map loaded ✅");
   });
