@@ -230,7 +230,6 @@ body{
       transition:.2s;
       border:1px solid rgba(227,227,230,.95);
       background:#fff;
-      #naverMap { border-radius:18px; }
     }
     .map-card:hover{ transform:translateY(-2px); }
     .map-card img{ width:100%; height:auto; pointer-events:none; }
@@ -488,9 +487,10 @@ img{
   user-select: none;
 }
     
-    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=91eed7186338a8599546bf372fc45f56"></script>
-    
+       
   </style>
+   <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=91eed7186338a8599546bf372fc45f56"></script>
+
 </head>
 
 <body>
@@ -591,10 +591,10 @@ img{
       아모르아트컨벤션 2층 아트홀<br>
       충북 청주시 흥덕구 남석로 579
     </p>
-<!--
+
  <div class="map-card" id="kakaoMapCard" role="link" tabindex="0" aria-label="지도 미리보기(클릭 시 길찾기 열기)">
   <div id="kakaoMap" style="width:100%; height:260px;"></div>
-</div> -->
+
     
   <div class="nav-btns">
   <a href="https://tmap.life/dadbe9d5" onclick="return pcGuard(event)">티맵</a>
@@ -1018,23 +1018,37 @@ document.addEventListener("keydown", (e) => {
     }
   });
 })();
+    (function initKakaoMap(){
+  if(!window.kakao || !kakao.maps) return;
+
+  const lat = 36.642846;
+  const lon = 127.404761;
+
+  const container = document.getElementById("kakaoMap");
+  if(!container) return;
+
+  const map = new kakao.maps.Map(container, {
+    center: new kakao.maps.LatLng(lat, lon),
+    level: 3
+  });
+
+  const marker = new kakao.maps.Marker({
+    position: new kakao.maps.LatLng(lat, lon)
+  });
+  marker.setMap(map);
+
+  // ✅ 지도 클릭 시: 모바일은 카카오맵 길찾기, PC는 토스트 유지
+  const card = document.getElementById("kakaoMapCard");
+  if(card){
+    card.addEventListener("click", (e) => {
+      if(typeof pcGuard === "function"){
+        if(!pcGuard(e)) return; // PC면 토스트 띄우고 중단
+      }
+      window.open(`https://map.kakao.com/link/to/${encodeURIComponent("아모르아트컨벤션")},${lat},${lon}`, "_blank", "noopener");
+    });
+  }
+})();
     
-var container = document.getElementById('map');
-
-var options = {
-  center: new kakao.maps.LatLng(36.642846, 127.404761),
-  level: 3
-};
-
-var map = new kakao.maps.Map(container, options);
-
-var markerPosition  = new kakao.maps.LatLng(36.642846, 127.404761);
-
-var marker = new kakao.maps.Marker({
-  position: markerPosition
-});
-
-marker.setMap(map);
     
          </script>
      </main>
