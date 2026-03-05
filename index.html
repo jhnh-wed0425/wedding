@@ -615,13 +615,15 @@ img{
 
  <div class="map-card" id="kakaoMapCard" role="link" tabindex="0" aria-label="지도 미리보기(클릭 시 길찾기 열기)">
   <div id="kakaoMap" style="width:100%; height:260px;"></div>
-
+</div>
+   
     
   <div class="nav-btns">
   <a href="https://tmap.life/dadbe9d5" onclick="return pcGuard(event)">티맵</a>
   <a href="#" onclick="return pcGuard(event, openKakaoNavi)">카카오내비</a>
   <a href="https://naver.me/x3iFFSDF" onclick="return pcGuard(event)">네이버지도</a>
 </div>
+    
     <!-- PC 안내 토스트 -->
 <div id="pcOnlyToast" class="pc-toast" aria-live="polite">
   모바일에서만 확인이 가능합니다.
@@ -1039,37 +1041,6 @@ document.addEventListener("keydown", (e) => {
     }
   });
 })();
-    (function initKakaoMap(){
-  if(!window.kakao || !kakao.maps) return;
-
-  const lat = 36.642846;
-  const lon = 127.404761;
-
-  const container = document.getElementById("kakaoMap");
-  if(!container) return;
-
-  const map = new kakao.maps.Map(container, {
-    center: new kakao.maps.LatLng(lat, lon),
-    level: 3
-  });
-
-  const marker = new kakao.maps.Marker({
-    position: new kakao.maps.LatLng(lat, lon)
-  });
-  marker.setMap(map);
-
-  // ✅ 지도 클릭 시: 모바일은 카카오맵 길찾기, PC는 토스트 유지
-  const card = document.getElementById("kakaoMapCard");
-  if(card){
-    card.addEventListener("click", (e) => {
-      if(typeof pcGuard === "function"){
-        if(!pcGuard(e)) return; // PC면 토스트 띄우고 중단
-      }
-      window.open(`https://map.kakao.com/link/to/${encodeURIComponent("아모르아트컨벤션")},${lat},${lon}`, "_blank", "noopener");
-    });
-  }
-})();
-    
     
          </script>
      </main>
