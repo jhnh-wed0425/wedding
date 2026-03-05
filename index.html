@@ -148,7 +148,7 @@ body{
       z-index:9999;
       font-family:var(--serif);
       letter-spacing:4px;
-      transition:opacity 1.2s ease;
+      transition:opacity 1.8s ease;
     }
     .loading.hide{ opacity:0; pointer-events:none; }
 
@@ -247,7 +247,17 @@ body{
       font-size:13px;
       background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(245,245,248,.95));
     }
-
+.parents-section{
+  padding-top: 28px;   /* 기존 54px -> 줄임 */
+  padding-bottom: 28px;
+}
+.parents-section .hero-frame{
+  margin-bottom: 4px;  /* 사진 아래 간격 최소화 */
+}
+.parents-section p{
+  margin-top: 4px !important;
+}
+    
     /* 계좌 */
     .account-wrapper{ max-width:520px; margin:18px auto 0; }
     .account-box{
@@ -557,6 +567,8 @@ img{
       <img src="대표사진2.jpg" alt="대표사진2">
     </div>
 
+  <section class="reveal parents-section">
+
     <p style="color:#777; font-size:13px; margin-top:1px; font-family:var(--serif);">
       류완영 · 노복란 의 장남 정현<br>
       이정복 · 신복순 의 장녀 나현
@@ -718,8 +730,8 @@ img{
       loadingEl.classList.add("hide");
       setTimeout(()=>{ loadingEl.style.display="none"; }, 700);
     }
-    setTimeout(hideLoading, 3000);
-    setTimeout(hideLoading, 5000);
+    setTimeout(hideLoading, 4500);
+    setTimeout(hideLoading, 6000);
     window.addEventListener("error", hideLoading, { once:true });
 
     /* =========================================================
