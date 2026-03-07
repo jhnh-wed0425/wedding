@@ -826,10 +826,9 @@
         충북 청주시 흥덕구 남석로 579
       </p>
 
-    <div class="map-card" aria-label="지도 미리보기">
-  <div id="daumRoughmapContainer1772903833671" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+ <div class="map-card" aria-label="지도 미리보기">
+  <div id="daumRoughmapContainer1772904601986" class="root_daum_roughmap root_daum_roughmap_landing"></div>
 </div>
-
       
       <div class="nav-btns">
         <a href="https://tmap.life/dadbe9d5" onclick="return pcGuard(event)">티맵</a>
@@ -1522,26 +1521,27 @@
   height:260px;
 }
 
-#daumRoughmapContainer1772903833671{
+#daumRoughmapContainer1772904601986{
   width:100% !important;
   height:260px !important;
 }
 
-#daumRoughmapContainer1772903833671 .wrap_map{
+#daumRoughmapContainer1772904601986,
+#daumRoughmapContainer1772904601986 > div,
+#daumRoughmapContainer1772904601986 .wrap_map{
   width:100% !important;
   height:260px !important;
 }
 
-#daumRoughmapContainer1772903833671 .wrap_controllers{
+#daumRoughmapContainer1772904601986 .wrap_controllers{
   width:100% !important;
 }
 
-#daumRoughmapContainer1772903833671 .root_daum_roughmap{
+.root_daum_roughmap{
   width:100% !important;
 }
+
     
-    .map-card:hover{ transform:translateY(-2px); }
-
     .nav-btns{
       display:flex;
       gap:10px;
@@ -2463,21 +2463,21 @@
         }
       });
 
-      (function initRoughMap(){
+(function initRoughMap(){
   function bootRoughMap(){
     if (!window.daum || !daum.roughmap || !daum.roughmap.Lander) return;
 
-    const container = document.getElementById("daumRoughmapContainer1772903833671");
+    const container = document.getElementById("daumRoughmapContainer1772904601986");
     if (!container) return;
-
     if (container.dataset.loaded === "true") return;
+
     container.dataset.loaded = "true";
 
     new daum.roughmap.Lander({
       "timestamp" : "1772904601986",
       "key" : "ijwvzomcovi",
-      "mapWidth" : "280",
-      "mapHeight" : "280"
+      "mapWidth" : "200",
+      "mapHeight" : "200"
     }).render();
   }
 
