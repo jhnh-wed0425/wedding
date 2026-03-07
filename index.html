@@ -588,6 +588,26 @@
       .hero-frame{ width:480px; }
       .gallery-shell{ width:100%; max-width:560px; }
     }
+
+  .site-footer{
+  text-align:center;
+  padding:36px 0 50px;
+  color:#8f8f8f;
+}
+
+.footer-name{
+  font-family:var(--serif);
+  font-size:18px;
+  letter-spacing:1px;
+  color:#6f6f6f;
+  margin-bottom:6px;
+}
+
+.footer-copy{
+  font-size:11px;
+  letter-spacing:1px;
+  color:#a5a5a5;
+}
   </style>
 
   <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=fcc3a1be2558f7a368d372db08814fd2&autoload=false"></script>
@@ -808,7 +828,16 @@
         <button class="button" style="margin-top:0; flex:1; min-width:160px;" onclick="shareKakao()">카카오톡으로<br>공유하기</button>
       </div>
     </section>
-
+    
+<footer class="site-footer">
+  <div class="footer-name">
+    Jeonghyeon & Nahyeon
+  </div>
+  <div class="footer-copy">
+    COPYRIGHT(C) Jeonghyeon & Nahyeon ALL RIGHTS RESERVED
+  </div>
+</footer>
+    
     <script>
       document.documentElement.classList.add("js");
 
