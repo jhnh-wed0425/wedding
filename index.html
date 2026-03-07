@@ -589,8 +589,45 @@
      line-height:1.2;
   text-align:center;
   }
+.gal-arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:44px;
+  height:44px;
+  border:0;
+  background:transparent;
+  box-shadow:none;
+  color:#fff;
+  font-size:52px;
+  font-weight:700;
+  line-height:44px;
+  text-align:center;
+  padding:0;
+  cursor:pointer;
+  user-select:none;
+  z-index:7;
+  text-shadow:0 2px 10px rgba(0,0,0,.28);
+  -webkit-text-stroke:0.2px rgba(255,255,255,.85);
+}
+
+.gal-arrow.left{ left:10px; }
+.gal-arrow.right{ right:10px; }
+
+.gal-arrow:active{
+  transform:translateY(-50%) scale(.96);
+}
+
+.gal-arrow:focus,
+.gal-arrow:focus-visible{
+  outline:none;
+}}
+    @media (max-width: 599px){
   .gal-arrow{
-    font-size:42px;
+    width:40px;
+    height:40px;
+    font-size:46px;
+    line-height:40px;
   }
 }
     
@@ -712,9 +749,9 @@
             <span class="hint-text">밀어서<br>더 많은<br>사 보기</span>
           </div>
 
-          <div class="gal-arrow left" id="prevBtn" aria-label="previous">&lt;</div>
-          <div class="gal-arrow right" id="nextBtn" aria-label="next">&gt;</div>
-
+          <div class="gal-arrow left" id="prevBtn" aria-label="previous">‹</div>
+          <div class="gal-arrow right" id="nextBtn" aria-label="next">›</div>
+          
           <div class="gallery" id="gallery">
             <div class="track" id="galleryTrack">
               <div class="slide"><div class="photo-frame portrait"><img src="Gallery1-1.jpg" alt="갤러리1"></div></div>
