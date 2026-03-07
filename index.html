@@ -1252,6 +1252,1260 @@
           e.preventDefault();
         }
       });
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta property="og:site_name" content="류정현 & 이나현 청첩장" />
+  <meta property="og:title" content="류정현 ♥ 이나현 결혼식에 초대합니다" />
+  <meta property="og:description" content="2026년 04월 25일 토요일 오전 11시" />
+  <meta property="og:url" content="https://jhnh-wed0425.github.io/wedding/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://jhnh-wed0425.github.io/wedding/KakaoTitle.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <title>류정현 ♥ 이나현</title>
+
+  <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500&family=Pretendard:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f6f6f7;
+      --text:#1f1f1f;
+      --muted:#9a9a9a;
+      --silver:#c7c7cc;
+      --shadow:0 14px 30px rgba(0,0,0,.07);
+      --radius:22px;
+      --serif:'Noto Serif KR', serif;
+      --sans:'Pretendard', system-ui, -apple-system, sans-serif;
+      --base-font:16px;
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    html, body{ touch-action:manipulation; }
+
+    body{
+      margin:0;
+      background:#fff;
+      color:var(--text);
+      font-family:var(--sans);
+      text-align:center;
+      line-height:1.85;
+      font-size:var(--base-font);
+    }
+
+    .page{
+      max-width:560px;
+      margin:0 auto;
+      min-height:100vh;
+      background:
+        radial-gradient(1200px 600px at 50% -120px, rgba(200,200,205,.35), transparent 55%),
+        linear-gradient(180deg, #fbfbfc 0%, var(--bg) 55%, #f3f3f5 100%);
+    }
+
+    section{
+      padding:54px 18px;
+      max-width:560px;
+      margin:0 auto;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    img{
+      display:block;
+      margin:0 auto;
+      -webkit-user-drag:none;
+      user-drag:none;
+      -webkit-touch-callout:none;
+      -webkit-user-select:none;
+      user-select:none;
+    }
+
+    .floating-music{
+      position:fixed;
+      top:12px;
+      right:12px;
+      z-index:9999;
+    }
+    .floating-music button{
+      width:44px;
+      height:44px;
+      border-radius:999px;
+      border:1px solid rgba(227,227,230,.95);
+      background:rgba(255,255,255,.85);
+      box-shadow:0 10px 20px rgba(0,0,0,.10);
+      backdrop-filter:blur(10px);
+      cursor:pointer;
+      font-size:18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      user-select:none;
+    }
+    .floating-music button:active{ transform:scale(.98); }
+
+    .section-title{
+      font-family:var(--serif);
+      font-size:12px;
+      letter-spacing:4px;
+      color:var(--muted);
+      font-weight:400;
+      margin:0 0 16px;
+      text-transform:uppercase;
+    }
+
+    .hero-name{
+      font-family:var(--serif);
+      font-size:28px;
+      font-weight:400;
+      letter-spacing:1px;
+      margin:10px 0 10px;
+    }
+
+    .heart{ color:#8b1f2f; }
+
+    .hero-sub{
+      font-family:var(--serif);
+      color:#7a7a7a;
+      font-size:13px;
+      letter-spacing:1px;
+      margin:0 0 16px;
+    }
+
+    .divider{
+      width:44px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, var(--silver), transparent);
+      margin:26px auto;
+    }
+
+    .card{
+      background:rgba(255,255,255,.86);
+      border:1px solid rgba(227,227,230,.85);
+      backdrop-filter:blur(6px);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:28px 18px;
+    }
+
+    .loading{
+      position:fixed;
+      inset:0;
+      background:#fff;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      z-index:9999;
+      font-family:var(--serif);
+      letter-spacing:4px;
+      transition:opacity 1.8s ease;
+    }
+    .loading.hide{
+      opacity:0;
+      pointer-events:none;
+    }
+
+    /* hero + petals */
+    .hero-section{
+      position:relative;
+      overflow:hidden;
+    }
+    #petalCanvas{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      pointer-events:none;
+      z-index:3;
+    }
+    .hero-section > *:not(#petalCanvas){
+      position:relative;
+      z-index:2;
+    }
+
+    .hero-frame{
+      margin:8px auto 0;
+      width:min(92vw, 480px);
+      aspect-ratio:4 / 5;
+      border:0;
+      border-radius:0;
+      background:transparent;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .hero-frame.landscape{ aspect-ratio:4 / 3; }
+    .hero-frame img{
+      width:100%;
+      height:auto;
+      object-fit:contain;
+      object-position:center;
+      background:transparent;
+    }
+
+    .reveal{ opacity:1; transform:none; }
+    html.js .reveal{
+      opacity:0;
+      transform:translateY(14px);
+      transition:opacity .9s ease, transform .9s ease;
+    }
+    html.js .reveal.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .timer-wrap{
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+    .time-box{
+      width:76px;
+      padding:14px 0;
+      border:1px solid rgba(227,227,230,.95);
+      border-radius:16px;
+      background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(245,245,248,.92));
+    }
+    .num{
+      font-size:26px;
+      font-weight:300;
+      letter-spacing:1px;
+    }
+    .label{
+      margin-top:6px;
+      font-size:10px;
+      letter-spacing:2px;
+      color:#9a9a9a;
+    }
+    .days-left{
+      margin:12px 0 0;
+      font-family:var(--serif);
+      color:#666;
+      font-size:14px;
+      letter-spacing:.6px;
+    }
+    .days-left b{
+      font-weight:500;
+      color:#3a3a3a;
+    }
+
+    .button{
+      display:inline-block;
+      padding:12px 26px;
+      border:1px solid rgba(205,205,210,.95);
+      border-radius:999px;
+      background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(245,245,248,.95));
+      color:#444;
+      font-size:13px;
+      letter-spacing:1px;
+      margin-top:18px;
+      cursor:pointer;
+    }
+.map-card{
+  max-width:480px;
+  margin:0 auto;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 18px 36px rgba(0,0,0,.08);
+  border:1px solid rgba(227,227,230,.95);
+  background:#fff;
+  height:260px;
+}
+
+#daumRoughmapContainer1772903833671{
+  width:100% !important;
+  height:260px !important;
+}
+
+#daumRoughmapContainer1772903833671 .wrap_map{
+  width:100% !important;
+  height:260px !important;
+}
+
+#daumRoughmapContainer1772903833671 .wrap_controllers{
+  width:100% !important;
+}
+
+#daumRoughmapContainer1772903833671 .root_daum_roughmap{
+  width:100% !important;
+}
+    
+    .map-card:hover{ transform:translateY(-2px); }
+
+    .nav-btns{
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+    .nav-btns a{
+      flex:1;
+      min-width:110px;
+      padding:14px 0;
+      border:1px solid rgba(227,227,230,.95);
+      border-radius:16px;
+      font-size:13px;
+      background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(245,245,248,.95));
+    }
+
+    .parents-section{
+      padding-top:28px;
+      padding-bottom:28px;
+    }
+    .parents-section .hero-frame{
+      margin-bottom:6px;
+    }
+    .parents-section p{
+      margin-top:0 !important;
+      margin-bottom:0 !important;
+      line-height:1.8;
+    }
+
+    .account-wrapper{
+      max-width:520px;
+      margin:18px auto 0;
+    }
+    .account-box{
+      background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(245,245,248,.92));
+      border:1px solid rgba(227,227,230,.95);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 16px 28px rgba(0,0,0,.05);
+      margin-bottom:14px;
+    }
+    .account-header{
+      padding:18px;
+      font-size:15px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      cursor:pointer;
+      background:rgba(243,243,246,.8);
+      font-family:var(--serif);
+      color:#444;
+    }
+    .account-body{
+      max-height:0;
+      overflow:hidden;
+      transition:max-height .45s ease;
+      padding:0 18px;
+    }
+    .account-body.open{ padding:8px 18px 18px; }
+    .account-card{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:14px 0;
+      border-bottom:1px solid rgba(227,227,230,.95);
+      font-size:13px;
+    }
+    .account-card:last-child{ border-bottom:0; }
+    .account-card button{
+      background:#e9e9ee;
+      border:0;
+      padding:8px 14px;
+      border-radius:12px;
+      font-size:12px;
+      cursor:pointer;
+    }
+
+    .modal{
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.55);
+      justify-content:center;
+      align-items:center;
+      z-index:9999;
+      padding:16px;
+    }
+    .modal-content{
+      width:min(420px, 92vw);
+      background:#fff;
+      padding:26px 18px;
+      border-radius:18px;
+      position:relative;
+      border:1px solid rgba(227,227,230,.95);
+      animation:fadeUp .25s ease;
+    }
+    .modal-close{
+      position:absolute;
+      right:16px;
+      top:12px;
+      cursor:pointer;
+      color:#999;
+      font-size:18px;
+    }
+    @keyframes fadeUp{
+      from{ transform:translateY(10px); opacity:.6; }
+      to{ transform:translateY(0); opacity:1; }
+    }
+
+    /* ===== GALLERY ===== */
+    .gallery-card{
+      background:transparent;
+      border:0;
+      box-shadow:none;
+      padding:0;
+      border-radius:0;
+    }
+
+    .gallery-shell{
+      position:relative;
+      margin:18px auto 0;
+      width:100%;
+      max-width:560px;
+      overflow:hidden;
+      background:var(--bg);
+    }
+
+    .gallery{
+      overflow-x:auto;
+      overflow-y:hidden;
+      scroll-snap-type:x mandatory;
+      scroll-snap-stop:always;
+      -webkit-overflow-scrolling:touch;
+      border:0;
+      border-radius:0;
+      background:var(--bg);
+      box-shadow:none;
+    }
+    .gallery::-webkit-scrollbar{ display:none; }
+
+    .track{
+      display:flex;
+      gap:0;
+      padding:0;
+      background:var(--bg);
+    }
+
+    .slide{
+      flex:0 0 100%;
+      scroll-snap-align:start;
+      position:relative;
+      padding:0;
+      background:var(--bg);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .photo-frame{
+      background:var(--bg);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin:0 auto;
+      overflow:hidden;
+      border-radius:22px;
+      box-shadow:0 10px 24px rgba(0,0,0,.06);
+    }
+
+    .photo-frame.portrait{
+      width:92%;
+      max-width:480px;
+      aspect-ratio:3 / 4;
+    }
+
+    .photo-frame.landscape{
+      width:100%;
+      max-width:560px;
+      aspect-ratio:6 / 4;
+    }
+
+    .photo-frame img{
+      display:block;
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:center center;
+      background:transparent;
+    }
+
+    .gallery-overlay-hint{
+      position:absolute;
+      top:14px;
+      right:14px;
+      z-index:6;
+      display:flex;
+      align-items:center;
+      gap:7px;
+      padding:10px 12px;
+      border-radius:16px;
+      background:rgba(95,95,98,.60);
+      color:#fff;
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+      pointer-events:none;
+      box-shadow:0 10px 24px rgba(0,0,0,.12);
+      opacity:1;
+      transition:opacity .45s ease, transform .45s ease;
+    }
+
+    .gallery-overlay-hint.hide{
+      opacity:0;
+      transform:translateY(-6px);
+    }
+
+    .gallery-overlay-hint .hint-icon{
+      font-size:14px;
+      line-height:1;
+    }
+
+    .gallery-overlay-hint .hint-text{
+      font-size:10px;
+      line-height:1.2;
+      text-align:center;
+      white-space:nowrap;
+    }
+
+    .gal-arrow{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:44px;
+      height:44px;
+      border:0;
+      background:transparent;
+      box-shadow:none;
+      color:#fff;
+      font-size:52px;
+      font-weight:700;
+      line-height:44px;
+      text-align:center;
+      padding:0;
+      cursor:pointer;
+      user-select:none;
+      z-index:7;
+      text-shadow:0 2px 10px rgba(0,0,0,.28);
+      -webkit-text-stroke:0.2px rgba(255,255,255,.85);
+    }
+    .gal-arrow.left{ left:10px; }
+    .gal-arrow.right{ right:10px; }
+    .gal-arrow:active{
+      transform:translateY(-50%) scale(.96);
+    }
+    .gal-arrow:focus,
+    .gal-arrow:focus-visible{
+      outline:none;
+    }
+
+    .pager{
+      margin-top:14px;
+      font-family:var(--sans);
+      font-size:14px;
+      font-weight:500;
+      letter-spacing:.5px;
+      color:#222;
+    }
+
+    .gallery-dots{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:8px;
+      margin-top:10px;
+    }
+
+    .gallery-dot{
+      width:8px;
+      height:8px;
+      border-radius:999px;
+      background:#d8d8dc;
+      transition:all .25s ease;
+    }
+
+    .gallery-dot.active{
+      background:#444;
+      transform:scale(1.18);
+    }
+
+    .hint{ display:none; }
+
+    .section-sep{
+      max-width:560px;
+      margin:0 auto;
+      padding:0 18px;
+    }
+    .section-sep::before{
+      content:"";
+      display:block;
+      height:1px;
+      background:linear-gradient(90deg, transparent, var(--silver), transparent);
+      opacity:.9;
+    }
+
+    .section-tight{
+      padding:32px 18px;
+    }
+    .section-tight .divider{
+      margin:18px auto;
+    }
+
+    .pc-toast{
+      position:fixed;
+      left:50%;
+      top:50%;
+      transform:translate(-50%, -50%);
+      z-index:10000;
+      background:rgba(0,0,0,.72);
+      color:#fff;
+      padding:14px 18px;
+      border-radius:14px;
+      font-size:14px;
+      letter-spacing:.2px;
+      line-height:1.4;
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .2s ease;
+    }
+    .pc-toast.show{ opacity:1; }
+
+    @media (hover:none) and (pointer:coarse){
+      .pc-toast{ display:none; }
+    }
+
+    @media (max-width: 599px){
+      .gallery-shell{
+        width:calc(100% + 36px);
+        margin-left:-18px;
+        margin-right:-18px;
+      }
+
+      .photo-frame.portrait{
+        width:90%;
+        max-width:none;
+      }
+
+      .photo-frame.landscape{
+        width:100%;
+      }
+
+      .gallery-overlay-hint{
+        top:12px;
+        right:12px;
+        padding:9px 11px;
+        border-radius:14px;
+      }
+      .gallery-overlay-hint .hint-icon{
+        font-size:13px;
+      }
+      .gallery-overlay-hint .hint-text{
+        font-size:10px;
+        line-height:1.2;
+        text-align:center;
+      }
+
+      .gal-arrow{
+        width:40px;
+        height:40px;
+        font-size:46px;
+        line-height:40px;
+      }
+    }
+
+    @media (min-width: 900px){
+      section{ padding:70px 20px; }
+      .hero-frame{ width:480px; }
+      .gallery-shell{ width:100%; max-width:560px; }
+    }
+
+    .site-footer{
+      text-align:center;
+      padding:36px 0 50px;
+      color:#8f8f8f;
+    }
+
+    .footer-name{
+      font-family:var(--serif);
+      font-size:14px;
+      letter-spacing:0.6px;
+      color:#7a7a7a;
+      margin-bottom:4px;
+    }
+
+    .footer-copy{
+      font-size:11px;
+      letter-spacing:0.8px;
+      color:#b0b0b0;
+    }
+
+    .root_daum_roughmap{
+  width:100% !important;
+}
+
+    
+  </style>
+
+</head>
+
+<body>
+  <div class="floating-music">
+    <button id="musicBtn" type="button" aria-label="음악 토글">🔊</button>
+  </div>
+
+  <div class="loading" id="loading">
+    <div>
+      WEDDING INVITATION
+      <div style="font-size:12px; letter-spacing:2px; margin-top:12px; color:#999;">
+        2026.04.25
+      </div>
+    </div>
+  </div>
+
+  <audio id="bgm" autoplay loop playsinline>
+    <source src="모청bgm.mp3" type="audio/mpeg">
+  </audio>
+
+  <main class="page">
+    <section class="reveal hero-section">
+      <canvas id="petalCanvas"></canvas>
+
+      <div class="section-title">WEDDING INVITATION</div>
+      <div class="hero-name">류정현 <span class="heart">♥</span> 이나현</div>
+      <div class="hero-sub">2026. 04. 25. SAT 11:00</div>
+
+      <div class="hero-frame">
+        <img src="MainPhoto.jpg" alt="MainPhoto">
+      </div>
+    </section>
+
+    <section class="reveal section-tight">
+      <div class="divider"></div>
+
+      <p style="font-family:var(--serif); color:#555; margin:0; text-align:center; line-height:1.9;">
+        서로의 계절이 되어주기로 했습니다.<br>
+        길가에 피어난 작은 꽃처럼, 때로는 시원한 바람처럼<br>
+        늘 곁에서 서로의 일상을 지켜주는<br>
+        평생의 동반자가 되려 합니다.<br>
+        <br>
+        저희 두 사람이 내딛는 첫걸음,<br>
+        따뜻한 사랑과 축복으로 함께해 주시면<br>
+        더 없는 기쁨이 되겠습니다.
+      </p>
+
+      <div class="divider"></div>
+    </section>
+
+    <section class="reveal parents-section">
+      <div class="hero-frame">
+        <img src="SubPhoto.jpg" alt="SubPhoto">
+      </div>
+
+      <p style="color:#777; font-size:13px; margin-top:1px; font-family:var(--serif);">
+        류완영 · 노복란 의 장남 정현<br>
+        이정복 · 신복순 의 장녀 나현
+      </p>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <section class="reveal">
+      <div class="section-title">OUR WEDDING DAY</div>
+
+      <div class="days-left">
+        <span style="font-family:var(--serif);">류정현 <span class="heart">♥</span> 이나현</span>
+        <span style="color:#9a9a9a;"> 결혼까지 </span>
+        <b id="daysLeft">00</b><span style="color:#9a9a9a;">일</span>
+      </div>
+
+      <div class="timer-wrap">
+        <div class="time-box"><div class="num" id="dd">00</div><div class="label">DAYS</div></div>
+        <div class="time-box"><div class="num" id="hh">00</div><div class="label">HOURS</div></div>
+        <div class="time-box"><div class="num" id="mm">00</div><div class="label">MIN</div></div>
+        <div class="time-box"><div class="num" id="ss">00</div><div class="label">SEC</div></div>
+      </div>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <section class="reveal">
+      <div class="gallery-card">
+        <div class="section-title" style="margin-bottom:10px;">GALLERY</div>
+
+        <div class="gallery-shell">
+          <div class="gallery-overlay-hint">
+            <span class="hint-icon">☞</span>
+            <span class="hint-text">밀어서<br>더 많은<br>사진보기</span>
+          </div>
+
+          <div class="gal-arrow left" id="prevBtn" aria-label="previous">‹</div>
+          <div class="gal-arrow right" id="nextBtn" aria-label="next">›</div>
+
+          <div class="gallery" id="gallery">
+            <div class="track" id="galleryTrack">
+              <div class="slide"><div class="photo-frame portrait"><img src="Gallery1-1.jpg" alt="갤러리1"></div></div>
+              <div class="slide"><div class="photo-frame portrait"><img src="Gallery1-2.jpg" alt="갤러리2"></div></div>
+              <div class="slide"><div class="photo-frame portrait"><img src="Gallery1-3.jpg" alt="갤러리3"></div></div>
+              <div class="slide"><div class="photo-frame portrait"><img src="Gallery1-4.jpg" alt="갤러리4"></div></div>
+              <div class="slide"><div class="photo-frame portrait"><img src="Gallery2-1.jpg" alt="갤러리5"></div></div>
+              <div class="slide"><div class="photo-frame portrait"><img src="Gallery2-2.jpg" alt="갤러리6"></div></div>
+              <div class="slide"><div class="photo-frame portrait"><img src="Gallery2-3.jpg" alt="갤러리7"></div></div>
+              <div class="slide"><div class="photo-frame portrait"><img src="Gallery2-4.jpg" alt="갤러리8"></div></div>
+              <div class="slide"><div class="photo-frame portrait"><img src="Gallery2-5.jpg" alt="갤러리9"></div></div>
+              <div class="slide"><div class="photo-frame portrait"><img src="Gallery3-1.jpg" alt="갤러리10"></div></div>
+              <div class="slide"><div class="photo-frame portrait"><img src="Gallery3-2.jpg" alt="갤러리11"></div></div>
+              <div class="slide"><div class="photo-frame portrait"><img src="Gallery3-3.jpg" alt="갤러리12"></div></div>
+              <div class="slide"><div class="photo-frame landscape"><img src="Gallery3-4.jpg" alt="갤러리13"></div></div>
+              <div class="slide"><div class="photo-frame landscape"><img src="Gallery3-5.jpg" alt="갤러리14"></div></div>
+              <div class="slide"><div class="photo-frame portrait"><img src="Gallery3-6.jpg" alt="갤러리15"></div></div>
+            </div>
+          </div>
+
+          <div class="gallery-dots" id="galleryDots"></div>
+          <div class="pager" id="galleryPager">1 / 15</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <section class="reveal">
+      <div class="section-title">LOCATION</div>
+
+      <p style="font-size:14px; margin:0 0 16px; color:#555; font-family:var(--serif);">
+        아모르아트컨벤션 2층 아트홀<br>
+        충북 청주시 흥덕구 남석로 579
+      </p>
+
+    <div class="map-card" aria-label="지도 미리보기">
+  <div id="daumRoughmapContainer1772903833671" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+</div>
+
+      
+      <div class="nav-btns">
+        <a href="https://tmap.life/dadbe9d5" onclick="return pcGuard(event)">티맵</a>
+        <a href="#" onclick="return pcGuard(event, openKakaoNavi)">카카오내비</a>
+        <a href="https://naver.me/x3iFFSDF" onclick="return pcGuard(event)">네이버지도</a>
+      </div>
+
+      <div id="pcOnlyToast" class="pc-toast" aria-live="polite">
+        모바일에서만 확인이 가능합니다.
+      </div>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <section class="reveal">
+      <div class="section-title" style="color:#b0b0b6;">GIFT</div>
+
+      <p style="max-width:520px; margin:12px auto 0; font-size:14px; color:#666; line-height:1.85; font-family:var(--serif);">
+        직접 발걸음 해주시지 못하는 분들을 위해<br>
+        부득이하게 계좌번호를 기재하게 되었습니다.<br>
+        넓은 마음으로 양해 부탁드립니다.
+      </p>
+
+      <div class="account-wrapper">
+        <div class="account-box">
+          <div class="account-header" onclick="toggleAccount('groom')">
+            신랑측 계좌번호 <span id="arrow-groom">▼</span>
+          </div>
+          <div id="groom" class="account-body">
+            <div class="account-card">
+              <div>신랑 혼주 류완영<br>신협 132-013-316085</div>
+              <button onclick="copyAccount(event,'132013316085')">복사</button>
+            </div>
+            <div class="account-card">
+              <div>신랑 혼주 노복란<br>농협 401038-52-108530</div>
+              <button onclick="copyAccount(event,'40103852108530')">복사</button>
+            </div>
+            <div class="account-card">
+              <div>신랑 류정현<br>하나 603-910419-43007</div>
+              <button onclick="copyAccount(event,'60391041943007')">복사</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="account-box">
+          <div class="account-header" onclick="toggleAccount('bride')">
+            신부측 계좌번호 <span id="arrow-bride">▼</span>
+          </div>
+          <div id="bride" class="account-body">
+            <div class="account-card">
+              <div>신부 혼주 신복순<br>농협 545-01-280252</div>
+              <button onclick="copyAccount(event,'54501280252')">복사</button>
+            </div>
+            <div class="account-card">
+              <div>신부 이나현<br>국민 661-302-04-100903</div>
+              <button onclick="copyAccount(event,'66130204100903')">복사</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <section class="reveal">
+      <div class="card" style="text-align:center;">
+        <div style="font-family:var(--serif); font-size:16px; color:#222;">
+          함께해 주시는 마음만으로도<br> 충분히 감사드립니다
+        </div>
+        <div style="margin-top:8px; color:#777; font-size:13px; line-height:1.7;">
+          화환을 보내주시는 경우, 예식장 규정으로 꽃화환은 불가하며<br>
+          쌀화환만 가능한 점 너그러이 양해 부탁드립니다.
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="hero-frame landscape">
+        <img src="KakaoTitle.jpg" alt="KakaoTitle">
+      </div>
+
+      <div style="max-width:520px; margin:14px auto 0; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+        <button class="button" style="margin-top:0; flex:1; min-width:160px;" onclick="copyLink()">청첩장 주소<br>복사하기</button>
+        <button class="button" style="margin-top:0; flex:1; min-width:160px;" onclick="shareKakao()">카카오톡으로<br>공유하기</button>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-name">
+        Jeonghyeon & Nahyeon
+      </div>
+      <div class="footer-copy">
+        COPYRIGHT(C) Jeonghyeon & Nahyeon ALL RIGHTS RESERVED
+      </div>
+    </footer>
+
+    <script charset="UTF-8" class="daum_roughmap_loader_script"
+  src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+    
+    <script>
+      document.documentElement.classList.add("js");
+
+      const loadingEl = document.getElementById("loading");
+      function hideLoading(){
+        if(!loadingEl) return;
+        loadingEl.classList.add("hide");
+        setTimeout(() => { loadingEl.style.display = "none"; }, 700);
+      }
+      setTimeout(hideLoading, 4500);
+      setTimeout(hideLoading, 6000);
+      window.addEventListener("error", hideLoading, { once:true });
+
+      if (window.Kakao && !Kakao.isInitialized()) {
+        Kakao.init("91eed7186338a8599546bf372fc45f56");
+      }
+
+      function shareKakao(){
+        if(!window.Kakao){
+          alert("카카오 공유 기능을 불러오지 못했습니다. (네트워크/차단 확인)");
+          return;
+        }
+        Kakao.Share.sendDefault({
+          objectType: "feed",
+          content: {
+            title: "류정현 ♥ 이나현 결혼식에 초대합니다",
+            description: "2026년 04월 25일 토요일 오전 11시",
+            imageUrl: "https://jhnh-wed0425.github.io/wedding/KakaoTitle.jpg",
+            link: { mobileWebUrl: location.href, webUrl: location.href }
+          },
+          buttons: [{
+            title: "청첩장 보기",
+            link: { mobileWebUrl: location.href, webUrl: location.href }
+          }]
+        });
+      }
+
+      function openMap(){
+        window.open("https://naver.me/x3iFFSDF");
+      }
+
+      const ddEl = document.getElementById("dd");
+      const hhEl = document.getElementById("hh");
+      const mmEl = document.getElementById("mm");
+      const ssEl = document.getElementById("ss");
+      const daysLeftEl = document.getElementById("daysLeft");
+
+      const target = new Date("2026-04-25T11:00:00").getTime();
+      setInterval(() => {
+        const gap = target - Date.now();
+        const d = Math.max(0, Math.floor(gap / (1000 * 60 * 60 * 24)));
+        const h = Math.max(0, Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+        const m = Math.max(0, Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60)));
+        const s = Math.max(0, Math.floor((gap % (1000 * 60)) / 1000));
+
+        ddEl.textContent = String(d).padStart(2, "0");
+        hhEl.textContent = String(h).padStart(2, "0");
+        mmEl.textContent = String(m).padStart(2, "0");
+        ssEl.textContent = String(s).padStart(2, "0");
+        daysLeftEl.textContent = String(d);
+      }, 1000);
+
+      function toggleAccount(id){
+        const body = document.getElementById(id);
+        const arrow = document.getElementById("arrow-" + id);
+        const opened = body.style.maxHeight && body.style.maxHeight !== "0px";
+
+        if(opened){
+          body.style.maxHeight = null;
+          body.classList.remove("open");
+          arrow.textContent = "▼";
+        }else{
+          body.style.maxHeight = body.scrollHeight + "px";
+          body.classList.add("open");
+          arrow.textContent = "▲";
+        }
+      }
+
+      function copyAccount(e, number){
+        e.stopPropagation();
+        navigator.clipboard.writeText(number);
+        alert("계좌번호가 복사되었습니다.");
+      }
+
+      function copyLink(){
+        navigator.clipboard.writeText(location.href);
+        alert("홈페이지 주소가 복사되었습니다.");
+      }
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(ent => {
+          if(ent.isIntersecting){
+            ent.target.classList.add("show");
+            io.unobserve(ent.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+      const galleryEl = document.getElementById("gallery");
+      const pagerEl = document.getElementById("galleryPager");
+      const dotsEl = document.getElementById("galleryDots");
+      const hintEl = document.querySelector(".gallery-overlay-hint");
+      const slides = Array.from(document.querySelectorAll("#galleryTrack .slide"));
+      const total = slides.length;
+
+      if (dotsEl) {
+        dotsEl.innerHTML = slides.map((_, i) =>
+          `<span class="gallery-dot${i === 0 ? " active" : ""}"></span>`
+        ).join("");
+      }
+
+      function getIndex(){
+        const w = galleryEl.clientWidth || 1;
+        const i = Math.round(galleryEl.scrollLeft / w);
+        return Math.max(0, Math.min(total - 1, i));
+      }
+
+      function updateGalleryUI(index){
+        pagerEl.textContent = `${index + 1} / ${total}`;
+        const dots = document.querySelectorAll(".gallery-dot");
+        dots.forEach((dot, i) => {
+          dot.classList.toggle("active", i === index);
+        });
+      }
+
+      function goTo(i){
+        const w = galleryEl.clientWidth || 1;
+        const next = Math.max(0, Math.min(total - 1, i));
+        galleryEl.scrollTo({ left: next * w, behavior: "smooth" });
+        updateGalleryUI(next);
+      }
+
+      document.getElementById("prevBtn").addEventListener("click", (e) => {
+        e.stopPropagation();
+        goTo(getIndex() - 1);
+      });
+
+      document.getElementById("nextBtn").addEventListener("click", (e) => {
+        e.stopPropagation();
+        goTo(getIndex() + 1);
+      });
+
+      galleryEl.addEventListener("scroll", () => {
+        const i = getIndex();
+        updateGalleryUI(i);
+      }, { passive:true });
+
+      window.addEventListener("resize", () => goTo(getIndex()));
+      goTo(0);
+      updateGalleryUI(0);
+
+      if (hintEl) {
+        setTimeout(() => {
+          hintEl.classList.add("hide");
+        }, 5000);
+      }
+
+      const bgmEl = document.getElementById("bgm");
+      const musicBtnEl = document.getElementById("musicBtn");
+      bgmEl.muted = true;
+
+      function syncMusicUI(){
+        musicBtnEl.textContent = bgmEl.paused ? "🔇" : "🔊";
+      }
+
+      async function tryAutoPlay(){
+        try{
+          await bgmEl.play();
+          bgmEl.muted = false;
+        }catch(e){}
+        syncMusicUI();
+      }
+
+      tryAutoPlay();
+      window.addEventListener("load", tryAutoPlay);
+
+      function unlock(){
+        tryAutoPlay();
+        document.removeEventListener("touchstart", unlock);
+        document.removeEventListener("click", unlock);
+        document.removeEventListener("scroll", unlock);
+      }
+
+      document.addEventListener("touchstart", unlock, { passive:true });
+      document.addEventListener("click", unlock, { passive:true });
+      document.addEventListener("scroll", unlock, { passive:true });
+
+      musicBtnEl.addEventListener("click", async (e) => {
+        e.stopPropagation();
+        try{
+          if(bgmEl.paused){
+            bgmEl.muted = false;
+            await bgmEl.play();
+          }else{
+            bgmEl.pause();
+          }
+        }catch(e2){}
+        syncMusicUI();
+      });
+
+      syncMusicUI();
+
+      function openKakaoNavi(e){
+        e.preventDefault();
+
+        const lat = 36.642846;
+        const lon = 127.404761;
+        const name = "아모르아트컨벤션";
+
+        if(!window.Kakao){
+          alert("카카오 SDK를 불러오지 못했습니다. (네트워크/차단 확인)");
+          return false;
+        }
+
+        if(!Kakao.isInitialized()){
+          Kakao.init("91eed7186338a8599546bf372fc45f56");
+        }
+
+        Kakao.Navi.start({
+          name: name,
+          x: lon,
+          y: lat,
+          coordType: "wgs84",
+        });
+
+        return false;
+      }
+
+      const pcToast = document.getElementById("pcOnlyToast");
+
+      function isDesktop(){
+        return window.matchMedia && window.matchMedia("(hover:hover) and (pointer:fine)").matches;
+      }
+
+      function showPcToast(msg){
+        if(!pcToast) return;
+        pcToast.textContent = msg || "모바일에서만 확인이 가능합니다.";
+        pcToast.classList.add("show");
+        clearTimeout(showPcToast._t);
+        showPcToast._t = setTimeout(() => pcToast.classList.remove("show"), 1400);
+      }
+
+      function pcGuard(e, mobileFn){
+        if(isDesktop()){
+          e.preventDefault();
+          showPcToast("모바일에서만 확인이 가능합니다.");
+          return false;
+        }
+        if(typeof mobileFn === "function"){
+          mobileFn(e);
+          return false;
+        }
+        return true;
+      }
+
+      document.addEventListener("contextmenu", (e) => {
+        if(e.target && e.target.closest && e.target.closest("img")) e.preventDefault();
+      });
+
+      document.addEventListener("dragstart", (e) => {
+        if(e.target && e.target.tagName === "IMG") e.preventDefault();
+      });
+
+      document.addEventListener("gesturestart", (e) => e.preventDefault(), { passive:false });
+      document.addEventListener("gesturechange", (e) => e.preventDefault(), { passive:false });
+      document.addEventListener("gestureend", (e) => e.preventDefault(), { passive:false });
+
+      document.addEventListener("wheel", (e) => {
+        if(e.ctrlKey || e.metaKey) e.preventDefault();
+      }, { passive:false });
+
+      document.addEventListener("keydown", (e) => {
+        const key = e.key.toLowerCase();
+        const zoomKeys = ["+", "=", "-", "_", "0"];
+        if((e.ctrlKey || e.metaKey) && zoomKeys.includes(key)){
+          e.preventDefault();
+        }
+      });
+
+      (function initRoughMap(){
+  function bootRoughMap(){
+    if (!window.daum || !daum.roughmap || !daum.roughmap.Lander) return;
+
+    const container = document.getElementById("daumRoughmapContainer1772903833671");
+    if (!container) return;
+
+    if (container.dataset.loaded === "true") return;
+    container.dataset.loaded = "true";
+
+    new daum.roughmap.Lander({
+      "timestamp" : "1772904601986",
+      "key" : "ijwvzomcovi",
+      "mapWidth" : "280",
+      "mapHeight" : "280"
+    }).render();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bootRoughMap);
+  } else {
+    bootRoughMap();
+  }
+
+  window.addEventListener("load", bootRoughMap);
+})();
+      
+
+      document.addEventListener("dblclick", (e) => {
+        e.preventDefault();
+      }, { passive:false });
+
+      document.addEventListener("mousedown", (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.target.closest("img")) {
+          e.preventDefault();
+        }
+      });
+
+      document.addEventListener("selectstart", (e) => {
+        if (e.target && e.target.closest && e.target.closest("img")) {
+          e.preventDefault();
+        }
+      });
 
       /* ===== PETALS ===== */
       (function initPetals(){
