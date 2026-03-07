@@ -373,7 +373,7 @@
       border-radius:0;
     }
 
-    .gallery-shell{
+.gallery-shell{
   position:relative;
   margin:18px auto 0;
   width:100%;
@@ -413,9 +413,8 @@
   justify-content:center;
 }
 
-/* 공통 프레임 */
+/* 스크롤해도 안 흔들리게 vh/svh 제거 */
 .photo-frame{
-  width:100%;
   background:var(--bg);
   display:flex;
   align-items:center;
@@ -426,17 +425,18 @@
 
 /* 세로 3:4 */
 .photo-frame.portrait{
-  width:min(100%, 49.5svh);   /* 66svh * 3/4 */
+  width:78%;
+  max-width:420px;
   aspect-ratio:3 / 4;
 }
 
 /* 가로 6:4 */
 .photo-frame.landscape{
-  width:min(100%, 100%);
+  width:100%;
+  max-width:560px;
   aspect-ratio:6 / 4;
 }
 
-/* 이미지는 절대 자르지 않음 */
 .photo-frame img{
   display:block;
   width:100%;
@@ -445,7 +445,7 @@
   object-position:center center;
   background:transparent;
 }
-
+    
     .gallery-overlay-hint{
       position:absolute;
       top:10px;
@@ -553,7 +553,7 @@
       .pc-toast{ display:none; }
     }
 
- @media (max-width: 599px){
+@media (max-width: 599px){
   .gallery-shell{
     width:calc(100% + 36px);
     margin-left:-18px;
@@ -561,7 +561,8 @@
   }
 
   .photo-frame.portrait{
-    width:min(100%, 46.5svh);   /* 62svh * 3/4 */
+    width:78%;
+    max-width:none;
   }
 
   .photo-frame.landscape{
@@ -583,6 +584,7 @@
     font-size:42px;
   }
 }
+    
     @media (min-width: 900px){
       section{ padding:70px 20px; }
       .hero-frame{ width:480px; }
@@ -1156,6 +1158,23 @@
           boot();
         }
       })();
+
+  document.addEventListener("dblclick", (e) => {
+    e.preventDefault();
+  }, { passive:false });
+
+  document.addEventListener("mousedown", (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.target.closest("img")) {
+      e.preventDefault();
+    }
+  });
+
+  document.addEventListener("selectstart", (e) => {
+    if (e.target && e.target.closest && e.target.closest("img")) {
+      e.preventDefault();
+    }
+  });
+
     </script>
   </main>
 </body>
