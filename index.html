@@ -374,72 +374,77 @@
     }
 
     .gallery-shell{
-      position:relative;
-      margin:18px auto 0;
-      width:100%;
-      max-width:560px;
-      overflow:hidden;
-      background:var(--bg);
-    }
+  position:relative;
+  margin:18px auto 0;
+  width:100%;
+  max-width:560px;
+  overflow:hidden;
+  background:var(--bg);
+}
 
-    .gallery{
-      overflow-x:auto;
-      overflow-y:hidden;
-      scroll-snap-type:x mandatory;
-      scroll-snap-stop:always;
-      -webkit-overflow-scrolling:touch;
-      border:0;
-      border-radius:0;
-      background:var(--bg);
-      box-shadow:none;
-    }
-    .gallery::-webkit-scrollbar{ display:none; }
+.gallery{
+  overflow-x:auto;
+  overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  scroll-snap-stop:always;
+  -webkit-overflow-scrolling:touch;
+  border:0;
+  border-radius:0;
+  background:var(--bg);
+  box-shadow:none;
+}
+.gallery::-webkit-scrollbar{ display:none; }
 
-    .track{
-      display:flex;
-      gap:0;
-      padding:0;
-      background:var(--bg);
-    }
+.track{
+  display:flex;
+  gap:0;
+  padding:0;
+  background:var(--bg);
+}
 
-    .slide{
-      flex:0 0 100%;
-      scroll-snap-align:start;
-      position:relative;
-      padding:0;
-      background:var(--bg);
-    }
+.slide{
+  flex:0 0 100%;
+  scroll-snap-align:start;
+  position:relative;
+  padding:0;
+  background:var(--bg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 
-    .photo-frame{
-      width:100%;
-      height:68svh;
-      min-height:420px;
-      max-height:820px;
-      border-radius:0;
-      overflow:hidden;
-      background:var(--bg);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
+/* 공통 프레임 */
+.photo-frame{
+  width:100%;
+  background:var(--bg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto;
+  overflow:hidden;
+}
 
-    .photo-frame img{
-      display:block;
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      object-position:center center;
-      background:transparent;
-      flex-shrink:0;
-    }
+/* 세로 3:4 */
+.photo-frame.portrait{
+  width:min(100%, 49.5svh);   /* 66svh * 3/4 */
+  aspect-ratio:3 / 4;
+}
 
-    .photo-frame.landscape img{
-      object-position:center center;
-    }
+/* 가로 6:4 */
+.photo-frame.landscape{
+  width:min(100%, 100%);
+  aspect-ratio:6 / 4;
+}
 
-    .photo-frame.portrait img{
-      object-position:center top;
-    }
+/* 이미지는 절대 자르지 않음 */
+.photo-frame img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center center;
+  background:transparent;
+}
 
     .gallery-overlay-hint{
       position:absolute;
@@ -548,32 +553,36 @@
       .pc-toast{ display:none; }
     }
 
-    @media (max-width: 599px){
-      .gallery-shell{
-        width:calc(100% + 36px);
-        margin-left:-18px;
-        margin-right:-18px;
-      }
-      .photo-frame{
-        height:62svh;
-        min-height:360px;
-      }
-      .gallery-overlay-hint{
-        top:8px;
-        right:8px;
-        padding:7px 10px;
-      }
-      .gallery-overlay-hint .hint-icon{
-        font-size:14px;
-      }
-      .gallery-overlay-hint .hint-text{
-        font-size:10px;
-      }
-      .gal-arrow{
-        font-size:42px;
-      }
-    }
+ @media (max-width: 599px){
+  .gallery-shell{
+    width:calc(100% + 36px);
+    margin-left:-18px;
+    margin-right:-18px;
+  }
 
+  .photo-frame.portrait{
+    width:min(100%, 46.5svh);   /* 62svh * 3/4 */
+  }
+
+  .photo-frame.landscape{
+    width:100%;
+  }
+
+  .gallery-overlay-hint{
+    top:8px;
+    right:8px;
+    padding:7px 10px;
+  }
+  .gallery-overlay-hint .hint-icon{
+    font-size:14px;
+  }
+  .gallery-overlay-hint .hint-text{
+    font-size:10px;
+  }
+  .gal-arrow{
+    font-size:42px;
+  }
+}
     @media (min-width: 900px){
       section{ padding:70px 20px; }
       .hero-frame{ width:480px; }
