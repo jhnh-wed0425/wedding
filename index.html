@@ -271,17 +271,17 @@
     }
 
     .parents-section{
-  padding-top:28px;
-  padding-bottom:20px;
-}
-.parents-section .hero-frame{
-  margin-bottom:0;
-}
-.parents-section p{
-  margin-top:0 !important;
-  margin-bottom:0 !important;
-  line-height:1.8;
-}
+      padding-top:28px;
+      padding-bottom:20px;
+    }
+    .parents-section .hero-frame{
+      margin-bottom:0;
+    }
+    .parents-section p{
+      margin-top:0 !important;
+      margin-bottom:0 !important;
+      line-height:1.8;
+    }
 
     .account-wrapper{
       max-width:520px;
@@ -379,7 +379,7 @@
       width:100%;
       max-width:560px;
       overflow:hidden;
-      background:transparent;
+      background:var(--bg);
     }
 
     .gallery{
@@ -390,7 +390,7 @@
       -webkit-overflow-scrolling:touch;
       border:0;
       border-radius:0;
-      background:transparent;
+      background:var(--bg);
       box-shadow:none;
     }
     .gallery::-webkit-scrollbar{ display:none; }
@@ -399,6 +399,7 @@
       display:flex;
       gap:0;
       padding:0;
+      background:var(--bg);
     }
 
     .slide{
@@ -406,33 +407,40 @@
       scroll-snap-align:start;
       position:relative;
       padding:0;
+      background:var(--bg);
     }
 
     .photo-frame{
-  width:100%;
-  height:68svh;
-  min-height:420px;
-  max-height:820px;
-  border-radius:0;
-  overflow:hidden;
-  background:#ece8e4;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
+      width:100%;
+      height:68svh;
+      min-height:420px;
+      max-height:820px;
+      border-radius:0;
+      overflow:hidden;
+      background:var(--bg);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
 
-.photo-frame img{
-  display:block;
-  max-width:100%;
-  max-height:100%;
-  width:auto;
-  height:auto;
-  object-fit:contain;
-  object-position:center top;
-  background:transparent;
-  flex-shrink:0;
-}
-    
+    .photo-frame img{
+      display:block;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center center;
+      background:transparent;
+      flex-shrink:0;
+    }
+
+    .photo-frame.landscape img{
+      object-position:center center;
+    }
+
+    .photo-frame.portrait img{
+      object-position:center top;
+    }
+
     .gallery-overlay-hint{
       position:absolute;
       top:10px;
@@ -547,9 +555,9 @@
         margin-right:-18px;
       }
       .photo-frame{
-  height:62svh;
-  min-height:360px;
-}
+        height:62svh;
+        min-height:360px;
+      }
       .gallery-overlay-hint{
         top:8px;
         right:8px;
@@ -669,21 +677,21 @@
 
           <div class="gallery" id="gallery">
             <div class="track" id="galleryTrack">
-              <div class="slide"><div class="photo-frame"><img src="Gallery1-1.jpg" alt="갤러리1"></div></div>
-              <div class="slide"><div class="photo-frame"><img src="Gallery1-2.jpg" alt="갤러리2"></div></div>
-              <div class="slide"><div class="photo-frame"><img src="Gallery1-3.jpg" alt="갤러리3"></div></div>
-              <div class="slide"><div class="photo-frame"><img src="Gallery1-4.jpg" alt="갤러리4"></div></div>
-              <div class="slide"><div class="photo-frame"><img src="Gallery2-1.jpg" alt="갤러리5"></div></div>
-              <div class="slide"><div class="photo-frame"><img src="Gallery2-2.jpg" alt="갤러리6"></div></div>
-              <div class="slide"><div class="photo-frame"><img src="Gallery2-3.jpg" alt="갤러리7"></div></div>
-              <div class="slide"><div class="photo-frame"><img src="Gallery2-4.jpg" alt="갤러리8"></div></div>
-              <div class="slide"><div class="photo-frame"><img src="Gallery2-5.jpg" alt="갤러리9"></div></div>
-              <div class="slide"><div class="photo-frame"><img src="Gallery3-1.jpg" alt="갤러리10"></div></div>
-              <div class="slide"><div class="photo-frame"><img src="Gallery3-2.jpg" alt="갤러리11"></div></div>
-              <div class="slide"><div class="photo-frame"><img src="Gallery3-3.jpg" alt="갤러리12"></div></div>
-              <div class="slide"><div class="photo-frame"><img src="Gallery3-4.jpg" alt="갤러리13"></div></div>
-              <div class="slide"><div class="photo-frame"><img src="Gallery3-5.jpg" alt="갤러리14"></div></div>
-              <div class="slide"><div class="photo-frame"><img src="Gallery3-6.jpg" alt="갤러리15"></div></div>
+              <div class="slide"><div class="photo-frame portrait"><img src="Gallery1-1.jpg" alt="갤러리1"></div></div>
+              <div class="slide"><div class="photo-frame portrait"><img src="Gallery1-2.jpg" alt="갤러리2"></div></div>
+              <div class="slide"><div class="photo-frame portrait"><img src="Gallery1-3.jpg" alt="갤러리3"></div></div>
+              <div class="slide"><div class="photo-frame portrait"><img src="Gallery1-4.jpg" alt="갤러리4"></div></div>
+              <div class="slide"><div class="photo-frame portrait"><img src="Gallery2-1.jpg" alt="갤러리5"></div></div>
+              <div class="slide"><div class="photo-frame portrait"><img src="Gallery2-2.jpg" alt="갤러리6"></div></div>
+              <div class="slide"><div class="photo-frame portrait"><img src="Gallery2-3.jpg" alt="갤러리7"></div></div>
+              <div class="slide"><div class="photo-frame portrait"><img src="Gallery2-4.jpg" alt="갤러리8"></div></div>
+              <div class="slide"><div class="photo-frame portrait"><img src="Gallery2-5.jpg" alt="갤러리9"></div></div>
+              <div class="slide"><div class="photo-frame portrait"><img src="Gallery3-1.jpg" alt="갤러리10"></div></div>
+              <div class="slide"><div class="photo-frame portrait"><img src="Gallery3-2.jpg" alt="갤러리11"></div></div>
+              <div class="slide"><div class="photo-frame portrait"><img src="Gallery3-3.jpg" alt="갤러리12"></div></div>
+              <div class="slide"><div class="photo-frame landscape"><img src="Gallery3-4.jpg" alt="갤러리13"></div></div>
+              <div class="slide"><div class="photo-frame landscape"><img src="Gallery3-5.jpg" alt="갤러리14"></div></div>
+              <div class="slide"><div class="photo-frame portrait"><img src="Gallery3-6.jpg" alt="갤러리15"></div></div>
             </div>
           </div>
 
