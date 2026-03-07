@@ -271,11 +271,17 @@
     }
 
     .parents-section{
-      padding-top:28px;
-      padding-bottom:28px;
-    }
-    .parents-section .hero-frame{ margin-bottom:4px; }
-    .parents-section p{ margin-top:4px !important; }
+  padding-top:28px;
+  padding-bottom:20px;
+}
+.parents-section .hero-frame{
+  margin-bottom:0;
+}
+.parents-section p{
+  margin-top:0 !important;
+  margin-bottom:0 !important;
+  line-height:1.8;
+}
 
     .account-wrapper{
       max-width:520px;
@@ -403,26 +409,30 @@
     }
 
     .photo-frame{
-      width:100%;
-      height:68vh;
-      min-height:420px;
-      max-height:820px;
-      border-radius:0;
-      overflow:hidden;
-      background:#ece8e4;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
+  width:100%;
+  height:68svh;
+  min-height:420px;
+  max-height:820px;
+  border-radius:0;
+  overflow:hidden;
+  background:#ece8e4;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 
-    .photo-frame img{
-      width:100%;
-      height:100%;
-      object-fit:contain;
-      object-position:center top;
-      background:transparent;
-    }
-
+.photo-frame img{
+  display:block;
+  max-width:100%;
+  max-height:100%;
+  width:auto;
+  height:auto;
+  object-fit:contain;
+  object-position:center top;
+  background:transparent;
+  flex-shrink:0;
+}
+    
     .gallery-overlay-hint{
       position:absolute;
       top:10px;
@@ -537,9 +547,9 @@
         margin-right:-18px;
       }
       .photo-frame{
-        height:62vh;
-        min-height:360px;
-      }
+  height:62svh;
+  min-height:360px;
+}
       .gallery-overlay-hint{
         top:8px;
         right:8px;
