@@ -4,21 +4,19 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
   <meta name="format-detection" content="telephone=no" />
-<meta property="og:site_name" content="류정현 & 이나현 청첩장" />
-<meta property="og:title" content="류정현 ♥ 이나현 결혼식에 초대합니다" />
-<meta property="og:description" content="2026년 04월 25일 토요일 오전 11시" />
-<meta property="og:url" content="https://jhnh-wed0425.github.io/wedding/" />
-<meta property="og:type" content="website" />
-<meta property="og:image" content="https://jhnh-wed0425.github.io/wedding/KakaoTitle.jpg" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-  
+  <meta property="og:site_name" content="류정현 & 이나현 청첩장" />
+  <meta property="og:title" content="류정현 ♥ 이나현 결혼식에 초대합니다" />
+  <meta property="og:description" content="2026년 04월 25일 토요일 오전 11시" />
+  <meta property="og:url" content="https://jhnh-wed0425.github.io/wedding/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://jhnh-wed0425.github.io/wedding/KakaoTitle.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
   <title>류정현 ♥ 이나현</title>
 
-  <!-- Kakao Share SDK (카카오 공유용) -->
   <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"></script>
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500&family=Pretendard:wght@200;300;400;500&display=swap" rel="stylesheet">
@@ -33,36 +31,32 @@
       --radius:22px;
       --serif:'Noto Serif KR', serif;
       --sans:'Pretendard', system-ui, -apple-system, sans-serif;
-      --base-font: 16px;
+      --base-font:16px;
     }
 
     *{ box-sizing:border-box; }
     html{ scroll-behavior:smooth; }
+    html, body{ touch-action:manipulation; }
 
-html, body{
-  touch-action: manipulation;
-}
-    
-body{
-  margin:0;
-  background:#fff;
-  color:var(--text);
-  font-family:var(--sans);
-  text-align:center;
-  line-height:1.85;
-  font-size: var(--base-font);
-}
-    
-/* ✅ 가운데 ‘모바일 화면’ */
-.page{
-  max-width:560px;          /* 모바일 카드 폭 */
-  margin:0 auto;
-  min-height:100vh;
-  background:
-    radial-gradient(1200px 600px at 50% -120px, rgba(200,200,205,.35), transparent 55%),
-    linear-gradient(180deg, #fbfbfc 0%, var(--bg) 55%, #f3f3f5 100%);
-}
-    
+    body{
+      margin:0;
+      background:#fff;
+      color:var(--text);
+      font-family:var(--sans);
+      text-align:center;
+      line-height:1.85;
+      font-size:var(--base-font);
+    }
+
+    .page{
+      max-width:560px;
+      margin:0 auto;
+      min-height:100vh;
+      background:
+        radial-gradient(1200px 600px at 50% -120px, rgba(200,200,205,.35), transparent 55%),
+        linear-gradient(180deg, #fbfbfc 0%, var(--bg) 55%, #f3f3f5 100%);
+    }
+
     section{
       padding:54px 18px;
       max-width:560px;
@@ -70,33 +64,39 @@ body{
     }
 
     a{ color:inherit; text-decoration:none; }
-    img{ display:block; margin:0 auto; }
+    img{
+      display:block;
+      margin:0 auto;
+      -webkit-user-drag:none;
+      user-drag:none;
+      -webkit-touch-callout:none;
+      -webkit-user-select:none;
+      user-select:none;
+    }
 
-    /* 오른쪽 상단 플로팅 음악 토글만 */
     .floating-music{
-      position: fixed;
-      top: 12px;
-      right: 12px;
-      z-index: 9999;
+      position:fixed;
+      top:12px;
+      right:12px;
+      z-index:9999;
     }
     .floating-music button{
-      width: 44px;
-      height: 44px;
-      border-radius: 999px;
-      border: 1px solid rgba(227,227,230,.95);
-      background: rgba(255,255,255,.85);
-      box-shadow: 0 10px 20px rgba(0,0,0,.10);
-      backdrop-filter: blur(10px);
-      cursor: pointer;
-      font-size: 18px;
+      width:44px;
+      height:44px;
+      border-radius:999px;
+      border:1px solid rgba(227,227,230,.95);
+      background:rgba(255,255,255,.85);
+      box-shadow:0 10px 20px rgba(0,0,0,.10);
+      backdrop-filter:blur(10px);
+      cursor:pointer;
+      font-size:18px;
       display:flex;
       align-items:center;
       justify-content:center;
       user-select:none;
     }
-    .floating-music button:active{ transform: scale(.98); }
+    .floating-music button:active{ transform:scale(.98); }
 
-    /* 공통 섹션 타이틀 */
     .section-title{
       font-family:var(--serif);
       font-size:12px;
@@ -107,7 +107,6 @@ body{
       text-transform:uppercase;
     }
 
-    /* 메인 타이틀 */
     .hero-name{
       font-family:var(--serif);
       font-size:28px;
@@ -115,7 +114,9 @@ body{
       letter-spacing:1px;
       margin:10px 0 10px;
     }
+
     .heart{ color:#8b1f2f; }
+
     .hero-sub{
       font-family:var(--serif);
       color:#7a7a7a;
@@ -134,53 +135,61 @@ body{
     .card{
       background:rgba(255,255,255,.86);
       border:1px solid rgba(227,227,230,.85);
-      backdrop-filter: blur(6px);
+      backdrop-filter:blur(6px);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
       padding:28px 18px;
     }
 
-    /* 로딩 오버레이 */
     .loading{
-      position:fixed; inset:0;
+      position:fixed;
+      inset:0;
       background:#fff;
-      display:flex; justify-content:center; align-items:center;
+      display:flex;
+      justify-content:center;
+      align-items:center;
       z-index:9999;
       font-family:var(--serif);
       letter-spacing:4px;
       transition:opacity 1.8s ease;
     }
-    .loading.hide{ opacity:0; pointer-events:none; }
+    .loading.hide{
+      opacity:0;
+      pointer-events:none;
+    }
 
-    /* 대표사진 프레임 */
- .hero-frame{
-  margin:8px auto 0;
-  width:min(92vw, 480px);
-  aspect-ratio: 4 / 5;
-  border:0;
-  border-radius:0;
-  background:transparent;
-  overflow:hidden; /* ✅ 프레임 밖으로 안 튀게 */
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.hero-frame.landscape{ aspect-ratio: 4 / 3; }
+    .hero-frame{
+      margin:8px auto 0;
+      width:min(92vw, 480px);
+      aspect-ratio:4 / 5;
+      border:0;
+      border-radius:0;
+      background:transparent;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .hero-frame.landscape{ aspect-ratio:4 / 3; }
+    .hero-frame img{
+      width:100%;
+      height:auto;
+      object-fit:contain;
+      object-position:center;
+      background:transparent;
+    }
 
-.hero-frame img{
-  width:100%;
-  height:auto;       /* 프레임에 맞추지 말고 사진 자체로 */
-   object-fit:contain;        /* ✅ 안 잘리고 */
-  object-position:center;    /* ✅ 가운데 */
-  background:transparent;
-}
-    
-    /* 섹션 애니메이션: JS가 켜졌을 때만 숨김 */
     .reveal{ opacity:1; transform:none; }
-    html.js .reveal{ opacity:0; transform:translateY(14px); transition: opacity .9s ease, transform .9s ease; }
-    html.js .reveal.show{ opacity:1; transform:translateY(0); }
+    html.js .reveal{
+      opacity:0;
+      transform:translateY(14px);
+      transition:opacity .9s ease, transform .9s ease;
+    }
+    html.js .reveal.show{
+      opacity:1;
+      transform:translateY(0);
+    }
 
-    /* 타이머 */
     .timer-wrap{
       display:flex;
       justify-content:center;
@@ -195,8 +204,17 @@ body{
       border-radius:16px;
       background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(245,245,248,.92));
     }
-    .num{ font-size:26px; font-weight:300; letter-spacing:1px; }
-    .label{ margin-top:6px; font-size:10px; letter-spacing:2px; color:#9a9a9a; }
+    .num{
+      font-size:26px;
+      font-weight:300;
+      letter-spacing:1px;
+    }
+    .label{
+      margin-top:6px;
+      font-size:10px;
+      letter-spacing:2px;
+      color:#9a9a9a;
+    }
     .days-left{
       margin:12px 0 0;
       font-family:var(--serif);
@@ -204,7 +222,10 @@ body{
       font-size:14px;
       letter-spacing:.6px;
     }
-    .days-left b{ font-weight:500; color:#3a3a3a; }
+    .days-left b{
+      font-weight:500;
+      color:#3a3a3a;
+    }
 
     .button{
       display:inline-block;
@@ -219,7 +240,6 @@ body{
       cursor:pointer;
     }
 
-    /* LOCATION */
     .map-card{
       max-width:480px;
       margin:0 auto;
@@ -232,34 +252,35 @@ body{
       background:#fff;
     }
     .map-card:hover{ transform:translateY(-2px); }
-    .map-card img{ width:100%; height:auto; pointer-events:none; }
 
     .nav-btns{
-      display:flex; gap:10px;
-      justify-content:center; flex-wrap:wrap;
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      flex-wrap:wrap;
       margin-top:18px;
     }
     .nav-btns a{
-      flex:1; min-width:110px;
+      flex:1;
+      min-width:110px;
       padding:14px 0;
       border:1px solid rgba(227,227,230,.95);
       border-radius:16px;
       font-size:13px;
       background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(245,245,248,.95));
     }
-.parents-section{
-  padding-top: 28px;   /* 기존 54px -> 줄임 */
-  padding-bottom: 28px;
-}
-.parents-section .hero-frame{
-  margin-bottom: 4px;  /* 사진 아래 간격 최소화 */
-}
-.parents-section p{
-  margin-top: 4px !important;
-}
-    
-    /* 계좌 */
-    .account-wrapper{ max-width:520px; margin:18px auto 0; }
+
+    .parents-section{
+      padding-top:28px;
+      padding-bottom:28px;
+    }
+    .parents-section .hero-frame{ margin-bottom:4px; }
+    .parents-section p{ margin-top:4px !important; }
+
+    .account-wrapper{
+      max-width:520px;
+      margin:18px auto 0;
+    }
     .account-box{
       background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(245,245,248,.92));
       border:1px solid rgba(227,227,230,.95);
@@ -305,12 +326,13 @@ body{
       cursor:pointer;
     }
 
-    /* RSVP 모달 */
     .modal{
       display:none;
-      position:fixed; inset:0;
+      position:fixed;
+      inset:0;
       background:rgba(0,0,0,.55);
-      justify-content:center; align-items:center;
+      justify-content:center;
+      align-items:center;
       z-index:9999;
       padding:16px;
     }
@@ -324,183 +346,221 @@ body{
       animation:fadeUp .25s ease;
     }
     .modal-close{
-      position:absolute; right:16px; top:12px;
-      cursor:pointer; color:#999; font-size:18px;
+      position:absolute;
+      right:16px;
+      top:12px;
+      cursor:pointer;
+      color:#999;
+      font-size:18px;
     }
     @keyframes fadeUp{
-      from{ transform:translateY(10px); opacity:.6 }
-      to{ transform:translateY(0); opacity:1 }
+      from{ transform:translateY(10px); opacity:.6; }
+      to{ transform:translateY(0); opacity:1; }
     }
 
-    /* =========================
-       GALLERY (Instagram feed style)
-       ========================= */
-/* ✅ 갤러리 카드(둥근 박스) 제거하고 싶으면: 갤러리 섹션에서만 카드 스타일 끄기 */
-.gallery-card{
-  background:transparent;
-  border:0;
-  box-shadow:none;
-  padding:0;
-  border-radius:0;
-}    
+    /* ===== GALLERY ===== */
+    .gallery-card{
+      background:transparent;
+      border:0;
+      box-shadow:none;
+      padding:0;
+      border-radius:0;
+    }
+
     .gallery-shell{
       position:relative;
-      margin:14px auto 0;
-      width:min(92vw, 480px);
-      background: transparent;
+      margin:18px auto 0;
+      width:100%;
+      max-width:560px;
+      overflow:hidden;
+      background:transparent;
     }
-.gallery{
-  overflow-x:auto;
-  overflow-y:hidden;
-  scroll-snap-type:x mandatory;
-  scroll-snap-stop:always;
-  -webkit-overflow-scrolling:touch;
 
-  border:0;
-  border-radius:0;
-  background:transparent;
-  box-shadow:none;
-}    
+    .gallery{
+      overflow-x:auto;
+      overflow-y:hidden;
+      scroll-snap-type:x mandatory;
+      scroll-snap-stop:always;
+      -webkit-overflow-scrolling:touch;
+      border:0;
+      border-radius:0;
+      background:transparent;
+      box-shadow:none;
+    }
     .gallery::-webkit-scrollbar{ display:none; }
-    .track{ display:flex; gap:0; padding:0; }
-    .slide{ flex:0 0 100%; scroll-snap-align:start; padding:0; }
 
-.photo-frame{
-  width:100%;
-  aspect-ratio: 4 / 5;
-  border-radius:0;
-  overflow:hidden;          /* ✅ 박스 밖으로 못 나감 */
-  background:transparent; /* ✅ 흰색 제거 */
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.photo-frame img{
-  width:100%;
-  height:100%;
-  object-fit:contain;       /* ✅ 안 잘림 */
-  object-position:center;   /* ✅ 가운데 */
-  background:transparent;
-}
-    /* 화살표(필요한 CSS가 빠져있던 부분을 다시 넣음) */
-  .gal-arrow{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  width:auto; height:auto;
-  border:0;
-  background:transparent;
-  box-shadow:none;
-  backdrop-filter:none;
-
-  color:#fff;              /* ✅ 하얀색 */
-  font-size:34px;          /* ✅ 크게 */
-  font-weight:700;         /* ✅ 굵게 */
-  line-height:1;
-  padding:6px 10px;
-
-  cursor:pointer;
-  user-select:none;
-  z-index:5;
-
-  text-shadow: 0 2px 10px rgba(0,0,0,.35); /* ✅ 사진 위에서도 잘 보이게 */
-}
-
-.gal-arrow.left{ left:10px; }
-.gal-arrow.right{ right:10px; }
-.gal-arrow:active{ transform:translateY(-50%) scale(.96); }
-
-/* ✅ 기존 chevron용 스타일은 이제 필요 없음 */
-.chev{ display:none; }
-    
-    .gal-arrow.right .chev{
-      transform:rotate(-45deg);
-      margin-left:-2px;
+    .track{
+      display:flex;
+      gap:0;
+      padding:0;
     }
+
+    .slide{
+      flex:0 0 100%;
+      scroll-snap-align:start;
+      position:relative;
+      padding:0;
+    }
+
+    .photo-frame{
+      width:100%;
+      height:72vh;
+      min-height:520px;
+      max-height:860px;
+      border-radius:0;
+      overflow:hidden;
+      background:#ece8e4;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .photo-frame img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center center;
+      background:transparent;
+    }
+
+    .gallery-overlay-hint{
+      position:absolute;
+      top:18px;
+      right:18px;
+      z-index:6;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 16px;
+      border-radius:14px;
+      background:rgba(0,0,0,.38);
+      color:#fff;
+      backdrop-filter:blur(4px);
+      -webkit-backdrop-filter:blur(4px);
+      pointer-events:none;
+      box-shadow:0 8px 18px rgba(0,0,0,.12);
+    }
+
+    .gallery-overlay-hint .hint-icon{
+      font-size:22px;
+      line-height:1;
+    }
+
+    .gallery-overlay-hint .hint-text{
+      font-size:14px;
+      line-height:1.45;
+      text-align:left;
+      white-space:nowrap;
+    }
+
+    .gal-arrow{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:auto;
+      height:auto;
+      border:0;
+      background:transparent;
+      box-shadow:none;
+      color:#fff;
+      font-size:46px;
+      font-weight:700;
+      line-height:1;
+      padding:8px 12px;
+      cursor:pointer;
+      user-select:none;
+      z-index:7;
+      text-shadow:0 2px 12px rgba(0,0,0,.35);
+    }
+    .gal-arrow.left{ left:10px; }
+    .gal-arrow.right{ right:10px; }
+    .gal-arrow:active{ transform:translateY(-50%) scale(.96); }
 
     .pager{
-      margin-top:12px;
-      font-family:var(--serif);
-      font-size:12px;
-      letter-spacing:2px;
-      color:#8a8a8a;
+      margin-top:14px;
+      font-family:var(--sans);
+      font-size:14px;
+      font-weight:500;
+      letter-spacing:.5px;
+      color:#222;
     }
-    .hint{
-      font-size:12px;
-      color:#8b8b8b;
-      margin-top:10px;
-      letter-spacing:1px;
-      font-family:var(--serif);
+
+    .hint{ display:none; }
+
+    .section-sep{
+      max-width:560px;
+      margin:0 auto;
+      padding:0 18px;
+    }
+    .section-sep::before{
+      content:"";
+      display:block;
+      height:1px;
+      background:linear-gradient(90deg, transparent, var(--silver), transparent);
+      opacity:.9;
+    }
+
+    .section-tight{
+      padding:32px 18px;
+    }
+    .section-tight .divider{
+      margin:18px auto;
+    }
+
+    .pc-toast{
+      position:fixed;
+      left:50%;
+      top:50%;
+      transform:translate(-50%, -50%);
+      z-index:10000;
+      background:rgba(0,0,0,.72);
+      color:#fff;
+      padding:14px 18px;
+      border-radius:14px;
+      font-size:14px;
+      letter-spacing:.2px;
+      line-height:1.4;
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .2s ease;
+    }
+    .pc-toast.show{ opacity:1; }
+
+    @media (hover:none) and (pointer:coarse){
+      .pc-toast{ display:none; }
+    }
+
+    @media (max-width: 599px){
+      .gallery-shell{
+        width:calc(100% + 36px);
+        margin-left:-18px;
+        margin-right:-18px;
+      }
+      .photo-frame{
+        height:68vh;
+        min-height:420px;
+      }
+      .gallery-overlay-hint{
+        top:16px;
+        right:16px;
+        padding:10px 14px;
+      }
+      .gallery-overlay-hint .hint-text{
+        font-size:13px;
+      }
+      .gal-arrow{
+        font-size:42px;
+      }
     }
 
     @media (min-width: 900px){
       section{ padding:70px 20px; }
       .hero-frame{ width:480px; }
-      .gallery-shell{ width:480px; }
+      .gallery-shell{ width:100%; max-width:560px; }
     }
-/* =========================
-   ✅ 모든 사진 "그냥 사진만" 나오게 (프레임/테두리/배경/둥근/그림자 제거)
-   ========================= */
-/* 섹션 구분선 */
-.section-sep{
-  max-width:560px;
-  margin:0 auto;
-  padding:0 18px;
-}
-.section-sep::before{
-  content:"";
-  display:block;
-  height:1px;
-  background:linear-gradient(90deg, transparent, var(--silver), transparent);
-  opacity:.9;
-}
-    /* 초대문 섹션 간격 줄이기 */
-.section-tight{
-  padding: 32px 18px; /* 기존 54px -> 32px */
-}
-.section-tight .divider{
-  margin: 18px auto; /* divider 간격도 같이 줄임 */
-}
-/* PC에서만 보여줄 중앙 안내 토스트 */
-.pc-toast{
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10000;
-
-  background: rgba(0,0,0,.72);
-  color: #fff;
-  padding: 14px 18px;
-  border-radius: 14px;
-  font-size: 14px;
-  letter-spacing: .2px;
-  line-height: 1.4;
-
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .2s ease;
-}
-.pc-toast.show{ opacity: 1; }
-
-/* 모바일에서는 토스트 숨김(원하면 이 줄 빼도 됨) */
-@media (hover:none) and (pointer:coarse){
-  .pc-toast{ display:none; }
-}
-    /* 사진 저장/드래그 방지(가능한 범위) */
-img{
-  -webkit-user-drag: none;
-  user-drag: none;
-  -webkit-touch-callout: none; /* iOS 롱탭 메뉴 */
-  -webkit-user-select: none;
-  user-select: none;
-}
-    
-       
   </style>
-<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=fcc3a1be2558f7a368d372db08814fd2&autoload=false"></script>
-  
+
+  <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=fcc3a1be2558f7a368d372db08814fd2&autoload=false"></script>
 </head>
 
 <body>
@@ -508,563 +568,525 @@ img{
     <button id="musicBtn" type="button" aria-label="음악 토글">🔊</button>
   </div>
 
-  <!-- 로딩 오버레이 -->
   <div class="loading" id="loading">
-  <div>
-    WEDDING INVITATION
-    <div style="font-size:12px; letter-spacing:2px; margin-top:12px; color:#999;">
-      2026.04.25
+    <div>
+      WEDDING INVITATION
+      <div style="font-size:12px; letter-spacing:2px; margin-top:12px; color:#999;">
+        2026.04.25
+      </div>
     </div>
   </div>
-</div>
 
-  <!-- BGM -->
   <audio id="bgm" autoplay loop playsinline>
     <source src="모청bgm.mp3" type="audio/mpeg">
   </audio>
 
-   <main class="page">
-  <!-- 1 메인 -->
-  <section class="reveal">
-    <div class="section-title">WEDDING INVITATION</div>
-    <div class="hero-name">류정현 <span class="heart">♥</span> 이나현</div>
-    <div class="hero-sub">2026. 04. 25. SAT 11:00</div>
+  <main class="page">
+    <section class="reveal">
+      <div class="section-title">WEDDING INVITATION</div>
+      <div class="hero-name">류정현 <span class="heart">♥</span> 이나현</div>
+      <div class="hero-sub">2026. 04. 25. SAT 11:00</div>
 
-    <div class="hero-frame">
-      <img src="MainPhoto.jpg" alt="MainPhoto">
-    </div>
-  </section>
+      <div class="hero-frame">
+        <img src="MainPhoto.jpg" alt="MainPhoto">
+      </div>
+    </section>
 
-<!-- 2 초대문 -->
-<section class="reveal section-tight">
-  <div class="divider"></div>
+    <section class="reveal section-tight">
+      <div class="divider"></div>
 
-  <p style="
-    font-family:var(--serif);
-    color:#555;
-    margin:0;
-    text-align:center;
-    line-height:1.9;
-  ">
-    서로의 계절이 되어주기로 했습니다.<br>
-    길가에 피어난 작은 꽃처럼, 때로는 시원한 바람처럼<br>
-    늘 곁에서 서로의 일상을 지켜주는<br>
-    평생의 동반자가 되려 합니다.<br>
-    <br>
-    저희 두 사람이 내딛는 첫걸음,<br>
-    따뜻한 사랑과 축복으로 함께해 주시면<br>
-    더 없는 기쁨이 되겠습니다.
-  </p>
+      <p style="font-family:var(--serif); color:#555; margin:0; text-align:center; line-height:1.9;">
+        서로의 계절이 되어주기로 했습니다.<br>
+        길가에 피어난 작은 꽃처럼, 때로는 시원한 바람처럼<br>
+        늘 곁에서 서로의 일상을 지켜주는<br>
+        평생의 동반자가 되려 합니다.<br>
+        <br>
+        저희 두 사람이 내딛는 첫걸음,<br>
+        따뜻한 사랑과 축복으로 함께해 주시면<br>
+        더 없는 기쁨이 되겠습니다.
+      </p>
 
-  <div class="divider"></div>
-</section>
+      <div class="divider"></div>
+    </section>
 
-<!-- 3 혼주 -->
-<section class="reveal parents-section">
-  <div class="hero-frame">
-    <img src="SubPhoto.jpg" alt="SubPhoto">
-  </div>
+    <section class="reveal parents-section">
+      <div class="hero-frame">
+        <img src="SubPhoto.jpg" alt="SubPhoto">
+      </div>
 
-  <p style="color:#777; font-size:13px; margin-top:1px; font-family:var(--serif);">
-    류완영 · 노복란 의 장남 정현<br>
-    이정복 · 신복순 의 장녀 나현
-  </p>
-</section>
-     
-<div class="section-sep"></div>
-     
-  <!-- 4 타이머 -->
-  <section class="reveal">
-    <div class="section-title">OUR WEDDING DAY</div>
+      <p style="color:#777; font-size:13px; margin-top:1px; font-family:var(--serif);">
+        류완영 · 노복란 의 장남 정현<br>
+        이정복 · 신복순 의 장녀 나현
+      </p>
+    </section>
 
-    <div class="days-left">
-      <span style="font-family:var(--serif);">류정현 <span class="heart">♥</span> 이나현</span>
-      <span style="color:#9a9a9a;"> 결혼까지 </span>
-      <b id="daysLeft">00</b><span style="color:#9a9a9a;">일</span>
-    </div>
+    <div class="section-sep"></div>
 
-    <div class="timer-wrap">
-      <div class="time-box"><div class="num" id="dd">00</div><div class="label">DAYS</div></div>
-      <div class="time-box"><div class="num" id="hh">00</div><div class="label">HOURS</div></div>
-      <div class="time-box"><div class="num" id="mm">00</div><div class="label">MIN</div></div>
-      <div class="time-box"><div class="num" id="ss">00</div><div class="label">SEC</div></div>
-    </div>
-  </section>
-<div class="section-sep"></div>
-     
-  <!-- 5 갤러리 -->
-  <section class="reveal">
-    <div class="gallery-card">
-      <div class="section-title" style="margin-bottom:10px;">GALLERY</div>
-      <div class="hint">좌우로 넘겨 더 많은 사진 보기</div>
+    <section class="reveal">
+      <div class="section-title">OUR WEDDING DAY</div>
 
-      <div class="gallery-shell" style="margin-top:14px;">
-       <div class="gal-arrow left" id="prevBtn" aria-label="previous">&lt;</div>
-      <div class="gal-arrow right" id="nextBtn" aria-label="next">&gt;</div>
-        
-        <div class="gallery" id="gallery">
-          <div class="track" id="galleryTrack">
-            <div class="slide"><div class="photo-frame"><img src="MainPhoto.jpg" alt="갤러리1"></div></div>
-            <div class="slide"><div class="photo-frame"><img src="SubPhoto.jpg" alt="갤러리2"></div></div>
-            <div class="slide"><div class="photo-frame"><img src="KakaoTitle.jpg" alt="갤러리3"></div></div>
+      <div class="days-left">
+        <span style="font-family:var(--serif);">류정현 <span class="heart">♥</span> 이나현</span>
+        <span style="color:#9a9a9a;"> 결혼까지 </span>
+        <b id="daysLeft">00</b><span style="color:#9a9a9a;">일</span>
+      </div>
+
+      <div class="timer-wrap">
+        <div class="time-box"><div class="num" id="dd">00</div><div class="label">DAYS</div></div>
+        <div class="time-box"><div class="num" id="hh">00</div><div class="label">HOURS</div></div>
+        <div class="time-box"><div class="num" id="mm">00</div><div class="label">MIN</div></div>
+        <div class="time-box"><div class="num" id="ss">00</div><div class="label">SEC</div></div>
+      </div>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <section class="reveal">
+      <div class="gallery-card">
+        <div class="section-title" style="margin-bottom:10px;">GALLERY</div>
+
+        <div class="gallery-shell">
+          <div class="gallery-overlay-hint">
+            <span class="hint-icon">☞</span>
+            <span class="hint-text">밀어서 더 많은<br>이미지 보기</span>
+          </div>
+
+          <div class="gal-arrow left" id="prevBtn" aria-label="previous">&lt;</div>
+          <div class="gal-arrow right" id="nextBtn" aria-label="next">&gt;</div>
+
+          <div class="gallery" id="gallery">
+            <div class="track" id="galleryTrack">
+              <div class="slide"><div class="photo-frame"><img src="MainPhoto.jpg" alt="갤러리1"></div></div>
+              <div class="slide"><div class="photo-frame"><img src="SubPhoto.jpg" alt="갤러리2"></div></div>
+              <div class="slide"><div class="photo-frame"><img src="KakaoTitle.jpg" alt="갤러리3"></div></div>
+            </div>
+          </div>
+
+          <div class="pager" id="galleryPager">1 / 3</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <section class="reveal">
+      <div class="section-title">LOCATION</div>
+
+      <p style="font-size:14px; margin:0 0 16px; color:#555; font-family:var(--serif);">
+        아모르아트컨벤션 2층 아트홀<br>
+        충북 청주시 흥덕구 남석로 579
+      </p>
+
+      <div class="map-card" id="kakaoMapCard" role="link" tabindex="0" aria-label="지도 미리보기(클릭 시 길찾기 열기)">
+        <div id="kakaoMap" style="width:100%; height:260px;"></div>
+      </div>
+
+      <div class="nav-btns">
+        <a href="https://tmap.life/dadbe9d5" onclick="return pcGuard(event)">티맵</a>
+        <a href="#" onclick="return pcGuard(event, openKakaoNavi)">카카오내비</a>
+        <a href="https://naver.me/x3iFFSDF" onclick="return pcGuard(event)">네이버지도</a>
+      </div>
+
+      <div id="pcOnlyToast" class="pc-toast" aria-live="polite">
+        모바일에서만 확인이 가능합니다.
+      </div>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <section class="reveal">
+      <div class="section-title" style="color:#b0b0b6;">GIFT</div>
+
+      <p style="max-width:520px; margin:12px auto 0; font-size:14px; color:#666; line-height:1.85; font-family:var(--serif);">
+        직접 발걸음 해주시지 못하는 분들을 위해<br>
+        부득이하게 계좌번호를 기재하게 되었습니다.<br>
+        넓은 마음으로 양해 부탁드립니다.
+      </p>
+
+      <div class="account-wrapper">
+        <div class="account-box">
+          <div class="account-header" onclick="toggleAccount('groom')">
+            신랑측 계좌번호 <span id="arrow-groom">▼</span>
+          </div>
+          <div id="groom" class="account-body">
+            <div class="account-card">
+              <div>신랑 혼주 류완영<br>신협 132-013-316085</div>
+              <button onclick="copyAccount(event,'132013316085')">복사</button>
+            </div>
+            <div class="account-card">
+              <div>신랑 혼주 노복란<br>농협 401038-52-108530</div>
+              <button onclick="copyAccount(event,'40103852108530')">복사</button>
+            </div>
+            <div class="account-card">
+              <div>신랑 혼주 류정현<br>하나 603-910419-43007</div>
+              <button onclick="copyAccount(event,'60391041943007')">복사</button>
+            </div>
+
           </div>
         </div>
 
-        <div class="pager" id="galleryPager">1/3</div>
-      </div>
-    </div>
-  </section>
-<div class="section-sep"></div>
- 
-     <!-- 6 오시는 길 -->
-  <section class="reveal">
-    <div class="section-title">LOCATION</div>
-
-    <p style="font-size:14px; margin:0 0 16px; color:#555; font-family:var(--serif);">
-      아모르아트컨벤션 2층 아트홀<br>
-      충북 청주시 흥덕구 남석로 579
-    </p>
-
- <div class="map-card" id="kakaoMapCard" role="link" tabindex="0" aria-label="지도 미리보기(클릭 시 길찾기 열기)">
-  <div id="kakaoMap" style="width:100%; height:260px;"></div>
-</div>
-   
-    
-  <div class="nav-btns">
-  <a href="https://tmap.life/dadbe9d5" onclick="return pcGuard(event)">티맵</a>
-  <a href="#" onclick="return pcGuard(event, openKakaoNavi)">카카오내비</a>
-  <a href="https://naver.me/x3iFFSDF" onclick="return pcGuard(event)">네이버지도</a>
-</div>
-    
-    <!-- PC 안내 토스트 -->
-<div id="pcOnlyToast" class="pc-toast" aria-live="polite">
-  모바일에서만 확인이 가능합니다.
-</div>
-  </section>
-<div class="section-sep"></div>
-     
-  <!-- 7 마음 전하는 곳 -->
-  <section class="reveal">
-    <div class="section-title" style="color:#b0b0b6;">GIFT</div>
-
-    <p style="max-width:520px; margin:12px auto 0; font-size:14px; color:#666; line-height:1.85; font-family:var(--serif);">
-      직접 발걸음 해주시지 못하는 분들을 위해<br>
-      부득이하게 계좌번호를 기재하게 되었습니다.<br>
-      넓은 마음으로 양해 부탁드립니다.
-    </p>
-
-    <div class="account-wrapper">
-      <div class="account-box">
-        <div class="account-header" onclick="toggleAccount('groom')">
-          신랑측 계좌번호 <span id="arrow-groom">▼</span>
-        </div>
-        <div id="groom" class="account-body">
-          <div class="account-card">
-            <div>신랑 류정현<br>기업은행 000-0000-0000-00</div>
-            <button onclick="copyAccount(event,'00000000000000')">복사</button>
+        <div class="account-box">
+          <div class="account-header" onclick="toggleAccount('bride')">
+            신부측 계좌번호 <span id="arrow-bride">▼</span>
           </div>
-          <div class="account-card">
-            <div>신랑 혼주 류완영<br>기업은행 000-0000-0000-00</div>
-            <button onclick="copyAccount(event,'00000000000000')">복사</button>
+          <div id="bride" class="account-body">
+            <div class="account-card">
+              <div>신부 혼주 신복순<br>농협 312-017-6914-651</div>
+              <button onclick="copyAccount(event,'3120176914651')">복사</button>
+            </div>
+            <div class="account-card">
+              <div>신부 이나현<br>국민 661-302-04-100903</div>
+              <button onclick="copyAccount(event,'66130204100903')">복사</button>
+            </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="account-box">
-        <div class="account-header" onclick="toggleAccount('bride')">
-          신부측 계좌번호 <span id="arrow-bride">▼</span>
+    <div class="section-sep"></div>
+
+    <section class="reveal">
+      <div class="card" style="text-align:center;">
+        <div style="font-family:var(--serif); font-size:16px; color:#222;">
+          함께해 주시는 마음만으로도<br> 충분히 감사드립니다
         </div>
-        <div id="bride" class="account-body">
-          <div class="account-card">
-            <div>신부 이나현<br>기업은행 448-043691-02-015</div>
-            <button onclick="copyAccount(event,'44804369102015')">복사</button>
-          </div>
-          <div class="account-card">
-            <div>신부 혼주 신복순<br>기업은행 000-0000-0000-00</div>
-            <button onclick="copyAccount(event,'00000000000000')">복사</button>
-          </div>
+        <div style="margin-top:8px; color:#777; font-size:13px; line-height:1.7;">
+          화환을 보내주시는 경우, 예식장 규정으로 꽃화환은 불가하며<br>
+          쌀화환만 가능한 점 너그러이 양해 부탁드립니다.
         </div>
       </div>
-    </div>
-  </section>
-<div class="section-sep"></div>
+    </section>
 
-
-  <!-- 9 화환 안내 (모달 삭제, 카드 안에 글귀만) -->
-  <section class="reveal">
-    <div class="card" style="text-align:center;">
-      <div style="font-family:var(--serif); font-size:16px; color:#222;">
-        함께해 주시는 마음만으로도<br> 충분히 감사드립니다
+    <section class="reveal">
+      <div class="hero-frame landscape">
+        <img src="KakaoTitle.jpg" alt="대표사진3">
       </div>
-      <div style="margin-top:8px; color:#777; font-size:13px; line-height:1.7;">
-        화환을 보내주시는 경우, 예식장 규정으로 꽃화환은 불가하며<br>
-        쌀화환만 가능한 점 너그러이 양해 부탁드립니다.
+
+      <div style="max-width:520px; margin:14px auto 0; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+        <button class="button" style="margin-top:0; flex:1; min-width:160px;" onclick="copyLink()">청첩장 주소<br>복사하기</button>
+        <button class="button" style="margin-top:0; flex:1; min-width:160px;" onclick="shareKakao()">카카오톡으로<br>공유하기</button>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 10 대표사진3 + 공유 -->
-  <section class="reveal">
-    <div class="hero-frame landscape">
-      <img src="KakaoTitle.jpg" alt="대표사진3">
-    </div>
+    <script>
+      document.documentElement.classList.add("js");
 
-    <div style="max-width:520px; margin:14px auto 0; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-      <button class="button" style="margin-top:0; flex:1; min-width:160px;" onclick="copyLink()">청첩장 주소<br>복사하기</button>
-      <button class="button" style="margin-top:0; flex:1; min-width:160px;" onclick="shareKakao()">카카오톡으로<br>공유하기</button>
-    </div>
-  </section>
-
-  <script>
-    // JS가 정상 실행될 때만 reveal 숨김 적용
-    document.documentElement.classList.add("js");
-
-    /* =========================================================
-       0) 로딩 화면: 3초 후 숨김 (최대 5초 안전장치)
-       ========================================================= */
-    const loadingEl = document.getElementById("loading");
-    function hideLoading(){
-      if(!loadingEl) return;
-      loadingEl.classList.add("hide");
-      setTimeout(()=>{ loadingEl.style.display="none"; }, 700);
-    }
-    setTimeout(hideLoading, 4500);
-    setTimeout(hideLoading, 6000);
-    window.addEventListener("error", hideLoading, { once:true });
-
-    /* =========================================================
-       1) 카카오 공유
-       ========================================================= */
-    if (window.Kakao && !Kakao.isInitialized()) {
-      Kakao.init("91eed7186338a8599546bf372fc45f56");
-    }
-    function shareKakao(){
-      if(!window.Kakao){
-        alert("카카오 공유 기능을 불러오지 못했습니다. (네트워크/차단 확인)");
-        return;
+      const loadingEl = document.getElementById("loading");
+      function hideLoading(){
+        if(!loadingEl) return;
+        loadingEl.classList.add("hide");
+        setTimeout(() => { loadingEl.style.display = "none"; }, 700);
       }
-      Kakao.Share.sendDefault({
-        objectType: "feed",
-        content: {
-          title: "류정현 ♥ 이나현 결혼식에 초대합니다",
-          description: "2026년 04월 25일 토요일 오전 11시",
-          imageUrl: "https://jhnh-wed0425.github.io/wedding/KakaoTitle.jpg",
-          link: { mobileWebUrl: location.href, webUrl: location.href }
-        },
-        buttons: [{ title: "청첩장 보기", link: { mobileWebUrl: location.href, webUrl: location.href } }]
-      });
-    }
+      setTimeout(hideLoading, 4500);
+      setTimeout(hideLoading, 6000);
+      window.addEventListener("error", hideLoading, { once:true });
 
-    /* =========================================================
-       2) 지도
-       ========================================================= */
-    function openMap(){ window.open("https://naver.me/x3iFFSDF"); }
-
-    /* =========================================================
-       3) D-day 타이머
-       ========================================================= */
-    const ddEl = document.getElementById("dd");
-    const hhEl = document.getElementById("hh");
-    const mmEl = document.getElementById("mm");
-    const ssEl = document.getElementById("ss");
-    const daysLeftEl = document.getElementById("daysLeft");
-
-    const target = new Date("2026-04-25T11:00:00").getTime();
-    setInterval(() => {
-      const gap = target - Date.now();
-      const d = Math.max(0, Math.floor(gap / (1000*60*60*24)));
-      const h = Math.max(0, Math.floor((gap % (1000*60*60*24)) / (1000*60*60)));
-      const m = Math.max(0, Math.floor((gap % (1000*60*60)) / (1000*60)));
-      const s = Math.max(0, Math.floor((gap % (1000*60)) / 1000));
-
-      ddEl.textContent = String(d).padStart(2,"0");
-      hhEl.textContent = String(h).padStart(2,"0");
-      mmEl.textContent = String(m).padStart(2,"0");
-      ssEl.textContent = String(s).padStart(2,"0");
-      daysLeftEl.textContent = String(d);
-    }, 1000);
-
-    /* =========================================================
-       4) 계좌 토글/복사, 링크 복사
-       ========================================================= */
-    function toggleAccount(id){
-      const body = document.getElementById(id);
-      const arrow = document.getElementById("arrow-" + id);
-      const opened = body.style.maxHeight && body.style.maxHeight !== "0px";
-
-      if(opened){
-        body.style.maxHeight = null;
-        body.classList.remove("open");
-        arrow.textContent = "▼";
-      }else{
-        body.style.maxHeight = body.scrollHeight + "px";
-        body.classList.add("open");
-        arrow.textContent = "▲";
-      }
-    }
-    function copyAccount(e, number){
-      e.stopPropagation();
-      navigator.clipboard.writeText(number);
-      alert("계좌번호가 복사되었습니다.");
-    }
-    function copyLink(){
-      navigator.clipboard.writeText(location.href);
-      alert("홈페이지 주소가 복사되었습니다.");
-    }
-
-    /* =========================================================
-       6) 섹션 등장 애니메이션
-       ========================================================= */
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(ent => {
-        if(ent.isIntersecting){
-          ent.target.classList.add("show");
-          io.unobserve(ent.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
-
-    /* =========================================================
-       7) 갤러리: 한 장씩 딱 넘김 + pager
-       ========================================================= */
-    const galleryEl = document.getElementById("gallery");
-    const pagerEl = document.getElementById("galleryPager");
-    const slides = Array.from(document.querySelectorAll("#galleryTrack .slide"));
-    const total = slides.length;
-
-    function getIndex(){
-      const w = galleryEl.clientWidth || 1;
-      const i = Math.round(galleryEl.scrollLeft / w);
-      return Math.max(0, Math.min(total - 1, i));
-    }
-    function goTo(i){
-      const w = galleryEl.clientWidth || 1;
-      const next = Math.max(0, Math.min(total - 1, i));
-      galleryEl.scrollTo({ left: next * w, behavior: "smooth" });
-      pagerEl.textContent = `${next+1}/${total}`;
-    }
-
-    document.getElementById("prevBtn").addEventListener("click", (e) => {
-      e.stopPropagation();
-      goTo(getIndex() - 1);
-    });
-    document.getElementById("nextBtn").addEventListener("click", (e) => {
-      e.stopPropagation();
-      goTo(getIndex() + 1);
-    });
-
-    galleryEl.addEventListener("scroll", () => {
-      const i = getIndex();
-      pagerEl.textContent = `${i+1}/${total}`;
-    }, { passive:true });
-
-    window.addEventListener("resize", () => goTo(getIndex()));
-    goTo(0);
-
-    /* =========================================================
-       8) 음악 자동재생/토글 (안정 버전)
-       ========================================================= */
-    const bgmEl = document.getElementById("bgm");
-    const musicBtnEl = document.getElementById("musicBtn");
-
-    // 자동재생 성공률↑ (특히 iOS/인앱): 처음엔 무음으로 시작
-    bgmEl.muted = true;
-
-    function syncMusicUI(){
-      musicBtnEl.textContent = bgmEl.paused ? "🔇" : "🔊";
-    }
-
-    async function tryAutoPlay(){
-      try{
-        await bgmEl.play();
-        bgmEl.muted = false; // 재생 성공 후 소리 켜기 시도
-      }catch(e){}
-      syncMusicUI();
-    }
-
-    // 가능한 빨리 + load 후 재시도
-    tryAutoPlay();
-    window.addEventListener("load", tryAutoPlay);
-
-    // 첫 사용자 제스처에서 unlock
-    function unlock(){
-      tryAutoPlay();
-      document.removeEventListener("touchstart", unlock);
-      document.removeEventListener("click", unlock);
-      document.removeEventListener("scroll", unlock);
-    }
-    document.addEventListener("touchstart", unlock, { passive:true });
-    document.addEventListener("click", unlock, { passive:true });
-    document.addEventListener("scroll", unlock, { passive:true });
-
-    // 버튼 토글
-    musicBtnEl.addEventListener("click", async (e) => {
-      e.stopPropagation();
-      try{
-        if(bgmEl.paused){
-          bgmEl.muted = false;
-          await bgmEl.play();
-        }else{
-          bgmEl.pause();
-        }
-      }catch(e2){}
-      syncMusicUI();
-    });
-
-    syncMusicUI();
-
- function openKakaoNavi(e){
-  e.preventDefault();
-
-  const lat = 36.642846;     // 위도(y)
-  const lon = 127.404761;    // 경도(x)
-  const name = "아모르아트컨벤션";
-
-  if(!window.Kakao){
-    alert("카카오 SDK를 불러오지 못했습니다. (네트워크/차단 확인)");
-    return false;
-  }
-  if(!Kakao.isInitialized()){
-    Kakao.init("91eed7186338a8599546bf372fc45f56"); // 이미 위에서 init 했으면 사실상 안 불려도 됨
-  }
-
-  // ✅ 카카오내비 공식 JS SDK 호출
-  Kakao.Navi.start({
-    name: name,
-    x: lon,
-    y: lat,
-    coordType: "wgs84",
-  });
-
-  return false;
-}
-
-    /* =========================================================
-   PC에서 내비/지도 버튼 클릭 시: 중앙 안내 + 이동 막기
-   ========================================================= */
-const pcToast = document.getElementById("pcOnlyToast");
-
-// PC 판별(마우스/트랙패드 환경)
-function isDesktop(){
-  return window.matchMedia && window.matchMedia("(hover:hover) and (pointer:fine)").matches;
-}
-
-function showPcToast(msg){
-  if(!pcToast) return;
-  pcToast.textContent = msg || "모바일에서만 확인이 가능합니다.";
-  pcToast.classList.add("show");
-  clearTimeout(showPcToast._t);
-  showPcToast._t = setTimeout(()=> pcToast.classList.remove("show"), 1400);
-}
-
-// a태그 클릭 가드
-function pcGuard(e, mobileFn){
-  if(isDesktop()){
-    e.preventDefault();
-    showPcToast("모바일에서만 확인이 가능합니다.");
-    return false;
-  }
-  // 모바일이면 (선택) mobileFn 실행
-  if(typeof mobileFn === "function"){
-    mobileFn(e);
-    return false;
-  }
-  return true;
-}
-
-    /* =========================================================
-   사진 저장/확대 방지(가능한 범위)
-   ========================================================= */
-
-// 이미지 우클릭 메뉴 차단
-document.addEventListener("contextmenu", (e) => {
-  if(e.target && e.target.closest && e.target.closest("img")) e.preventDefault();
-});
-
-// 이미지 드래그 저장 차단
-document.addEventListener("dragstart", (e) => {
-  if(e.target && e.target.tagName === "IMG") e.preventDefault();
-});
-
-// iOS 사파리 핀치줌 관련 제스처 차단(가능한 범위)
-document.addEventListener("gesturestart", (e) => e.preventDefault(), { passive:false });
-document.addEventListener("gesturechange", (e) => e.preventDefault(), { passive:false });
-document.addEventListener("gestureend", (e) => e.preventDefault(), { passive:false });
-
-// PC/모바일 브라우저: Ctrl/Command + 휠 확대 차단
-document.addEventListener("wheel", (e) => {
-  if(e.ctrlKey || e.metaKey) e.preventDefault();
-}, { passive:false });
-
-// Ctrl/Command + (+/-/0) 확대 차단
-document.addEventListener("keydown", (e) => {
-  const key = e.key.toLowerCase();
-  const zoomKeys = ["+", "=", "-", "_", "0"];
-  if((e.ctrlKey || e.metaKey) && zoomKeys.includes(key)){
-    e.preventDefault();
-  }
-});
-
-  (function initKakaoMap(){
-    function boot(){
-      // SDK 로드 체크
-      if(!window.kakao || !kakao.maps || !kakao.maps.load){
-        console.error("❌ Kakao Maps SDK not loaded:", window.kakao);
-        return;
+      if (window.Kakao && !Kakao.isInitialized()) {
+        Kakao.init("91eed7186338a8599546bf372fc45f56");
       }
 
-      kakao.maps.load(function(){
-        const lat = 36.642846;
-        const lon = 127.404761;
-
-        const container = document.getElementById("kakaoMap");
-        if(!container){
-          console.error("❌ #kakaoMap not found");
+      function shareKakao(){
+        if(!window.Kakao){
+          alert("카카오 공유 기능을 불러오지 못했습니다. (네트워크/차단 확인)");
           return;
         }
+        Kakao.Share.sendDefault({
+          objectType: "feed",
+          content: {
+            title: "류정현 ♥ 이나현 결혼식에 초대합니다",
+            description: "2026년 04월 25일 토요일 오전 11시",
+            imageUrl: "https://jhnh-wed0425.github.io/wedding/KakaoTitle.jpg",
+            link: { mobileWebUrl: location.href, webUrl: location.href }
+          },
+          buttons: [{
+            title: "청첩장 보기",
+            link: { mobileWebUrl: location.href, webUrl: location.href }
+          }]
+        });
+      }
 
-        const map = new kakao.maps.Map(container, {
-          center: new kakao.maps.LatLng(lat, lon),
-          level: 3
+      function openMap(){
+        window.open("https://naver.me/x3iFFSDF");
+      }
+
+      const ddEl = document.getElementById("dd");
+      const hhEl = document.getElementById("hh");
+      const mmEl = document.getElementById("mm");
+      const ssEl = document.getElementById("ss");
+      const daysLeftEl = document.getElementById("daysLeft");
+
+      const target = new Date("2026-04-25T11:00:00").getTime();
+      setInterval(() => {
+        const gap = target - Date.now();
+        const d = Math.max(0, Math.floor(gap / (1000 * 60 * 60 * 24)));
+        const h = Math.max(0, Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+        const m = Math.max(0, Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60)));
+        const s = Math.max(0, Math.floor((gap % (1000 * 60)) / 1000));
+
+        ddEl.textContent = String(d).padStart(2, "0");
+        hhEl.textContent = String(h).padStart(2, "0");
+        mmEl.textContent = String(m).padStart(2, "0");
+        ssEl.textContent = String(s).padStart(2, "0");
+        daysLeftEl.textContent = String(d);
+      }, 1000);
+
+      function toggleAccount(id){
+        const body = document.getElementById(id);
+        const arrow = document.getElementById("arrow-" + id);
+        const opened = body.style.maxHeight && body.style.maxHeight !== "0px";
+
+        if(opened){
+          body.style.maxHeight = null;
+          body.classList.remove("open");
+          arrow.textContent = "▼";
+        }else{
+          body.style.maxHeight = body.scrollHeight + "px";
+          body.classList.add("open");
+          arrow.textContent = "▲";
+        }
+      }
+
+      function copyAccount(e, number){
+        e.stopPropagation();
+        navigator.clipboard.writeText(number);
+        alert("계좌번호가 복사되었습니다.");
+      }
+
+      function copyLink(){
+        navigator.clipboard.writeText(location.href);
+        alert("홈페이지 주소가 복사되었습니다.");
+      }
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(ent => {
+          if(ent.isIntersecting){
+            ent.target.classList.add("show");
+            io.unobserve(ent.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+      const galleryEl = document.getElementById("gallery");
+      const pagerEl = document.getElementById("galleryPager");
+      const slides = Array.from(document.querySelectorAll("#galleryTrack .slide"));
+      const total = slides.length;
+
+      function getIndex(){
+        const w = galleryEl.clientWidth || 1;
+        const i = Math.round(galleryEl.scrollLeft / w);
+        return Math.max(0, Math.min(total - 1, i));
+      }
+
+      function goTo(i){
+        const w = galleryEl.clientWidth || 1;
+        const next = Math.max(0, Math.min(total - 1, i));
+        galleryEl.scrollTo({ left: next * w, behavior: "smooth" });
+        pagerEl.textContent = `${next + 1} / ${total}`;
+      }
+
+      document.getElementById("prevBtn").addEventListener("click", (e) => {
+        e.stopPropagation();
+        goTo(getIndex() - 1);
+      });
+
+      document.getElementById("nextBtn").addEventListener("click", (e) => {
+        e.stopPropagation();
+        goTo(getIndex() + 1);
+      });
+
+      galleryEl.addEventListener("scroll", () => {
+        const i = getIndex();
+        pagerEl.textContent = `${i + 1} / ${total}`;
+      }, { passive:true });
+
+      window.addEventListener("resize", () => goTo(getIndex()));
+      goTo(0);
+
+      const bgmEl = document.getElementById("bgm");
+      const musicBtnEl = document.getElementById("musicBtn");
+      bgmEl.muted = true;
+
+      function syncMusicUI(){
+        musicBtnEl.textContent = bgmEl.paused ? "🔇" : "🔊";
+      }
+
+      async function tryAutoPlay(){
+        try{
+          await bgmEl.play();
+          bgmEl.muted = false;
+        }catch(e){}
+        syncMusicUI();
+      }
+
+      tryAutoPlay();
+      window.addEventListener("load", tryAutoPlay);
+
+      function unlock(){
+        tryAutoPlay();
+        document.removeEventListener("touchstart", unlock);
+        document.removeEventListener("click", unlock);
+        document.removeEventListener("scroll", unlock);
+      }
+
+      document.addEventListener("touchstart", unlock, { passive:true });
+      document.addEventListener("click", unlock, { passive:true });
+      document.addEventListener("scroll", unlock, { passive:true });
+
+      musicBtnEl.addEventListener("click", async (e) => {
+        e.stopPropagation();
+        try{
+          if(bgmEl.paused){
+            bgmEl.muted = false;
+            await bgmEl.play();
+          }else{
+            bgmEl.pause();
+          }
+        }catch(e2){}
+        syncMusicUI();
+      });
+
+      syncMusicUI();
+
+      function openKakaoNavi(e){
+        e.preventDefault();
+
+        const lat = 36.642846;
+        const lon = 127.404761;
+        const name = "아모르아트컨벤션";
+
+        if(!window.Kakao){
+          alert("카카오 SDK를 불러오지 못했습니다. (네트워크/차단 확인)");
+          return false;
+        }
+
+        if(!Kakao.isInitialized()){
+          Kakao.init("91eed7186338a8599546bf372fc45f56");
+        }
+
+        Kakao.Navi.start({
+          name: name,
+          x: lon,
+          y: lat,
+          coordType: "wgs84",
         });
 
-        const marker = new kakao.maps.Marker({
-          position: new kakao.maps.LatLng(lat, lon)
-        });
-        marker.setMap(map);
+        return false;
+      }
 
-        console.log("✅ Kakao map rendered");
+      const pcToast = document.getElementById("pcOnlyToast");
 
-        const card = document.getElementById("kakaoMapCard");
-        if(card){
-          card.addEventListener("click", (e) => {
-            // PC면 토스트
-            if(typeof pcGuard === "function" && !pcGuard(e)) return;
-            window.open(
-              `https://map.kakao.com/link/to/${encodeURIComponent("아모르아트컨벤션")},${lat},${lon}`,
-              "_blank",
-              "noopener"
-            );
-          });
+      function isDesktop(){
+        return window.matchMedia && window.matchMedia("(hover:hover) and (pointer:fine)").matches;
+      }
+
+      function showPcToast(msg){
+        if(!pcToast) return;
+        pcToast.textContent = msg || "모바일에서만 확인이 가능합니다.";
+        pcToast.classList.add("show");
+        clearTimeout(showPcToast._t);
+        showPcToast._t = setTimeout(() => pcToast.classList.remove("show"), 1400);
+      }
+
+      function pcGuard(e, mobileFn){
+        if(isDesktop()){
+          e.preventDefault();
+          showPcToast("모바일에서만 확인이 가능합니다.");
+          return false;
+        }
+        if(typeof mobileFn === "function"){
+          mobileFn(e);
+          return false;
+        }
+        return true;
+      }
+
+      document.addEventListener("contextmenu", (e) => {
+        if(e.target && e.target.closest && e.target.closest("img")) e.preventDefault();
+      });
+
+      document.addEventListener("dragstart", (e) => {
+        if(e.target && e.target.tagName === "IMG") e.preventDefault();
+      });
+
+      document.addEventListener("gesturestart", (e) => e.preventDefault(), { passive:false });
+      document.addEventListener("gesturechange", (e) => e.preventDefault(), { passive:false });
+      document.addEventListener("gestureend", (e) => e.preventDefault(), { passive:false });
+
+      document.addEventListener("wheel", (e) => {
+        if(e.ctrlKey || e.metaKey) e.preventDefault();
+      }, { passive:false });
+
+      document.addEventListener("keydown", (e) => {
+        const key = e.key.toLowerCase();
+        const zoomKeys = ["+", "=", "-", "_", "0"];
+        if((e.ctrlKey || e.metaKey) && zoomKeys.includes(key)){
+          e.preventDefault();
         }
       });
-    }
 
-    if(document.readyState === "loading"){
-      document.addEventListener("DOMContentLoaded", boot);
-    }else{
-      boot();
-    }
-  })();
+      (function initKakaoMap(){
+        function boot(){
+          if(!window.kakao || !kakao.maps || !kakao.maps.load){
+            console.error("❌ Kakao Maps SDK not loaded");
+            return;
+          }
 
-</script>
+          kakao.maps.load(function(){
+            const lat = 36.642846;
+            const lon = 127.404761;
+            const placeName = "아모르아트컨벤션";
 
-    console.log("kakao map loaded ✅");
-  });
-})();
-    
-         </script>
-     </main>
-  </body>
+            const container = document.getElementById("kakaoMap");
+            if(!container){
+              console.error("❌ #kakaoMap not found");
+              return;
+            }
+
+            const options = {
+              center: new kakao.maps.LatLng(lat, lon),
+              level: 3
+            };
+
+            const map = new kakao.maps.Map(container, options);
+
+            const marker = new kakao.maps.Marker({
+              position: new kakao.maps.LatLng(lat, lon)
+            });
+            marker.setMap(map);
+
+            window.addEventListener("resize", function(){
+              map.relayout();
+              map.setCenter(new kakao.maps.LatLng(lat, lon));
+            });
+
+            const card = document.getElementById("kakaoMapCard");
+            if(card){
+              card.addEventListener("click", function(e){
+                if(isDesktop()){
+                  e.preventDefault();
+                  showPcToast("모바일에서만 확인이 가능합니다.");
+                  return;
+                }
+
+                window.open(
+                  `https://map.kakao.com/link/to/${encodeURIComponent(placeName)},${lat},${lon}`,
+                  "_blank"
+                );
+              });
+            }
+
+            console.log("✅ Kakao map rendered");
+          });
+        }
+
+        if(document.readyState === "loading"){
+          document.addEventListener("DOMContentLoaded", boot);
+        }else{
+          boot();
+        }
+      })();
+    </script>
+  </main>
+</body>
 </html>
