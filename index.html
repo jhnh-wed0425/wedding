@@ -413,7 +413,6 @@
   justify-content:center;
 }
 
-/* 스크롤해도 안 흔들리게 vh/svh 제거 */
 .photo-frame{
   background:var(--bg);
   display:flex;
@@ -421,6 +420,8 @@
   justify-content:center;
   margin:0 auto;
   overflow:hidden;
+  border-radius:22px;
+  box-shadow:0 10px 24px rgba(0,0,0,.06);
 }
 
 /* 세로 3:4 */
@@ -445,69 +446,74 @@
   object-position:center center;
   background:transparent;
 }
+
+.gallery-overlay-hint{
+  position:absolute;
+  top:14px;
+  right:14px;
+  z-index:6;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:10px 12px;
+  border-radius:16px;
+  background:rgba(95,95,98,.60);
+  color:#fff;
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  pointer-events:none;
+  box-shadow:0 10px 24px rgba(0,0,0,.12);
+  opacity:1;
+  transition:opacity .45s ease, transform .45s ease;
+}
+
+.gallery-overlay-hint.hide{
+  opacity:0;
+  transform:translateY(-6px);
+}
+
+.gallery-overlay-hint .hint-icon{
+  font-size:14px;
+  line-height:1;
+}
+
+.gallery-overlay-hint .hint-text{
+  font-size:10px;
+  line-height:1.2;
+  text-align:center;
+  white-space:nowrap;
+}
+
+.pager{
+  margin-top:14px;
+  font-family:var(--sans);
+  font-size:14px;
+  font-weight:500;
+  letter-spacing:.5px;
+  color:#222;
+}
+
+.gallery-dots{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  margin-top:10px;
+}
+
+.gallery-dot{
+  width:8px;
+  height:8px;
+  border-radius:999px;
+  background:#d8d8dc;
+  transition:all .25s ease;
+}
+
+.gallery-dot.active{
+  background:#444;
+  transform:scale(1.18);
+}
     
-    .gallery-overlay-hint{
-      position:absolute;
-      top:10px;
-      right:10px;
-      z-index:6;
-      display:flex;
-      align-items:center;
-      gap:7px;
-      padding:8px 11px;
-      border-radius:10px;
-      background:rgba(0,0,0,.35);
-      color:#fff;
-      backdrop-filter:blur(4px);
-      -webkit-backdrop-filter:blur(4px);
-      pointer-events:none;
-      box-shadow:0 8px 18px rgba(0,0,0,.12);
-    }
-
-    .gallery-overlay-hint .hint-icon{
-      font-size:15px;
-      line-height:1;
-    }
-
-    .gallery-overlay-hint .hint-text{
-      font-size:8px;
-      line-height:1.35;
-      text-align:left;
-      white-space:nowrap;
-    }
-
-    .gal-arrow{
-      position:absolute;
-      top:50%;
-      transform:translateY(-50%);
-      width:auto;
-      height:auto;
-      border:0;
-      background:transparent;
-      box-shadow:none;
-      color:#fff;
-      font-size:46px;
-      font-weight:700;
-      line-height:1;
-      padding:8px 12px;
-      cursor:pointer;
-      user-select:none;
-      z-index:7;
-      text-shadow:0 2px 12px rgba(0,0,0,.35);
-    }
-    .gal-arrow.left{ left:10px; }
-    .gal-arrow.right{ right:10px; }
-    .gal-arrow:active{ transform:translateY(-50%) scale(.96); }
-
-    .pager{
-      margin-top:14px;
-      font-family:var(--sans);
-      font-size:14px;
-      font-weight:500;
-      letter-spacing:.5px;
-      color:#222;
-    }
-
     .hint{ display:none; }
 
     .section-sep{
@@ -570,12 +576,13 @@
   }
 
   .gallery-overlay-hint{
-    top:8px;
-    right:8px;
-    padding:7px 10px;
+    top:12x;
+    right:12px;
+   padding:9px 11px;
+  border-radius:14px;
   }
   .gallery-overlay-hint .hint-icon{
-    font-size:14px;
+    font-size:13px;
   }
   .gallery-overlay-hint .hint-text{
     font-size:10px;
@@ -702,7 +709,7 @@
         <div class="gallery-shell">
           <div class="gallery-overlay-hint">
             <span class="hint-icon">☞</span>
-            <span class="hint-text">밀어서<br>더 많은<br>이미지 보기</span>
+            <span class="hint-text">밀어서<br>더 많은<br>사 보기</span>
           </div>
 
           <div class="gal-arrow left" id="prevBtn" aria-label="previous">&lt;</div>
@@ -728,6 +735,7 @@
             </div>
           </div>
 
+          <div class="gallery-dots" id="galleryDots"></div>
           <div class="pager" id="galleryPager">1 / 15</div>
         </div>
       </div>
@@ -942,23 +950,40 @@
       document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 
       const galleryEl = document.getElementById("gallery");
-      const pagerEl = document.getElementById("galleryPager");
-      const slides = Array.from(document.querySelectorAll("#galleryTrack .slide"));
-      const total = slides.length;
+const pagerEl = document.getElementById("galleryPager");
+const dotsEl = document.getElementById("galleryDots");
+const hintEl = document.querySelector(".gallery-overlay-hint");
+const slides = Array.from(document.querySelectorAll("#galleryTrack .slide"));
+const total = slides.length;
 
+if (dotsEl) {
+  dotsEl.innerHTML = slides.map((_, i) =>
+    `<span class="gallery-dot${i === 0 ? " active" : ""}"></span>`
+  ).join("");
+}
+
+      
       function getIndex(){
         const w = galleryEl.clientWidth || 1;
         const i = Math.round(galleryEl.scrollLeft / w);
         return Math.max(0, Math.min(total - 1, i));
       }
 
-      function goTo(i){
-        const w = galleryEl.clientWidth || 1;
-        const next = Math.max(0, Math.min(total - 1, i));
-        galleryEl.scrollTo({ left: next * w, behavior: "smooth" });
-        pagerEl.textContent = `${next + 1} / ${total}`;
-      }
+      function updateGalleryUI(index){
+  pagerEl.textContent = `${index + 1} / ${total}`;
+  const dots = document.querySelectorAll(".gallery-dot");
+  dots.forEach((dot, i) => {
+    dot.classList.toggle("active", i === index);
+  });
+}
 
+function goTo(i){
+  const w = galleryEl.clientWidth || 1;
+  const next = Math.max(0, Math.min(total - 1, i));
+  galleryEl.scrollTo({ left: next * w, behavior: "smooth" });
+  updateGalleryUI(next);
+}
+      
       document.getElementById("prevBtn").addEventListener("click", (e) => {
         e.stopPropagation();
         goTo(getIndex() - 1);
@@ -970,13 +995,22 @@
       });
 
       galleryEl.addEventListener("scroll", () => {
-        const i = getIndex();
-        pagerEl.textContent = `${i + 1} / ${total}`;
-      }, { passive:true });
+  const i = getIndex();
+  updateGalleryUI(i);
+}, { passive:true });
 
+      
       window.addEventListener("resize", () => goTo(getIndex()));
       goTo(0);
 
+      updateGalleryUI(0);
+
+if (hintEl) {
+  setTimeout(() => {
+    hintEl.classList.add("hide");
+  }, 5000);
+}
+      
       const bgmEl = document.getElementById("bgm");
       const musicBtnEl = document.getElementById("musicBtn");
       bgmEl.muted = true;
