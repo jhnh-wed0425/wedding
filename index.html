@@ -404,9 +404,9 @@
 
     .photo-frame{
       width:100%;
-      height:72vh;
-      min-height:520px;
-      max-height:860px;
+      height:68vh;
+      min-height:420px;
+      max-height:820px;
       border-radius:0;
       overflow:hidden;
       background:#ece8e4;
@@ -418,22 +418,22 @@
     .photo-frame img{
       width:100%;
       height:100%;
-      object-fit:cover;
-      object-position:center center;
+      object-fit:contain;
+      object-position:center top;
       background:transparent;
     }
 
     .gallery-overlay-hint{
       position:absolute;
-      top:18px;
-      right:18px;
+      top:10px;
+      right:10px;
       z-index:6;
       display:flex;
       align-items:center;
-      gap:10px;
-      padding:12px 16px;
-      border-radius:14px;
-      background:rgba(0,0,0,.38);
+      gap:7px;
+      padding:8px 11px;
+      border-radius:10px;
+      background:rgba(0,0,0,.35);
       color:#fff;
       backdrop-filter:blur(4px);
       -webkit-backdrop-filter:blur(4px);
@@ -442,13 +442,13 @@
     }
 
     .gallery-overlay-hint .hint-icon{
-      font-size:22px;
+      font-size:15px;
       line-height:1;
     }
 
     .gallery-overlay-hint .hint-text{
-      font-size:14px;
-      line-height:1.45;
+      font-size:11px;
+      line-height:1.35;
       text-align:left;
       white-space:nowrap;
     }
@@ -537,16 +537,19 @@
         margin-right:-18px;
       }
       .photo-frame{
-        height:68vh;
-        min-height:420px;
+        height:62vh;
+        min-height:360px;
       }
       .gallery-overlay-hint{
-        top:16px;
-        right:16px;
-        padding:10px 14px;
+        top:8px;
+        right:8px;
+        padding:7px 10px;
+      }
+      .gallery-overlay-hint .hint-icon{
+        font-size:14px;
       }
       .gallery-overlay-hint .hint-text{
-        font-size:13px;
+        font-size:10px;
       }
       .gal-arrow{
         font-size:42px;
@@ -656,13 +659,25 @@
 
           <div class="gallery" id="gallery">
             <div class="track" id="galleryTrack">
-              <div class="slide"><div class="photo-frame"><img src="MainPhoto.jpg" alt="갤러리1"></div></div>
-              <div class="slide"><div class="photo-frame"><img src="SubPhoto.jpg" alt="갤러리2"></div></div>
-              <div class="slide"><div class="photo-frame"><img src="KakaoTitle.jpg" alt="갤러리3"></div></div>
+              <div class="slide"><div class="photo-frame"><img src="Gallery1-1.jpg" alt="갤러리1"></div></div>
+              <div class="slide"><div class="photo-frame"><img src="Gallery1-2.jpg" alt="갤러리2"></div></div>
+              <div class="slide"><div class="photo-frame"><img src="Gallery1-3.jpg" alt="갤러리3"></div></div>
+              <div class="slide"><div class="photo-frame"><img src="Gallery1-4.jpg" alt="갤러리4"></div></div>
+              <div class="slide"><div class="photo-frame"><img src="Gallery2-1.jpg" alt="갤러리5"></div></div>
+              <div class="slide"><div class="photo-frame"><img src="Gallery2-2.jpg" alt="갤러리6"></div></div>
+              <div class="slide"><div class="photo-frame"><img src="Gallery2-3.jpg" alt="갤러리7"></div></div>
+              <div class="slide"><div class="photo-frame"><img src="Gallery2-4.jpg" alt="갤러리8"></div></div>
+              <div class="slide"><div class="photo-frame"><img src="Gallery2-5.jpg" alt="갤러리9"></div></div>
+              <div class="slide"><div class="photo-frame"><img src="Gallery3-1.jpg" alt="갤러리10"></div></div>
+              <div class="slide"><div class="photo-frame"><img src="Gallery3-2.jpg" alt="갤러리11"></div></div>
+              <div class="slide"><div class="photo-frame"><img src="Gallery3-3.jpg" alt="갤러리12"></div></div>
+              <div class="slide"><div class="photo-frame"><img src="Gallery3-4.jpg" alt="갤러리13"></div></div>
+              <div class="slide"><div class="photo-frame"><img src="Gallery3-5.jpg" alt="갤러리14"></div></div>
+              <div class="slide"><div class="photo-frame"><img src="Gallery3-6.jpg" alt="갤러리15"></div></div>
             </div>
           </div>
 
-          <div class="pager" id="galleryPager">1 / 3</div>
+          <div class="pager" id="galleryPager">1 / 15</div>
         </div>
       </div>
     </section>
@@ -721,7 +736,6 @@
               <div>신랑 류정현<br>하나 603-910419-43007</div>
               <button onclick="copyAccount(event,'60391041943007')">복사</button>
             </div>
-
           </div>
         </div>
 
@@ -1028,7 +1042,7 @@
       (function initKakaoMap(){
         function boot(){
           if(!window.kakao || !kakao.maps || !kakao.maps.load){
-            console.error("❌ Kakao Maps SDK not loaded");
+            console.error("Kakao Maps SDK not loaded");
             return;
           }
 
@@ -1039,7 +1053,7 @@
 
             const container = document.getElementById("kakaoMap");
             if(!container){
-              console.error("❌ #kakaoMap not found");
+              console.error("#kakaoMap not found");
               return;
             }
 
@@ -1076,7 +1090,7 @@
               });
             }
 
-            console.log("✅ Kakao map rendered");
+            console.log("Kakao map rendered");
           });
         }
 
