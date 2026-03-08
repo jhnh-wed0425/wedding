@@ -762,12 +762,17 @@
       <section class="reveal">
         <div class="section-title">OUR WEDDING DAY</div>
 
-        <div class="days-left">
-          <span style="font-family:var(--serif);">류정현 <span class="heart">♥</span> 이나현</span>
-          <span style="color:#9a9a9a;"> 결혼까지 </span>
-          <b id="daysLeft">00</b><span style="color:#9a9a9a;">일</span>
-        </div>
+<div class="days-left" id="daysTextWrap">
+  <span style="font-family:var(--serif);">류정현 <span class="heart">♥</span> 이나현</span>
+  <span id="daysLabel" style="color:#9a9a9a;"> 결혼까지 </span>
+  <b id="daysLeft">00</b><span style="color:#9a9a9a;">일</span>
+</div>
 
+<div id="afterWeddingMessage" style="display:none; margin-top:12px; color:#777; font-size:13px; line-height:1.8; font-family:var(--serif);">
+  보내주신 축복과 마음을 간직하며<br>
+  행복하게 잘 살아가겠습니다.
+</div>
+        
         <div class="timer-wrap">
           <div class="time-box"><div class="num" id="dd">00</div><div class="label">DAYS</div></div>
           <div class="time-box"><div class="num" id="hh">00</div><div class="label">HOURS</div></div>
@@ -967,27 +972,81 @@
         });
       }
 
-      const ddEl = document.getElementById("dd");
-      const hhEl = document.getElementById("hh");
-      const mmEl = document.getElementById("mm");
-      const ssEl = document.getElementById("ss");
-      const daysLeftEl = document.getElementById("daysLeft");
+const ddEl = document.getElementById("dd");
+const hhEl = document.getElementById("hh");
+const mmEl = document.getElementById("mm");
+const ssEl = document.getElementById("ss");
+const daysLeftEl = document.getElementById("daysLeft");
+const daysLabelEl = document.getElementById("daysLabel");
+const afterWeddingMessageEl = document.getElementById("afterWeddingMessage");
 
-      const target = new Date("2026-04-25T11:00:00").getTime();
-      setInterval(() => {
-        const gap = target - Date.now();
-        const d = Math.max(0, Math.floor(gap / (1000 * 60 * 60 * 24)));
-        const h = Math.max(0, Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
-        const m = Math.max(0, Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60)));
-        const s = Math.max(0, Math.floor((gap % (1000 * 60)) / 1000));
+// 예식 시작 시각
+const weddingStart = new Date("2026-04-25T11:00:00").getTime();
 
-        ddEl.textContent = String(d).padStart(2, "0");
-        hhEl.textContent = String(h).padStart(2, "0");
-        mmEl.textContent = String(m).padStart(2, "0");
-        ssEl.textContent = String(s).padStart(2, "0");
-        daysLeftEl.textContent = String(d);
-      }, 1000);
+// 문구 변경 시각
+const marriedStart = new Date("2026-04-25T12:00:00").getTime();
 
+function pad(num){
+  return String(num).padStart(2, "0");
+}
+
+function updateWeddingTimer(){
+  const now = Date.now();
+
+  // 1) 예식 전: 결혼식까지 카운트다운
+  if (now < weddingStart) {
+    const gap = weddingStart - now;
+
+    const d = Math.floor(gap / (1000 * 60 * 60 * 24));
+    const h = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const m = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((gap % (1000 * 60)) / 1000);
+
+    ddEl.textContent = pad(d);
+    hhEl.textContent = pad(h);
+    mmEl.textContent = pad(m);
+    ssEl.textContent = pad(s);
+
+    daysLabelEl.textContent = " 결혼까지 ";
+    daysLeftEl.textContent = String(d);
+    afterWeddingMessageEl.style.display = "none";
+    return;
+  }
+
+  // 2) 예식 시작 후 ~ 12시 전: 0으로 고정
+  if (now >= weddingStart && now < marriedStart) {
+    ddEl.textContent = "00";
+    hhEl.textContent = "00";
+    mmEl.textContent = "00";
+    ssEl.textContent = "00";
+
+    daysLabelEl.textContent = " 결혼식 진행 중 ";
+    daysLeftEl.textContent = "0";
+    afterWeddingMessageEl.style.display = "none";
+    return;
+  }
+
+  // 3) 12시 이후: 부부된 지 경과시간 표시
+  const passed = now - marriedStart;
+
+  const d = Math.floor(passed / (1000 * 60 * 60 * 24));
+  const h = Math.floor((passed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const m = Math.floor((passed % (1000 * 60 * 60)) / (1000 * 60));
+  const s = Math.floor((passed % (1000 * 60)) / 1000);
+
+  ddEl.textContent = pad(d);
+  hhEl.textContent = pad(h);
+  mmEl.textContent = pad(m);
+  ssEl.textContent = pad(s);
+
+  daysLabelEl.textContent = " 부부된 지 ";
+  daysLeftEl.textContent = String(d);
+  afterWeddingMessageEl.style.display = "block";
+}
+
+updateWeddingTimer();
+setInterval(updateWeddingTimer, 1000);
+      
       function toggleAccount(id){
         const body = document.getElementById(id);
         const arrow = document.getElementById("arrow-" + id);
