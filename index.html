@@ -765,9 +765,8 @@
 <div class="days-left" id="daysTextWrap">
   <span style="font-family:var(--serif);">류정현 <span class="heart">♥</span> 이나현</span>
   <span id="daysLabel" style="color:#9a9a9a;"> 결혼까지 </span>
-  <b id="daysLeft">00</b><span style="color:#9a9a9a;">일</span>
+  <b id="daysLeft">00</b><span id="daysUnit" style="color:#9a9a9a;">일</span>
 </div>
-
         
         <div class="timer-wrap">
           <div class="time-box"><div class="num" id="dd">00</div><div class="label">DAYS</div></div>
@@ -991,10 +990,10 @@ const afterWeddingMessageEl = document.getElementById("afterWeddingMessage");
 //const marriedStart = new Date("2026-04-25T12:00:00").getTime();
 
       // 테스트용 예식 시작 시각
-const weddingStart = new Date("2026-03-09T01:47:00").getTime();
+const weddingStart = new Date("2026-03-09T02:05:00").getTime();
 
 // 테스트용 문구 변경 시각
-const marriedStart = new Date("2026-03-09T01:48:00").getTime();
+const marriedStart = new Date("2026-03-09T02:06:00").getTime();
       
       
 function pad(num){
