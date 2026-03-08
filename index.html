@@ -768,10 +768,6 @@
   <b id="daysLeft">00</b><span style="color:#9a9a9a;">일</span>
 </div>
 
-<div id="afterWeddingMessage" style="display:none; margin-top:12px; color:#777; font-size:13px; line-height:1.8; font-family:var(--serif);">
-  보내주신 축복과 마음을 간직하며<br>
-  행복하게 잘 살아가겠습니다.
-</div>
         
         <div class="timer-wrap">
           <div class="time-box"><div class="num" id="dd">00</div><div class="label">DAYS</div></div>
@@ -779,6 +775,13 @@
           <div class="time-box"><div class="num" id="mm">00</div><div class="label">MIN</div></div>
           <div class="time-box"><div class="num" id="ss">00</div><div class="label">SEC</div></div>
         </div>
+
+        <div id="afterWeddingMessage" style="display:none; margin-top:12px; color:#777; font-size:13px; line-height:1.8; font-family:var(--serif);">
+  보내주신 축복과 마음을 간직하며<br>
+  행복하게 잘 살아가겠습니다.
+</div>
+
+      
       </section>
 
       <div class="section-sep"></div>
@@ -978,6 +981,7 @@ const mmEl = document.getElementById("mm");
 const ssEl = document.getElementById("ss");
 const daysLeftEl = document.getElementById("daysLeft");
 const daysLabelEl = document.getElementById("daysLabel");
+const daysUnitEl = document.getElementById("daysUnit");
 const afterWeddingMessageEl = document.getElementById("afterWeddingMessage");
 
 // 예식 시작 시각
@@ -987,10 +991,10 @@ const afterWeddingMessageEl = document.getElementById("afterWeddingMessage");
 //const marriedStart = new Date("2026-04-25T12:00:00").getTime();
 
       // 테스트용 예식 시작 시각
-const weddingStart = new Date("2026-03-09T01:37:00").getTime();
+const weddingStart = new Date("2026-03-09T01:47:00").getTime();
 
 // 테스트용 문구 변경 시각
-const marriedStart = new Date("2026-03-09T01:39:00").getTime();
+const marriedStart = new Date("2026-03-09T01:48:00").getTime();
       
       
 function pad(num){
@@ -1014,10 +1018,13 @@ function updateWeddingTimer(){
     mmEl.textContent = pad(m);
     ssEl.textContent = pad(s);
 
-    daysLabelEl.textContent = " 결혼까지 ";
+     daysLabelEl.textContent = " 결혼까지 ";
     daysLeftEl.textContent = String(d);
+    daysLeftEl.style.display = "inline";
+    daysUnitEl.style.display = "inline";
     afterWeddingMessageEl.style.display = "none";
     return;
+    
   }
 
   // 2) 예식 시작 후 ~ 12시 전: 0으로 고정
@@ -1027,8 +1034,10 @@ function updateWeddingTimer(){
     mmEl.textContent = "00";
     ssEl.textContent = "00";
 
-    daysLabelEl.textContent = " 결혼식 진행 중 ";
-    daysLeftEl.textContent = "0";
+   daysLabelEl.textContent = " 결혼식 진행 중 ";
+    daysLeftEl.textContent = "";
+    daysLeftEl.style.display = "none";
+    daysUnitEl.style.display = "none";
     afterWeddingMessageEl.style.display = "none";
     return;
   }
@@ -1048,6 +1057,8 @@ function updateWeddingTimer(){
 
   daysLabelEl.textContent = " 부부된 지 ";
   daysLeftEl.textContent = String(d);
+  daysLeftEl.style.display = "inline";
+  daysUnitEl.style.display = "inline";
   afterWeddingMessageEl.style.display = "block";
 }
 
