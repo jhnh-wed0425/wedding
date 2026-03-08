@@ -118,8 +118,8 @@
       margin:10px 0 10px;
     }
 
-    .heart{ color:#8b1f2f; }
-
+    .heart{ color:#c94f6a; }
+    
     .hero-sub{
       font-family:var(--serif);
       color:#7a7a7a;
@@ -209,8 +209,8 @@
 
     html.js .reveal{
       opacity:0;
-      transform:translateY(14px);
-      transition:opacity .9s ease, transform .9s ease;
+      transform:translateY(18px);
+      transition:opacity 1.15s ease, transform 1.15s ease;
     }
 
     html.js .reveal.show{
@@ -325,7 +325,7 @@
 
     .parents-section{
       padding-top:28px;
-      padding-bottom:28px;
+      padding-bottom:40px;
     }
 
     .parents-section .hero-frame{
@@ -1251,7 +1251,7 @@
 
         const ctx = canvas.getContext("2d");
         let petals = [];
-        const petalCount = 12;
+        const petalCount = 15;
 
         let animationId = null;
         let lastTime = 0;
@@ -1281,14 +1281,14 @@
           return {
             x: random(0, w),
             y: initial ? random(0, h) : random(-40, -10),
-            size: random(3.8, 6.2),
+            size: random(5.2, 8.4),
             speedY: random(10, 20),
             drift: random(-6, 6),
             swayAmp: random(4, 10),
             swayFreq: random(0.8, 1.4),
             rot: random(0, Math.PI * 2),
             rotSpeed: random(-0.25, 0.25),
-            alpha: random(0.26, 0.5)
+            alpha: random(0.4, 0.68)
           };
         }
 
