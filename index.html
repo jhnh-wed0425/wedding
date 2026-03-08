@@ -981,11 +981,18 @@ const daysLabelEl = document.getElementById("daysLabel");
 const afterWeddingMessageEl = document.getElementById("afterWeddingMessage");
 
 // 예식 시작 시각
-const weddingStart = new Date("2026-04-25T11:00:00").getTime();
+//const weddingStart = new Date("2026-04-25T11:00:00").getTime();
 
 // 문구 변경 시각
-const marriedStart = new Date("2026-04-25T12:00:00").getTime();
+//const marriedStart = new Date("2026-04-25T12:00:00").getTime();
 
+      // 테스트용 예식 시작 시각
+const weddingStart = new Date("2026-03-09T01:40:00").getTime();
+
+// 테스트용 문구 변경 시각
+const marriedStart = new Date("2026-03-09T01:42:00").getTime();
+      
+      
 function pad(num){
   return String(num).padStart(2, "0");
 }
