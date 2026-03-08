@@ -706,10 +706,10 @@
     </div>
   </div>
 
-  <audio id="bgm" autoplay loop playsinline>
-    <source src="모청bgm.mp3" type="audio/mpeg">
-  </audio>
-
+<audio id="bgm" autoplay loop playsinline preload="auto">
+  <source src="모청bgm.mp3" type="audio/mpeg">
+</audio>
+  
   <main class="page">
     <div class="petal-zone">
       <canvas id="petalCanvas"></canvas>
@@ -1095,58 +1095,83 @@
         nextBtn.addEventListener("click", hideGalleryHint);
       }
 
-      const bgmEl = document.getElementById("bgm");
-      const musicBtnEl = document.getElementById("musicBtn");
-      bgmEl.muted = true;
+const bgmEl = document.getElementById("bgm");
+const musicBtnEl = document.getElementById("musicBtn");
 
-      function syncMusicUI(){
-        musicBtnEl.textContent = (bgmEl.paused || bgmEl.muted) ? "🔇" : "🔊";
-      }
+if (bgmEl) {
+  bgmEl.volume = 1;
+  bgmEl.muted = true;
+}
 
-      async function tryAutoPlay(){
-        if (!bgmEl) return;
-        try{
-          bgmEl.muted = true;
-          await bgmEl.play();
-        }catch(e){}
-        syncMusicUI();
-      }
+function syncMusicUI(){
+  if (!bgmEl || !musicBtnEl) return;
+  musicBtnEl.textContent = (!bgmEl.paused && !bgmEl.muted) ? "🔊" : "🔇";
+}
 
-      tryAutoPlay();
-      window.addEventListener("load", tryAutoPlay);
+async function tryMutedAutoplay(){
+  if (!bgmEl) return;
+  try{
+    bgmEl.muted = true;
+    await bgmEl.play();
+  }catch(e){}
+  syncMusicUI();
+}
 
-      async function unlock(){
-        if (!bgmEl) return;
-        try{
-          bgmEl.muted = false;
-          await bgmEl.play();
-        }catch(e){}
-        syncMusicUI();
+async function enableSound(){
+  if (!bgmEl) return false;
+  try{
+    bgmEl.muted = false;
+    await bgmEl.play();
+    syncMusicUI();
+    return true;
+  }catch(e){
+    syncMusicUI();
+    return false;
+  }
+}
 
-        document.removeEventListener("touchstart", unlock);
-        document.removeEventListener("click", unlock);
-        document.removeEventListener("scroll", unlock);
-      }
+function removeUnlockListeners(){
+  document.removeEventListener("touchstart", handleFirstGesture);
+  document.removeEventListener("click", handleFirstGesture);
+}
 
-      document.addEventListener("touchstart", unlock, { passive:true });
-      document.addEventListener("click", unlock, { passive:true });
-      document.addEventListener("scroll", unlock, { passive:true });
+async function handleFirstGesture(){
+  const ok = await enableSound();
+  if (ok) {
+    removeUnlockListeners();
+  }
+}
 
-      musicBtnEl.addEventListener("click", async (e) => {
-        e.stopPropagation();
-        try{
-          if(bgmEl.paused){
-            bgmEl.muted = false;
-            await bgmEl.play();
-          }else{
-            bgmEl.pause();
-          }
-        }catch(e2){}
-        syncMusicUI();
-      });
+tryMutedAutoplay();
+window.addEventListener("load", tryMutedAutoplay);
 
-      syncMusicUI();
+document.addEventListener("touchstart", handleFirstGesture, { passive:true });
+document.addEventListener("click", handleFirstGesture, { passive:true });
 
+musicBtnEl.addEventListener("click", async (e) => {
+  e.stopPropagation();
+  if (!bgmEl) return;
+
+  try{
+    if (bgmEl.paused) {
+      bgmEl.muted = false;
+      await bgmEl.play();
+    } else if (bgmEl.muted) {
+      bgmEl.muted = false;
+      await bgmEl.play();
+    } else {
+      bgmEl.pause();
+    }
+  }catch(e2){}
+  syncMusicUI();
+});
+
+bgmEl?.addEventListener("play", syncMusicUI);
+bgmEl?.addEventListener("pause", syncMusicUI);
+bgmEl?.addEventListener("volumechange", syncMusicUI);
+
+syncMusicUI();
+      
       function openKakaoNavi(e){
         e.preventDefault();
 
