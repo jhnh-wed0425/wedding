@@ -334,10 +334,14 @@
 
     .parents-section p{
       margin-top:0 !important;
-      margin-bottom:30x !important;
+      margin-bottom:0 !important;
       line-height:1.8;
     }
 
+    .parents-gap{
+      height:30px;
+    }
+    
     .account-wrapper{
       max-width:520px;
       margin:18px auto 0;
@@ -751,7 +755,8 @@
           이정복 · 신복순 의 장녀 나현
         </p>
       </section>
-
+      
+      <div class="parents-gap"></div>
       <div class="section-sep"></div>
 
       <section class="reveal">
@@ -1095,83 +1100,87 @@
         nextBtn.addEventListener("click", hideGalleryHint);
       }
 
-const bgmEl = document.getElementById("bgm");
-const musicBtnEl = document.getElementById("musicBtn");
 
-if (bgmEl) {
-  bgmEl.volume = 1;
-  bgmEl.muted = true;
-}
+  const bgmEl = document.getElementById("bgm");
+  const musicBtnEl = document.getElementById("musicBtn");
+  let autoUnmuteTried = false;
 
-function syncMusicUI(){
-  if (!bgmEl || !musicBtnEl) return;
-  musicBtnEl.textContent = (!bgmEl.paused && !bgmEl.muted) ? "🔊" : "🔇";
-}
-
-async function tryMutedAutoplay(){
-  if (!bgmEl) return;
-  try{
-    bgmEl.muted = true;
-    await bgmEl.play();
-  }catch(e){}
-  syncMusicUI();
-}
-
-async function enableSound(){
-  if (!bgmEl) return false;
-  try{
-    bgmEl.muted = false;
-    await bgmEl.play();
-    syncMusicUI();
-    return true;
-  }catch(e){
-    syncMusicUI();
-    return false;
+  function syncMusicUI(){
+    musicBtnEl.textContent = (bgmEl.paused || bgmEl.muted) ? "🔇" : "🔊";
   }
-}
 
-function removeUnlockListeners(){
-  document.removeEventListener("touchstart", handleFirstGesture);
-  document.removeEventListener("click", handleFirstGesture);
-}
-
-async function handleFirstGesture(){
-  const ok = await enableSound();
-  if (ok) {
-    removeUnlockListeners();
+  async function startMutedAutoplay(){
+    if (!bgmEl) return;
+    try{
+      bgmEl.muted = true;
+      bgmEl.volume = 1;
+      await bgmEl.play();
+    }catch(e){}
+    syncMusicUI();
   }
-}
 
-tryMutedAutoplay();
-window.addEventListener("load", tryMutedAutoplay);
+  async function delayedUnmute(){
+    if (!bgmEl || autoUnmuteTried) return;
+    autoUnmuteTried = true;
 
-document.addEventListener("touchstart", handleFirstGesture, { passive:true });
-document.addEventListener("click", handleFirstGesture, { passive:true });
+    try{
+      if (bgmEl.paused) {
+        bgmEl.muted = true;
+        await bgmEl.play();
+      }
 
-musicBtnEl.addEventListener("click", async (e) => {
-  e.stopPropagation();
-  if (!bgmEl) return;
+      setTimeout(async () => {
+        try{
+          bgmEl.muted = false;
+          await bgmEl.play();
+        }catch(e){}
+        syncMusicUI();
+      }, 2500);
+    }catch(e){}
+  }
 
-  try{
-    if (bgmEl.paused) {
+  async function unlockBgm(){
+    if (!bgmEl) return;
+    try{
       bgmEl.muted = false;
       await bgmEl.play();
-    } else if (bgmEl.muted) {
-      bgmEl.muted = false;
-      await bgmEl.play();
-    } else {
-      bgmEl.pause();
-    }
-  }catch(e2){}
+    }catch(e){}
+    syncMusicUI();
+
+    document.removeEventListener("touchstart", unlockBgm);
+    document.removeEventListener("click", unlockBgm);
+    document.removeEventListener("scroll", unlockBgm);
+  }
+
+  startMutedAutoplay();
+
+  window.addEventListener("load", () => {
+    startMutedAutoplay();
+    delayedUnmute();
+  });
+
+  document.addEventListener("touchstart", unlockBgm, { passive:true });
+  document.addEventListener("click", unlockBgm, { passive:true });
+  document.addEventListener("scroll", unlockBgm, { passive:true });
+
+  musicBtnEl.addEventListener("click", async (e) => {
+    e.stopPropagation();
+    try{
+      if (bgmEl.paused){
+        bgmEl.muted = false;
+        await bgmEl.play();
+      }else if (bgmEl.muted){
+        bgmEl.muted = false;
+        await bgmEl.play();
+      }else{
+        bgmEl.pause();
+      }
+    }catch(e){}
+    syncMusicUI();
+  });
+
   syncMusicUI();
-});
-
-bgmEl?.addEventListener("play", syncMusicUI);
-bgmEl?.addEventListener("pause", syncMusicUI);
-bgmEl?.addEventListener("volumechange", syncMusicUI);
-
-syncMusicUI();
-      
+    
       function openKakaoNavi(e){
         e.preventDefault();
 
