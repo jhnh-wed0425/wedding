@@ -35,18 +35,22 @@
     }
 
     *{ box-sizing:border-box; }
-    html{ scroll-behavior:smooth; }
-    html, body{ touch-action:manipulation; }
+   html{
+  scroll-behavior:smooth;
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+}
 
-    body{
-      margin:0;
-      background:#fff;
-      color:var(--text);
-      font-family:var(--sans);
-      text-align:center;
-      line-height:1.85;
-      font-size:var(--base-font);
-    }
+body{
+  margin:0;
+  background:#fff;
+  color:var(--text);
+  font-family:var(--sans);
+  text-align:center;
+  line-height:1.85;
+  font-size:var(--base-font);
+  word-break:keep-all;
+}
 
     .page{
       max-width:560px;
@@ -120,13 +124,14 @@
 
     .heart{ color:#c94f6a; }
 
-    .hero-sub{
-      font-family:var(--serif);
-      color:#7a7a7a;
-      font-size:13px;
-      letter-spacing:1px;
-      margin:0 0 16px;
-    }
+   .hero-sub{
+  font-family:var(--serif);
+  color:#666;
+  font-size:15px;
+  font-weight:400;
+  letter-spacing:.2px;
+  margin:0 0 18px;
+}
 
     .divider{
       width:44px;
@@ -218,35 +223,41 @@
       transform:translateY(0);
     }
 
-    .timer-wrap{
-      display:flex;
-      justify-content:center;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:18px;
-    }
+.timer-wrap{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  gap:10px;
+  margin-top:18px;
+  width:100%;
+  max-width:360px;
+  margin-left:auto;
+  margin-right:auto;
+}
 
-    .time-box{
-      width:76px;
-      padding:14px 0;
-      border:1px solid rgba(227,227,230,.95);
-      border-radius:16px;
-      background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(245,245,248,.92));
-    }
+.time-box{
+  width:100%;
+  min-width:0;
+  padding:14px 0;
+  border:1px solid rgba(227,227,230,.95);
+  border-radius:16px;
+  background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(245,245,248,.92));
+}
 
-    .num{
-      font-size:26px;
-      font-weight:300;
-      letter-spacing:1px;
-    }
+.num{
+  font-size:clamp(24px, 5vw, 26px);
+  font-weight:300;
+  letter-spacing:.5px;
+  line-height:1.1;
+}
 
-    .label{
-      margin-top:6px;
-      font-size:10px;
-      letter-spacing:2px;
-      color:#9a9a9a;
-    }
-
+.label{
+  margin-top:6px;
+  font-size:10px;
+  letter-spacing:1.5px;
+  color:#8f8f8f;
+  white-space:nowrap;
+}
+    
     .days-left{
       margin:12px 0 0;
       font-family:var(--serif);
@@ -332,12 +343,13 @@
       margin-bottom:6px;
     }
 
-    .parents-section p{
-      margin-top:0 !important;
-      margin-bottom:0 !important;
-      line-height:1.8;
-    }
-
+   .parents-section p{
+  margin-top:0 !important;
+  margin-bottom:0 !important;
+  line-height:1.8;
+  font-size:14px;
+  color:#666;
+}
     .parents-gap{
       height:45px;
     }
@@ -416,18 +428,20 @@
       background:var(--bg);
     }
 
-    .gallery{
-      overflow-x:auto;
-      overflow-y:hidden;
-      scroll-snap-type:x mandatory;
-      scroll-snap-stop:always;
-      -webkit-overflow-scrolling:touch;
-      border:0;
-      border-radius:0;
-      background:var(--bg);
-      box-shadow:none;
-    }
-
+  .gallery{
+  overflow-x:auto;
+  overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  scroll-snap-stop:always;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-x:contain;
+  scroll-behavior:smooth;
+  border:0;
+  border-radius:0;
+  background:var(--bg);
+  box-shadow:none;
+}
+    
     .gallery::-webkit-scrollbar{ display:none; }
 
     .track{
@@ -620,7 +634,18 @@
       pointer-events:none;
       transition:opacity .2s ease;
     }
-
+    
+.location-text{
+  font-size:15px;
+  margin:0 0 16px;
+  color:#4f4f4f;
+  font-family:var(--serif);
+  line-height:1.9;
+  font-weight:400;
+  letter-spacing:-0.1px;
+}
+    
+    
     .pc-toast.show{ opacity:1; }
 
     @media (hover:none) and (pointer:coarse){
@@ -673,7 +698,36 @@
       .hero-frame{ width:480px; }
       .gallery-shell{ width:100%; max-width:560px; }
     }
+@media (max-width:380px){
+  section{
+    padding:48px 16px;
+  }
 
+  .hero-name{
+    font-size:26px;
+  }
+
+  .hero-sub{
+    font-size:14px;
+  }
+
+  .days-left{
+    font-size:13px;
+  }
+
+  .num{
+    font-size:22px;
+  }
+
+  .label{
+    font-size:9px;
+    letter-spacing:1px;
+  }
+
+  .gal-arrow{
+    font-size:40px;
+  }
+}
     .site-footer{
       text-align:center;
       padding:36px 0 50px;
@@ -682,17 +736,20 @@
 
     .footer-name{
       font-family:var(--serif);
-      font-size:14px;
+      font-size:12px;
       letter-spacing:0.6px;
       color:#7a7a7a;
       margin-bottom:4px;
     }
 
     .footer-copy{
-      font-size:11px;
+      font-size:10px;
       letter-spacing:0.8px;
       color:#b0b0b0;
     }
+
+
+    
   </style>
 </head>
 
@@ -721,7 +778,7 @@
       <section class="reveal hero-section">
         <div class="section-title">WEDDING INVITATION</div>
         <div class="hero-name">류정현 <span class="heart">♥</span> 이나현</div>
-        <div class="hero-sub">2026. 04. 25. SAT 11:00</div>
+        <div class="hero-sub">2026. 04. 25. 토요일 11:00</div>
 
         <div class="hero-frame">
           <img src="MainPhoto.jpg" alt="MainPhoto">
@@ -832,11 +889,12 @@
     <section class="reveal">
       <div class="section-title">LOCATION</div>
 
-      <p style="font-size:14px; margin:0 0 16px; color:#555; font-family:var(--serif);">
-        아모르아트컨벤션 2층 아트홀<br>
-        충북 청주시 흥덕구 남석로 579
-      </p>
+      <p class="location-text">
+  아모르아트컨벤션 2층 아트홀<br>
+  충북 청주시 흥덕구 남석로 579
+</p>
 
+      
       <div class="map-card" aria-label="지도 미리보기">
         <div id="daumRoughmapContainer1772904601986" class="root_daum_roughmap root_daum_roughmap_landing"></div>
       </div>
@@ -1132,6 +1190,63 @@ setInterval(updateWeddingTimer, 1000);
         updateGalleryUI(next);
       }
 
+let currentIndex = 0;
+let touchStartX = 0;
+let touchStartScrollLeft = 0;
+let snapTimer = null;
+
+function getIndex(){
+  const w = galleryEl.clientWidth || 1;
+  const i = Math.round(galleryEl.scrollLeft / w);
+  return Math.max(0, Math.min(total - 1, i));
+}
+
+function updateGalleryUI(index){
+  currentIndex = index;
+  pagerEl.textContent = `${index + 1} / ${total}`;
+  const dots = document.querySelectorAll(".gallery-dot");
+  dots.forEach((dot, i) => {
+    dot.classList.toggle("active", i === index);
+  });
+}
+
+function goTo(i){
+  const w = galleryEl.clientWidth || 1;
+  const next = Math.max(0, Math.min(total - 1, i));
+  currentIndex = next;
+  galleryEl.scrollTo({ left: next * w, behavior: "smooth" });
+  updateGalleryUI(next);
+}
+
+galleryEl.addEventListener("touchstart", (e) => {
+  if (!e.touches || !e.touches.length) return;
+  touchStartX = e.touches[0].clientX;
+  touchStartScrollLeft = galleryEl.scrollLeft;
+}, { passive:true });
+
+galleryEl.addEventListener("touchend", (e) => {
+  const w = galleryEl.clientWidth || 1;
+  const moved = galleryEl.scrollLeft - touchStartScrollLeft;
+  const threshold = Math.max(35, w * 0.08);
+
+  let nextIndex = currentIndex;
+
+  if (Math.abs(moved) > threshold) {
+    if (moved > 0) nextIndex = currentIndex + 1;
+    else nextIndex = currentIndex - 1;
+  }
+
+  goTo(nextIndex);
+}, { passive:true });
+
+galleryEl.addEventListener("scroll", () => {
+  clearTimeout(snapTimer);
+  snapTimer = setTimeout(() => {
+    updateGalleryUI(getIndex());
+  }, 60);
+}, { passive:true });
+      
+      
       prevBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         goTo(getIndex() - 1);
