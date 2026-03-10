@@ -4,15 +4,23 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
   <meta name="format-detection" content="telephone=no" />
-  <meta property="og:site_name" content="류정현 & 이나현 청첩장" />
-  <meta property="og:title" content="류정현 ♥ 이나현 결혼합니다" />
-  <meta property="og:description" content="2026년 04월 25일 토요일 오전 11시" />
-  <meta property="og:url" content="https://jhnh-wed0425.github.io/wedding/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://jhnh-wed0425.github.io/wedding/KakaoTitlePaste.jpg" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="류정현 & 이나현 청첩장" />
+<meta property="og:title" content="류정현 ♥ 이나현 결혼합니다" />
+<meta property="og:description" content="2026년 04월 25일 토요일 오전 11시" />
+<meta property="og:url" content="https://jhnh-wed0425.github.io/wedding/" />
+<meta property="og:image" content="https://jhnh-wed0425.github.io/wedding/kakao-thumb-v2.jpg" />
+<meta property="og:image:secure_url" content="https://jhnh-wed0425.github.io/wedding/kakao-thumb-v2.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="류정현 ♥ 이나현 결혼식 청첩장" />
 
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="류정현 ♥ 이나현 결혼합니다" />
+<meta name="twitter:description" content="2026년 04월 25일 토요일 오전 11시" />
+<meta name="twitter:image" content="https://jhnh-wed0425.github.io/wedding/kakao-thumb-v2.jpg" />
+
+  
   <title>류정현 ♥ 이나현</title>
 
   <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"></script>
@@ -1028,7 +1036,10 @@ html.js .reveal.show{
             title: "류정현 ♥ 이나현 결혼합니다",
             description: "2026년 04월 25일 토요일 오전 11시",
             imageUrl: "https://jhnh-wed0425.github.io/wedding/KakaoTitleShare.jpg",
-            link: { mobileWebUrl: location.href, webUrl: location.href }
+link: {
+  mobileWebUrl: "https://jhnh-wed0425.github.io/wedding/",
+  webUrl: "https://jhnh-wed0425.github.io/wedding/"
+}
           },
           buttons: [{
             title: "청첩장 보기",
@@ -1143,9 +1154,10 @@ setInterval(updateWeddingTimer, 1000);
       }
 
       function copyLink(){
-        navigator.clipboard.writeText(location.href);
-        alert("홈페이지 주소가 복사되었습니다.");
-      }
+  navigator.clipboard.writeText("https://jhnh-wed0425.github.io/wedding/");
+  alert("홈페이지 주소가 복사되었습니다.");
+}
+      
 const io = new IntersectionObserver((entries) => {
   entries.forEach(ent => {
     if(ent.isIntersecting){
