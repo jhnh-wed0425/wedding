@@ -62,7 +62,7 @@ body{
     }
 
     section{
-      padding:54px 18px;
+      padding:64px 18px;
       max-width:560px;
       margin:0 auto;
     }
@@ -210,19 +210,22 @@ body{
       background:transparent;
     }
 
-    .reveal{ opacity:1; transform:none; }
+.reveal{ opacity:1; transform:none; }
 
-    html.js .reveal{
-      opacity:0;
-      transform:translateY(18px);
-      transition:opacity 1.15s ease, transform 1.15s ease;
-    }
+html.js .reveal{
+  opacity:0;
+  transform:translateY(32px);
+  transition:
+    opacity 0.9s ease-out,
+    transform 0.9s ease-out;
+  will-change:opacity, transform;
+}
 
-    html.js .reveal.show{
-      opacity:1;
-      transform:translateY(0);
-    }
-
+html.js .reveal.show{
+  opacity:1;
+  transform:translateY(0);
+}
+    
 .timer-wrap{
   display:grid;
   grid-template-columns:repeat(4, minmax(0, 1fr));
@@ -1139,17 +1142,20 @@ setInterval(updateWeddingTimer, 1000);
         navigator.clipboard.writeText(location.href);
         alert("홈페이지 주소가 복사되었습니다.");
       }
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(ent => {
+    if(ent.isIntersecting){
+      ent.target.classList.add("show");
+      io.unobserve(ent.target);
+    }
+  });
+}, {
+  threshold: 0.28,
+  rootMargin: "0px 0px -8% 0px"
+});
 
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(ent => {
-          if(ent.isIntersecting){
-            ent.target.classList.add("show");
-            io.unobserve(ent.target);
-          }
-        });
-      }, { threshold: 0.12 });
-      document.querySelectorAll(".reveal").forEach(el => io.observe(el));
-
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+      
 const galleryEl = document.getElementById("gallery");
 const trackEl = document.getElementById("galleryTrack");
 const pagerEl = document.getElementById("galleryPager");
