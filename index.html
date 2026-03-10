@@ -4,17 +4,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
   <meta name="format-detection" content="telephone=no" />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="류정현 & 이나현 청첩장" />
+
+  <meta property="og:site_name" content="류정현 & 이나현 청첩장" />
 <meta property="og:title" content="류정현 ♥ 이나현 결혼합니다" />
 <meta property="og:description" content="2026년 04월 25일 토요일 오전 11시" />
 <meta property="og:url" content="https://jhnh-wed0425.github.io/wedding/" />
+<meta property="og:type" content="website" />
 <meta property="og:image" content="https://jhnh-wed0425.github.io/wedding/KakaoTitlePaste.jpg" />
-<meta property="og:image:secure_url" content="https://jhnh-wed0425.github.io/wedding/KakaoTitlePaste.jpg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="류정현 ♥ 이나현 결혼식 청첩장" />
-  
   
   <title>류정현 ♥ 이나현</title>
 
@@ -1012,7 +1010,7 @@ html.js .reveal.show{
         loadingEl.classList.add("hide");
         setTimeout(() => { loadingEl.style.display = "none"; }, 700);
       }
-      setTimeout(hideLoading, 2500);
+      setTimeout(hideLoading, 3500);
       setTimeout(hideLoading, 6000);
       window.addEventListener("error", hideLoading, { once:true });
 
@@ -1020,29 +1018,33 @@ html.js .reveal.show{
         Kakao.init("91eed7186338a8599546bf372fc45f56");
       }
 
-      function shareKakao(){
-        if(!window.Kakao){
-          alert("카카오 공유 기능을 불러오지 못했습니다. (네트워크/차단 확인)");
-          return;
-        }
-        Kakao.Share.sendDefault({
-          objectType: "feed",
-          content: {
-            title: "류정현 ♥ 이나현 결혼합니다",
-            description: "2026년 04월 25일 토요일 오전 11시",
-            imageUrl: "https://jhnh-wed0425.github.io/wedding/KakaoTitleShare.jpg",
-link: {
-  mobileWebUrl: "https://jhnh-wed0425.github.io/wedding/",
-  webUrl: "https://jhnh-wed0425.github.io/wedding/"
-}
-          },
-          buttons: [{
-            title: "청첩장 보기",
-            link: { mobileWebUrl: location.href, webUrl: location.href }
-          }]
-        });
-      }
+   function shareKakao(){
+  if(!window.Kakao){
+    alert("카카오 공유 기능을 불러오지 못했습니다. (네트워크/차단 확인)");
+    return;
+  }
 
+  Kakao.Share.sendDefault({
+    objectType: "feed",
+    content: {
+      title: "류정현 ♥ 이나현 결혼합니다",
+      description: "2026년 04월 25일 토요일 오전 11시",
+      imageUrl: "https://jhnh-wed0425.github.io/wedding/KakaoTitleShare.jpg",
+      link: {
+        mobileWebUrl: "https://jhnh-wed0425.github.io/wedding/",
+        webUrl: "https://jhnh-wed0425.github.io/wedding/"
+      }
+    },
+    buttons: [{
+      title: "청첩장 보기",
+      link: {
+        mobileWebUrl: "https://jhnh-wed0425.github.io/wedding/",
+        webUrl: "https://jhnh-wed0425.github.io/wedding/"
+      }
+    }]
+  });
+}
+      
 const ddEl = document.getElementById("dd");
 const hhEl = document.getElementById("hh");
 const mmEl = document.getElementById("mm");
