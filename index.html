@@ -763,9 +763,10 @@ body{
   </div>
 
   <audio id="bgm" autoplay loop playsinline preload="auto">
-    <source src="모청bgm.mp3" type="audio/mpeg">
-  </audio>
-
+  <source src="모청bgm.m4a" type="audio/mp4">
+  <source src="모청bgm.mp3" type="audio/mpeg">
+</audio>
+  
   <main class="page">
     <div class="petal-zone">
       <canvas id="petalCanvas"></canvas>
@@ -1001,7 +1002,7 @@ body{
         loadingEl.classList.add("hide");
         setTimeout(() => { loadingEl.style.display = "none"; }, 700);
       }
-      setTimeout(hideLoading, 4500);
+      setTimeout(hideLoading, 2500);
       setTimeout(hideLoading, 6000);
       window.addEventListener("error", hideLoading, { once:true });
 
