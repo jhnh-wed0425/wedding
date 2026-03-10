@@ -428,40 +428,35 @@ body{
       background:var(--bg);
     }
 
-  .gallery{
-  overflow-x:auto;
-  overflow-y:hidden;
-  scroll-snap-type:x mandatory;
-  scroll-snap-stop:always;
-  -webkit-overflow-scrolling:touch;
-  overscroll-behavior-x:contain;
-  scroll-behavior:smooth;
+.gallery{
+  overflow:hidden;
+  position:relative;
   border:0;
   border-radius:0;
   background:var(--bg);
   box-shadow:none;
+  touch-action:pan-y;
+}
+
+.track{
+  display:flex;
+  gap:0;
+  padding:0;
+  background:var(--bg);
+  transition:transform .35s ease;
+  will-change:transform;
+}
+
+.slide{
+  flex:0 0 100%;
+  position:relative;
+  padding:0;
+  background:var(--bg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
     
-    .gallery::-webkit-scrollbar{ display:none; }
-
-    .track{
-      display:flex;
-      gap:0;
-      padding:0;
-      background:var(--bg);
-    }
-
-    .slide{
-      flex:0 0 100%;
-      scroll-snap-align:start;
-      position:relative;
-      padding:0;
-      background:var(--bg);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
     .photo-frame{
       background:var(--bg);
       display:flex;
@@ -1154,55 +1149,29 @@ setInterval(updateWeddingTimer, 1000);
       }, { threshold: 0.12 });
       document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 
-      const galleryEl = document.getElementById("gallery");
-      const pagerEl = document.getElementById("galleryPager");
-      const dotsEl = document.getElementById("galleryDots");
-      const hintEl = document.querySelector(".gallery-overlay-hint");
-      const slides = Array.from(document.querySelectorAll("#galleryTrack .slide"));
-      const total = slides.length;
-      const prevBtn = document.getElementById("prevBtn");
-      const nextBtn = document.getElementById("nextBtn");
-
-      if (dotsEl) {
-        dotsEl.innerHTML = slides.map((_, i) =>
-          `<span class="gallery-dot${i === 0 ? " active" : ""}"></span>`
-        ).join("");
-      }
-
-      function getIndex(){
-        const w = galleryEl.clientWidth || 1;
-        const i = Math.round(galleryEl.scrollLeft / w);
-        return Math.max(0, Math.min(total - 1, i));
-      }
-
-      function updateGalleryUI(index){
-        pagerEl.textContent = `${index + 1} / ${total}`;
-        const dots = document.querySelectorAll(".gallery-dot");
-        dots.forEach((dot, i) => {
-          dot.classList.toggle("active", i === index);
-        });
-      }
-
-      function goTo(i){
-        const w = galleryEl.clientWidth || 1;
-        const next = Math.max(0, Math.min(total - 1, i));
-        galleryEl.scrollTo({ left: next * w, behavior: "smooth" });
-        updateGalleryUI(next);
-      }
+const galleryEl = document.getElementById("gallery");
+const trackEl = document.getElementById("galleryTrack");
+const pagerEl = document.getElementById("galleryPager");
+const dotsEl = document.getElementById("galleryDots");
+const hintEl = document.querySelector(".gallery-overlay-hint");
+const slides = Array.from(document.querySelectorAll("#galleryTrack .slide"));
+const total = slides.length;
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
 
 let currentIndex = 0;
-let touchStartX = 0;
-let touchStartScrollLeft = 0;
-let snapTimer = null;
+let startX = 0;
+let currentX = 0;
+let isDragging = false;
+let hintHidden = false;
 
-function getIndex(){
-  const w = galleryEl.clientWidth || 1;
-  const i = Math.round(galleryEl.scrollLeft / w);
-  return Math.max(0, Math.min(total - 1, i));
+if (dotsEl) {
+  dotsEl.innerHTML = slides.map((_, i) =>
+    `<span class="gallery-dot${i === 0 ? " active" : ""}"></span>`
+  ).join("");
 }
 
 function updateGalleryUI(index){
-  currentIndex = index;
   pagerEl.textContent = `${index + 1} / ${total}`;
   const dots = document.querySelectorAll(".gallery-dot");
   dots.forEach((dot, i) => {
@@ -1210,81 +1179,85 @@ function updateGalleryUI(index){
   });
 }
 
-function goTo(i){
-  const w = galleryEl.clientWidth || 1;
-  const next = Math.max(0, Math.min(total - 1, i));
-  currentIndex = next;
-  galleryEl.scrollTo({ left: next * w, behavior: "smooth" });
-  updateGalleryUI(next);
+function hideGalleryHint(){
+  if (hintHidden || !hintEl) return;
+  hintHidden = true;
+  hintEl.classList.add("hide");
 }
 
+function renderSlider(withAnimation = true){
+  trackEl.style.transition = withAnimation ? "transform .35s ease" : "none";
+  trackEl.style.transform = `translateX(-${currentIndex * 100}%)`;
+  updateGalleryUI(currentIndex);
+}
+
+function goTo(index){
+  currentIndex = Math.max(0, Math.min(total - 1, index));
+  renderSlider(true);
+}
+
+prevBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  hideGalleryHint();
+  goTo(currentIndex - 1);
+});
+
+nextBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  hideGalleryHint();
+  goTo(currentIndex + 1);
+});
+
 galleryEl.addEventListener("touchstart", (e) => {
-  if (!e.touches || !e.touches.length) return;
-  touchStartX = e.touches[0].clientX;
-  touchStartScrollLeft = galleryEl.scrollLeft;
-}, { passive:true });
+  if (!e.touches || e.touches.length !== 1) return;
+  startX = e.touches[0].clientX;
+  currentX = startX;
+  isDragging = true;
+  trackEl.style.transition = "none";
+}, { passive: true });
 
-galleryEl.addEventListener("touchend", (e) => {
-  const w = galleryEl.clientWidth || 1;
-  const moved = galleryEl.scrollLeft - touchStartScrollLeft;
-  const threshold = Math.max(35, w * 0.08);
+galleryEl.addEventListener("touchmove", (e) => {
+  if (!isDragging || !e.touches || e.touches.length !== 1) return;
 
-  let nextIndex = currentIndex;
+  currentX = e.touches[0].clientX;
+  const diffX = currentX - startX;
 
-  if (Math.abs(moved) > threshold) {
-    if (moved > 0) nextIndex = currentIndex + 1;
-    else nextIndex = currentIndex - 1;
+  if (Math.abs(diffX) > 8) {
+    hideGalleryHint();
   }
 
-  goTo(nextIndex);
-}, { passive:true });
+  const width = galleryEl.clientWidth || 1;
+  const offsetPx = (-currentIndex * width) + diffX;
+  trackEl.style.transform = `translateX(${offsetPx}px)`;
+}, { passive: true });
 
-galleryEl.addEventListener("scroll", () => {
-  clearTimeout(snapTimer);
-  snapTimer = setTimeout(() => {
-    updateGalleryUI(getIndex());
-  }, 60);
-}, { passive:true });
-      
-      
-      prevBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        goTo(getIndex() - 1);
-      });
+galleryEl.addEventListener("touchend", () => {
+  if (!isDragging) return;
+  isDragging = false;
 
-      nextBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        goTo(getIndex() + 1);
-      });
+  const width = galleryEl.clientWidth || 1;
+  const diffX = currentX - startX;
+  const threshold = width * 0.18;
 
-      galleryEl.addEventListener("scroll", () => {
-        const i = getIndex();
-        updateGalleryUI(i);
-      }, { passive:true });
+  if (diffX <= -threshold) {
+    goTo(currentIndex + 1);
+  } else if (diffX >= threshold) {
+    goTo(currentIndex - 1);
+  } else {
+    renderSlider(true);
+  }
+});
 
-      window.addEventListener("resize", () => goTo(getIndex()));
-      goTo(0);
-      updateGalleryUI(0);
+galleryEl.addEventListener("touchcancel", () => {
+  isDragging = false;
+  renderSlider(true);
+});
 
-      if (hintEl && galleryEl) {
-        let hintHidden = false;
+window.addEventListener("resize", () => {
+  renderSlider(false);
+});
 
-        function hideGalleryHint(){
-          if (hintHidden) return;
-          hintHidden = true;
-          hintEl.classList.add("hide");
-        }
-
-        galleryEl.addEventListener("scroll", () => {
-          if (galleryEl.scrollLeft > 20) {
-            hideGalleryHint();
-          }
-        }, { passive:true });
-
-        prevBtn.addEventListener("click", hideGalleryHint);
-        nextBtn.addEventListener("click", hideGalleryHint);
-      }
-
+renderSlider(false);
 /* ===== BGM 단순 안정 버전 ===== */
 const bgmEl = document.getElementById("bgm");
 const musicBtnEl = document.getElementById("musicBtn");
