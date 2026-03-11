@@ -331,6 +331,7 @@ html.js .reveal.show{
 .nav-btns a{
   width:100%;
   padding:14px 0;
+  white-space:nowrap;
   border:1px solid rgba(227,227,230,.95);
   border-radius:16px;
   font-size:13px;
@@ -782,7 +783,7 @@ html.js .reveal.show{
     </div>
   </div>
 
-<audio id="bgm" autoplay loop playsinline preload="auto">
+<audio id="bgm" autoplay loop playsinline preload="metadata">
   <source src="모청bgm.m4a" type="audio/mp4">
 </audio>
   
@@ -1028,8 +1029,8 @@ html.js .reveal.show{
         loadingEl.classList.add("hide");
         setTimeout(() => { loadingEl.style.display = "none"; }, 700);
       }
-      setTimeout(hideLoading, 2500);
-      setTimeout(hideLoading, 6000);
+      setTimeout(hideLoading, 2000);
+      setTimeout(hideLoading, 4000);
       window.addEventListener("error", hideLoading, { once:true });
 
       if (window.Kakao && !Kakao.isInitialized()) {
