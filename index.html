@@ -380,11 +380,11 @@ html.js .reveal.show{
     
 .parents-section{
   padding-top:18px;
-  padding-bottom:22px !important;
+  padding-bottom:14px !important;
 }
 
 .parents-section p{
-  margin-top:26px !important;
+  margin-top:34px !important;
   margin-bottom:0 !important;
   line-height:1.65;
   font-size:14px;
@@ -392,7 +392,30 @@ html.js .reveal.show{
 }
 
 .parents-gap{
-  height:20px;
+  height:30px;
+}
+
+
+    .account-info{
+  flex:1;
+  min-width:0;
+  text-align:left;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  line-height:1.5;
+}
+
+.account-name{
+  font-size:13px;
+  color:#444;
+  margin-bottom:4px;
+}
+
+.account-number{
+  font-size:13px;
+  color:#2f2f2f;
+  letter-spacing:0.1px;
 }
     
     .account-wrapper{
@@ -400,26 +423,29 @@ html.js .reveal.show{
       margin:18px auto 0;
     }
 
-    .account-box{
-      background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(245,245,248,.92));
-      border:1px solid rgba(227,227,230,.95);
-      border-radius:18px;
-      overflow:hidden;
-      box-shadow:0 16px 28px rgba(0,0,0,.05);
-      margin-bottom:14px;
-    }
-
+.account-box{
+  background:rgba(255,255,255,.78);
+  border:1px solid rgba(228,228,232,.9);
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 10px 22px rgba(0,0,0,.035);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  margin-bottom:16px;
+}
+    
     .account-header{
-      padding:18px;
-      font-size:15px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      cursor:pointer;
-      background:rgba(243,243,246,.8);
-      font-family:var(--serif);
-      color:#444;
-    }
+  padding:16px 18px;
+  font-size:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  cursor:pointer;
+  background:rgba(243,243,246,.72);
+  font-family:var(--serif);
+  color:#444;
+}
+    
 
     .account-body{
       max-height:0;
@@ -428,29 +454,35 @@ html.js .reveal.show{
       padding:0 18px;
     }
 
-    .account-body.open{ padding:8px 18px 18px; }
+    .account-body.open{ padding:6px 18px 14px; }
 
-    .account-card{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      padding:14px 0;
-      border-bottom:1px solid rgba(227,227,230,.95);
-      font-size:13px;
-    }
-
+    
+.account-card{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  padding:12px 0;
+  border-bottom:1px solid rgba(227,227,230,.78);
+  font-size:13px;
+   text-align:left;
+}
+    
     .account-card:last-child{ border-bottom:0; }
 
-    .account-card button{
-      background:#e9e9ee;
-      border:0;
-      padding:8px 14px;
-      border-radius:12px;
-      font-size:12px;
-      cursor:pointer;
-    }
-
+.account-card button{
+  min-width:64px;
+  height:40px;
+  background:rgba(236,236,240,.88);
+  border:1px solid rgba(222,222,228,.9);
+  padding:0 14px;
+  border-radius:12px;
+  font-size:12px;
+  color:#444;
+  cursor:pointer;
+  flex-shrink:0;
+}
+    
     /* ===== GALLERY ===== */
     .gallery-card{
       background:transparent;
@@ -962,43 +994,61 @@ html.js .reveal.show{
     넓은 마음으로 양해 부탁드립니다.
   </p>
 
-  <div class="account-wrapper">
-    <div class="account-box">
-      <div class="account-header" onclick="toggleAccount('groom')">
-        신랑측 계좌번호 <span id="arrow-groom">▼</span>
-      </div>
-      <div id="groom" class="account-body">
-        <div class="account-card">
-          <div>신랑 혼주 류완영<br>신협 132-013-316085</div>
-          <button onclick="copyAccount(event,'132013316085')">복사</button>
-        </div>
-        <div class="account-card">
-          <div>신랑 혼주 노복란<br>농협 401038-52-108530</div>
-          <button onclick="copyAccount(event,'40103852108530')">복사</button>
-        </div>
-        <div class="account-card">
-          <div>신랑 류정현<br>하나 603-910419-43007</div>
-          <button onclick="copyAccount(event,'60391041943007')">복사</button>
-        </div>
-      </div>
+<div class="account-wrapper">
+  <div class="account-box">
+    <div class="account-header" onclick="toggleAccount('groom')">
+      신랑측 계좌번호 <span id="arrow-groom">▼</span>
     </div>
-
-    <div class="account-box">
-      <div class="account-header" onclick="toggleAccount('bride')">
-        신부측 계좌번호 <span id="arrow-bride">▼</span>
+    <div id="groom" class="account-body">
+      <div class="account-card">
+        <div class="account-info">
+          <div class="account-name">신랑 혼주 류완영</div>
+          <div class="account-number">신협 132-013-316085</div>
+        </div>
+        <button onclick="copyAccount(event,'132013316085')">복사</button>
       </div>
-      <div id="bride" class="account-body">
-        <div class="account-card">
-          <div>신부 혼주 신복순<br>농협 545-01-280252</div>
-          <button onclick="copyAccount(event,'54501280252')">복사</button>
+
+      <div class="account-card">
+        <div class="account-info">
+          <div class="account-name">신랑 혼주 노복란</div>
+          <div class="account-number">농협 401038-52-108530</div>
         </div>
-        <div class="account-card">
-          <div>신부 이나현<br>국민 661-302-04-100903</div>
-          <button onclick="copyAccount(event,'66130204100903')">복사</button>
+        <button onclick="copyAccount(event,'40103852108530')">복사</button>
+      </div>
+
+      <div class="account-card">
+        <div class="account-info">
+          <div class="account-name">신랑 류정현</div>
+          <div class="account-number">하나 603-910419-43007</div>
         </div>
+        <button onclick="copyAccount(event,'60391041943007')">복사</button>
       </div>
     </div>
   </div>
+
+  <div class="account-box">
+    <div class="account-header" onclick="toggleAccount('bride')">
+      신부측 계좌번호 <span id="arrow-bride">▼</span>
+    </div>
+    <div id="bride" class="account-body">
+      <div class="account-card">
+        <div class="account-info">
+          <div class="account-name">신부 혼주 신복순</div>
+          <div class="account-number">농협 545-01-280252</div>
+        </div>
+        <button onclick="copyAccount(event,'54501280252')">복사</button>
+      </div>
+
+      <div class="account-card">
+        <div class="account-info">
+          <div class="account-name">신부 이나현</div>
+          <div class="account-number">국민 661-302-04-100903</div>
+        </div>
+        <button onclick="copyAccount(event,'66130204100903')">복사</button>
+      </div>
+    </div>
+  </div>
+</div>
 </section>
 
     
