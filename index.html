@@ -771,9 +771,8 @@ html.js .reveal.show{
     </div>
   </div>
 
-  <audio id="bgm" autoplay loop playsinline preload="auto">
+<audio id="bgm" autoplay loop playsinline preload="auto">
   <source src="모청bgm.m4a" type="audio/mp4">
-  <source src="모청bgm.mp3" type="audio/mpeg">
 </audio>
   
   <main class="page">
@@ -786,7 +785,7 @@ html.js .reveal.show{
         <div class="hero-sub">2026. 04. 25. 토요일 오전 11시</div>
 
         <div class="hero-frame">
-          <img src="MainPhoto.jpg" alt="MainPhoto">
+          <img src="MainPhoto.jpg" alt="MainPhoto" fetchpriority="high" decoding="async">
         </div>
       </section>
 
@@ -811,7 +810,7 @@ html.js .reveal.show{
 
       <section class="reveal parents-section">
         <div class="hero-frame">
-          <img src="SubPhoto.jpg" alt="SubPhoto">
+          <img src="SubPhoto.jpg" alt="SubPhoto" loading="lazy" decoding="async">
         </div>
 
         <p style="color:#777; font-size:13px; margin-top:1px; font-family:var(--serif);">
@@ -864,21 +863,22 @@ html.js .reveal.show{
 
             <div class="gallery" id="gallery">
               <div class="track" id="galleryTrack">
-                <div class="slide"><div class="photo-frame portrait"><img src="Gallery1-1.jpg" alt="갤러리1"></div></div>
-                <div class="slide"><div class="photo-frame portrait"><img src="Gallery1-2.jpg" alt="갤러리2"></div></div>
-                <div class="slide"><div class="photo-frame portrait"><img src="Gallery1-3.jpg" alt="갤러리3"></div></div>
-                <div class="slide"><div class="photo-frame portrait"><img src="Gallery1-4.jpg" alt="갤러리4"></div></div>
-                <div class="slide"><div class="photo-frame portrait"><img src="Gallery2-1.jpg" alt="갤러리5"></div></div>
-                <div class="slide"><div class="photo-frame portrait"><img src="Gallery2-2.jpg" alt="갤러리6"></div></div>
-                <div class="slide"><div class="photo-frame portrait"><img src="Gallery2-3.jpg" alt="갤러리7"></div></div>
-                <div class="slide"><div class="photo-frame portrait"><img src="Gallery2-4.jpg" alt="갤러리8"></div></div>
-                <div class="slide"><div class="photo-frame portrait"><img src="Gallery2-5.jpg" alt="갤러리9"></div></div>
-                <div class="slide"><div class="photo-frame portrait"><img src="Gallery3-1.jpg" alt="갤러리10"></div></div>
-                <div class="slide"><div class="photo-frame portrait"><img src="Gallery3-2.jpg" alt="갤러리11"></div></div>
-                <div class="slide"><div class="photo-frame portrait"><img src="Gallery3-3.jpg" alt="갤러리12"></div></div>
-                <div class="slide"><div class="photo-frame landscape"><img src="Gallery3-4.jpg" alt="갤러리13"></div></div>
-                <div class="slide"><div class="photo-frame landscape"><img src="Gallery3-5.jpg" alt="갤러리14"></div></div>
-                <div class="slide"><div class="photo-frame portrait"><img src="Gallery3-6.jpg" alt="갤러리15"></div></div>
+                <div class="slide"><div class="photo-frame portrait"><img src="Gallery1-1.jpg" alt="갤러리1" loading="lazy" decoding="async"></div></div>
+<div class="slide"><div class="photo-frame portrait"><img src="Gallery1-2.jpg" alt="갤러리2" loading="lazy" decoding="async"></div></div>
+<div class="slide"><div class="photo-frame portrait"><img src="Gallery1-3.jpg" alt="갤러리3" loading="lazy" decoding="async"></div></div>
+<div class="slide"><div class="photo-frame portrait"><img src="Gallery1-4.jpg" alt="갤러리4" loading="lazy" decoding="async"></div></div>
+<div class="slide"><div class="photo-frame portrait"><img src="Gallery2-1.jpg" alt="갤러리5" loading="lazy" decoding="async"></div></div>
+<div class="slide"><div class="photo-frame portrait"><img src="Gallery2-2.jpg" alt="갤러리6" loading="lazy" decoding="async"></div></div>
+<div class="slide"><div class="photo-frame portrait"><img src="Gallery2-3.jpg" alt="갤러리7" loading="lazy" decoding="async"></div></div>
+<div class="slide"><div class="photo-frame portrait"><img src="Gallery2-4.jpg" alt="갤러리8" loading="lazy" decoding="async"></div></div>
+<div class="slide"><div class="photo-frame portrait"><img src="Gallery2-5.jpg" alt="갤러리9" loading="lazy" decoding="async"></div></div>
+<div class="slide"><div class="photo-frame portrait"><img src="Gallery3-1.jpg" alt="갤러리10" loading="lazy" decoding="async"></div></div>
+<div class="slide"><div class="photo-frame portrait"><img src="Gallery3-2.jpg" alt="갤러리11" loading="lazy" decoding="async"></div></div>
+<div class="slide"><div class="photo-frame portrait"><img src="Gallery3-3.jpg" alt="갤러리12" loading="lazy" decoding="async"></div></div>
+<div class="slide"><div class="photo-frame landscape"><img src="Gallery3-4.jpg" alt="갤러리13" loading="lazy" decoding="async"></div></div>
+<div class="slide"><div class="photo-frame landscape"><img src="Gallery3-5.jpg" alt="갤러리14" loading="lazy" decoding="async"></div></div>
+<div class="slide"><div class="photo-frame portrait"><img src="Gallery3-6.jpg" alt="갤러리15" loading="lazy" decoding="async"></div></div>
+                
               </div>
             </div>
 
@@ -980,7 +980,7 @@ html.js .reveal.show{
 
     <section class="reveal">
       <div class="hero-frame landscape">
-        <img src="KakaoTitleShare.jpg" alt="KakaoTitle">
+        <img src="KakaoTitleShare.jpg" alt="KakaoTitle" loading="lazy" decoding="async">
       </div>
 
       <div style="max-width:520px; margin:14px auto 0; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
