@@ -320,24 +320,23 @@ html.js .reveal.show{
       width:100% !important;
     }
 
-    .nav-btns{
-      display:flex;
-      gap:10px;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin-top:18px;
-    }
-
-    .nav-btns a{
-      flex:1;
-      min-width:110px;
-      padding:14px 0;
-      border:1px solid rgba(227,227,230,.95);
-      border-radius:16px;
-      font-size:13px;
-      background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(245,245,248,.95));
-    }
-
+.nav-btns{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:10px;
+  max-width:420px;
+  margin:18px auto 0;
+}
+    
+.nav-btns a{
+  width:100%;
+  padding:14px 0;
+  border:1px solid rgba(227,227,230,.95);
+  border-radius:16px;
+  font-size:13px;
+  background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(245,245,248,.95));
+}
+    
     .parents-section{
       padding-top:4px;
       padding-bottom:8px !important;
@@ -919,7 +918,7 @@ html.js .reveal.show{
     <section class="reveal">
       <div class="section-title" style="color:#b0b0b6;">GIFT</div>
 
-      <p style="max-width:520px; margin:12px auto 0; font-size:14px; color:#666; line-height:1.85; font-family:var(--serif);">
+      <div style="max-width:520px; margin:14px auto 0; display:grid; grid-template-columns:1fr 1fr; gap:10px;">
         직접 발걸음 해주시지 못하는 분들을 위해<br>
         부득이하게 계좌번호를 기재하게 되었습니다.<br>
         넓은 마음으로 양해 부탁드립니다.
@@ -983,10 +982,16 @@ html.js .reveal.show{
         <img src="KakaoTitleShare.jpg" alt="KakaoTitle" loading="lazy" decoding="async">
       </div>
 
-      <div style="max-width:520px; margin:14px auto 0; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-        <button class="button" style="margin-top:0; flex:1; min-width:160px;" onclick="copyLink()">청첩장 주소<br>복사하기</button>
-        <button class="button" style="margin-top:0; flex:1; min-width:160px;" onclick="shareKakao()">카카오톡으로<br>공유하기</button>
-      </div>
+<div style="max-width:520px; margin:14px auto 0; display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+  <button class="button" style="margin-top:0; width:100%;" onclick="copyLink()">
+    청첩장 주소<br>복사하기
+  </button>
+
+  <button class="button" style="margin-top:0; width:100%;" onclick="shareKakao()">
+    카카오톡으로<br>공유하기
+  </button>
+</div>
+    
     </section>
 
     <footer class="site-footer">
